@@ -1,0 +1,15 @@
+# Images
+image/jpg; $X_LIB_HOME/mutt/view_attachment.sh %s jpg
+image/jpeg; $X_LIB_HOME/mutt/view_attachment.sh %s jpg
+image/pjpeg; $X_LIB_HOME/mutt/view_attachment.sh %s jpg
+image/png; $X_LIB_HOME/mutt/view_attachment.sh %s png
+image/gif; $X_LIB_HOME/mutt/view_attachment.sh %s gif
+
+# PDFs
+application/pdf; $X_LIB_HOME/mutt/view_attachment.sh %s pdf
+
+# HTML
+text/html; $X_LIB_HOME/mutt/view_attachment.sh %s html
+
+# Unidentified files
+application/octet-stream; $X_LIB_HOME/mutt/view_attachment.sh %s '-'

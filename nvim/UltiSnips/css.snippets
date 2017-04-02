@@ -1,0 +1,75 @@
+priority -50
+
+#= Basic selector
+#==================================================
+snippet slt "tag selector"
+${1:tag} {
+	$2
+}$0
+endsnippet
+
+snippet slc "class selector"
+.${1:class} {
+	$2
+}$0
+endsnippet
+
+snippet sli "id selector"
+#${1:id} {
+	$2
+}$0
+endsnippet
+
+#= Basic properties
+#==================================================
+snippet bac "background"
+background: ${1:background};$0
+endsnippet
+
+snippet bor "border"
+border: ${1:1px} ${2:solid} ${3:transparent};$0
+endsnippet
+
+snippet borr "border-radius"
+border-radius: ${1:50%};$0
+endsnippet
+
+snippet bos "box-shadow"
+box-shadow: ${1:h-shadow} ${2:v-shadow} ${3:blur} ${4:spred} ${5:color} ${0:inset};
+endsnippet
+
+snippet col "color"
+color: ${1:color};$0
+endsnippet
+
+snippet dis "display"
+display: ${1:flex};$0
+endsnippet
+
+snippet alc "align-content"
+align-content: ${1:center};$0
+endsnippet
+
+snippet ali "align-items"
+align-items: ${1:center};$0
+endsnippet
+
+snippet juc "justify-content"
+justify-content: ${1:center};$0
+endsnippet
+
+snippet pos "position"
+position: ${1:absolute};$0
+endsnippet
+
+#= At rules
+#==================================================
+snippet @ke "@keyframes"
+@keyframes {
+	$1
+}$0
+endsnippet
+
+snippet @im "@import"
+@import '${1:file}';
+endsnippet

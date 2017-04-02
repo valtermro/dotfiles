@@ -1,0 +1,29 @@
+set my_msmtprc = $XDG_CONFIG_HOME/msmtp/config
+
+set mbox_type = Maildir
+set timeout = 3
+set mail_check = 0
+set pipe_decode = yes
+set thorough_search = yes
+set delete = yes
+# set quit= no
+set mark_old = no
+set sendmail_wait = 0
+
+set tmpdir = /tmp
+set header_cache = $XDG_CACHE_HOME/mutt/headers
+set message_cachedir = $XDG_CACHE_HOME/mutt/bodies
+set certificate_file = $XDG_DATA_HOME/mutt/certificates
+set mailcap_path = $XDG_CONFIG_HOME/mutt/mailcap
+
+# Headers
+ignore *
+unignore from: to: cc: date: subject:
+unhdr_order *
+hdr_order from: to: cc: date: subject:
+
+source $XDG_CONFIG_HOME/mutt/views.mutt
+source $XDG_CONFIG_HOME/mutt/mappings.mutt
+source $XDG_CONFIG_HOME/mutt/colors/default.mutt
+
+source $XDG_CONFIG_HOME/mutt/accounts/valtermro@outlook.com/config.mutt

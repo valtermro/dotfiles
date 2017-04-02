@@ -1,0 +1,34 @@
+priority -50
+extends css
+
+#= Sass selectors
+#==================================================
+snippet slp "placeholder selector"
+%${1:placeholder} {
+	$2
+}$0
+endsnippet
+
+#= Basic constructors
+#==================================================
+snippet @fu "@function"
+@function ${1:name}(${2:args}) {
+	$3
+}$0
+endsnippet
+
+snippet @in "@include"
+@include ${1:mixin}(${2:args});$0
+endsnippet
+
+snippet @ex "@extend %placehoder"
+@extend %${1:placehoder};$0
+endsnippet
+
+snippet @ex "@extend %placehoder"
+@extend %${1:placehoder};$0
+endsnippet
+
+snippet @exc "@extend .class"
+@extend .${1:class};$0
+endsnippet
