@@ -11,5 +11,9 @@ application/pdf; $X_LIB_HOME/mutt/view_attachment.sh %s pdf
 # HTML
 text/html; $X_LIB_HOME/mutt/view_attachment.sh %s html
 
+# Plain text
+text/plain; $EDITOR -c 'startinsert' %s
+# text/plain; $X_LIB_HOME/mutt/view_attachment.sh %s txt
+
 # Unidentified files
 application/octet-stream; $X_LIB_HOME/mutt/view_attachment.sh %s '-'
