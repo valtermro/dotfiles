@@ -24,13 +24,13 @@ color index  color9    default  '~D'           # deleted messages
 color index  color160  default  '~D~U'         # deleted unread messages
 color index  color244  color18  '~v~(!~N)'     # collapsed thread with no unread
 color index  color4    color18  '~v~(~N)'      # collapsed thread with some unread
-color index  color39   default  '~N~v~(~N)'    # collapsed thread with unread parent
+color index  color39   color18  '~N~v~(~N)'    # collapsed thread with unread parent
 color index  color2    color18  '~v~(~F)!~N'   # collapsed thread with flagged, no unread
 color index  color34   color18  '~v~(~F~N)'    # collapsed thread with some unread & flagged
-color index  color47   default  '~N~v~(~F~N)'  # collapsed thread with unread parent & flagged
-color index  color2    default  '~N~v~(~F)'    # collapsed thread with unread parent, no unread inside, but some flagged
-color index  color39   default  '~v~(~p)'      # collapsed thread with unread parent, no unread inside, some to me directly
-color index  color9    default  '~v~(~D)'      # thread with deleted (doesn't differentiate between all or partial)
+color index  color47   color18  '~N~v~(~F~N)'  # collapsed thread with unread parent & flagged
+color index  color2    color18  '~N~v~(~F)'    # collapsed thread with unread parent, no unread inside, but some flagged
+color index  color39   color18  '~v~(~p)'      # collapsed thread with unread parent, no unread inside, some to me directly
+color index  color9    color18  '~v~(~D)'      # thread with deleted (doesn't differentiate between all or partial)
 
 #= Message headers
 #==================================================
