@@ -26,7 +26,7 @@ export X_ENV_HOME=$HOME/.local/env
 export X_BIN_HOME=$HOME/.local/bin
 export X_VAR_HOME=$HOME/.local/var
 
-if [[ -d $X_BIN_HOME ]]; then
+if [[ -d $X_BIN_HOME && ! $TMUX ]]; then
   export PATH=$PATH:$X_BIN_HOME
 fi
 
