@@ -3,7 +3,7 @@
 [general]
 # ui = Blinkenlights
 metadata = $XDG_DATA_HOME/offlineimap
-pythonfile =$X_LIB_HOME/offlineimap/folder_resolver.py
+pythonfile =$X_LIB_HOME/offlineimap/config.py
 
 accounts = valtermro@outlook.com
 maxsyncaccounts = 2
