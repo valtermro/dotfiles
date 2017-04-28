@@ -12,7 +12,7 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 
-set wildignore+=*/tmp/*,*/node_modules/*
+set wildignore+=*/tmp/*,*/node_modules/*,*/vendor/*
 set wildmode=longest,list
 
 set number
@@ -35,8 +35,15 @@ set ignorecase
 set nohlsearch
 set smartcase
 
-" `nvim/ftdetect`??
-augroup filetype_detection
+" use `nvim/[after/]ftplugin` may cause problems with plugins
+augroup ft_plugin
+  autocmd!
+  autocmd FileType php setl tabstop=4 | setl softtabstop=4 | setl shiftwidth=4
+  autocmd FileType python setl tabstop=4 | setl softtabstop=4 | setl shiftwidth=4
+augroup END
+
+" use `nvim/[after/]ftdetect` may cause problems with plugins
+augroup ft_detect
   autocmd!
   autocmd BufRead,BufNewFile *.tmux set ft=tmux-conf
   autocmd BufRead,BufNewFile *.mutt set ft=muttrc

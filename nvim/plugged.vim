@@ -60,7 +60,7 @@ nnoremap <silent> <F5> :NERDTreeToggle<CR>
 call dein#add('Shougo/deoplete.nvim')
 call dein#add('Raimondi/delimitMate')
 call dein#add('SirVer/ultisnips')
-call dein#add('mattn/emmet-vim', {'on_ft': 'html'})
+call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'php']})
 call dein#add('Shougo/neco-vim', {'on_ft': 'vim', 'depends': 'deoplete.nvim'})
 
 let g:delimitMate_expand_cr = 1
@@ -83,7 +83,7 @@ augroup END
 "==================================================
 call dein#add('tpope/vim-endwise', {'on_ft': ['vim', 'sh', 'zsh', 'ruby']})
 call dein#add('othree/html5.vim', {'on_ft': 'html'})
-call dein#add('gregsexton/MatchTag', {'on_ft': 'html'})
+call dein#add('gregsexton/MatchTag', {'on_ft': ['html', 'php']})
 call dein#add('hail2u/vim-css3-syntax', {'on_ft': ['css', 'scss']})
 call dein#add('whatyouhide/vim-tmux-syntax', {'on_ft': ['tmux', 'tmux-conf']})
 call dein#add('elzr/vim-json', {'on_ft': 'json'})
@@ -91,6 +91,8 @@ call dein#add('othree/yajs.vim', {'on_ft': 'javascript'})
 call dein#add('othree/es.next.syntax.vim', {'on_ft': 'javascript', 'depends': 'yajs.vim'})
 call dein#add('othree/jsdoc-syntax.vim', {'on_ft': 'javascript'})
 call dein#add('heavenshell/vim-jsdoc', {'on_ft': 'javascript'})
+call dein#add('captbaritone/better-indent-support-for-php-with-html', {'on_ft': 'php'})
+call dein#add('StanAngeloff/php.vim', {'on_ft': 'php'})
 
 let g:vim_json_syntax_conceal = 0
 
