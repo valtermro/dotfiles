@@ -81,7 +81,7 @@ augroup END
 
 "= Language support
 "==================================================
-call dein#add('tpope/vim-endwise', {'on_ft': ['vim', 'sh', 'zsh']})
+call dein#add('tpope/vim-endwise', {'on_ft': ['vim', 'sh', 'zsh', 'ruby']})
 call dein#add('othree/html5.vim', {'on_ft': 'html'})
 call dein#add('gregsexton/MatchTag', {'on_ft': 'html'})
 call dein#add('hail2u/vim-css3-syntax', {'on_ft': ['css', 'scss']})
