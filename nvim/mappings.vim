@@ -1,15 +1,16 @@
 "= Setup and reset
 "=================================================
-let mapleader = ' '
-let maplocalleader = ','
-
 nnoremap ' `
 nnoremap ` '
 
+"= Dealing with buffers
+"==================================================
+nnoremap [3 <C-^>
+
 "= Repeating
 "==================================================
-" use `nmap` so tpope's vim-repeat can operate here
-nmap Q n.
+nnoremap Q n.
+nnoremap <C-q> ;.
 
 "= Resizing windows
 "=================================================
@@ -41,9 +42,9 @@ nnoremap <Leader>= mtgg=G't
 "= Stripping text
 "=================================================
 nnoremap X "_dd
-nnoremap x "_x
 nnoremap D "_D
 nnoremap S "_S
+xnoremap x "_x
 
 "= Searching
 "==================================================
@@ -59,3 +60,17 @@ nnoremap <C-E> 5<C-E>
 nnoremap <C-Y> 5<C-Y>
 nnoremap <C-O> <C-O>zz
 nnoremap <C-I> <C-I>zz
+
+"= Custom motions
+"==================================================
+" all no-blank characters in the current line
+xnoremap <silent> il :<C-U>normal! $v^<CR>
+onoremap <silent> il :<C-U>normal! $v^<CR>
+
+" The entire line except the EOF character
+xnoremap <silent> al :<C-U>normal! $v0<CR>
+onoremap <silent> al :<C-U>normal! $v0<CR>
+
+" the entire file
+xnoremap <silent> af :<C-U>normal! GVgg<CR>
+onoremap <silent> af :normal GVgg<CR>

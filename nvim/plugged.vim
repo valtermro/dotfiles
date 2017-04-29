@@ -53,7 +53,7 @@ call dein#add('ctrlpvim/ctrlp.vim')
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let NERDTreeShowHidden = 1
 
-nnoremap <silent> <F5> :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>ne :NERDTreeToggle<CR>
 
 "= Completion, snippets and alike
 "==================================================
@@ -63,21 +63,15 @@ call dein#add('SirVer/ultisnips')
 call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'php']})
 call dein#add('Shougo/neco-vim', {'on_ft': 'vim', 'depends': 'deoplete.nvim'})
 
+set completeopt=menu,menuone,noinsert,noselect
+let g:deoplete#enable_smart_case = 1
+
 let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
 
 let g:UltiSnipsExpandTrigger='<Tab>'
 let g:UltiSnipsJumpForwardTrigger='<Tab>'
 let g:UltiSnipsJumpBackwardTrigger='<S-Tab>'
-
-set completeopt=menu,menuone,noinsert,noselect
-let g:deoplete#enable_smart_case = 1
-
-" `g:deoplete#enable_at_startup` causes a huge lag when first entering insert mode.
-augroup deoplete_startup
-  autocmd!
-  autocmd VimEnter * call deoplete#enable()
-augroup END
 
 "= Language support
 "==================================================
