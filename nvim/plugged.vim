@@ -34,7 +34,7 @@ call dein#add('jreybert/vimagit', {'on_cmd': 'Magit'})
 
 augroup fugitive_config
   autocmd!
-  autocmd FileType gitcommit setlocal cursorline
+  autocmd FileType gitcommit setl cursorline
 augroup END
 
 "= Navigation
@@ -52,7 +52,7 @@ nnoremap <silent> <Leader>ne :NERDTreeToggle<CR>
 call dein#add('Shougo/deoplete.nvim')
 call dein#add('Raimondi/delimitMate')
 call dein#add('SirVer/ultisnips')
-call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'php']})
+call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'blade']})
 call dein#add('Shougo/neco-vim', {'on_ft': 'vim', 'depends': 'deoplete.nvim'})
 
 set completeopt=menu,menuone,noinsert,noselect
@@ -68,8 +68,8 @@ let g:UltiSnipsJumpBackwardTrigger='<S-Tab>'
 "= Language support
 "==================================================
 call dein#add('tpope/vim-endwise', {'on_ft': ['vim', 'sh', 'zsh', 'ruby']})
-call dein#add('othree/html5.vim', {'on_ft': 'html'})
-call dein#add('gregsexton/MatchTag', {'on_ft': ['html', 'php']})
+call dein#add('othree/html5.vim', {'on_ft': ['html', 'blade']})
+call dein#add('gregsexton/MatchTag', {'on_ft': ['html', 'blade']})
 call dein#add('hail2u/vim-css3-syntax', {'on_ft': ['css', 'scss']})
 call dein#add('whatyouhide/vim-tmux-syntax', {'on_ft': ['tmux', 'tmux-conf']})
 call dein#add('elzr/vim-json', {'on_ft': 'json'})
@@ -77,7 +77,6 @@ call dein#add('othree/yajs.vim', {'on_ft': 'javascript'})
 call dein#add('othree/es.next.syntax.vim', {'on_ft': 'javascript', 'depends': 'yajs.vim'})
 call dein#add('othree/jsdoc-syntax.vim', {'on_ft': 'javascript'})
 call dein#add('heavenshell/vim-jsdoc', {'on_ft': 'javascript'})
-call dein#add('captbaritone/better-indent-support-for-php-with-html', {'on_ft': 'php'})
 call dein#add('StanAngeloff/php.vim', {'on_ft': 'php'})
 
 let g:vim_json_syntax_conceal = 0
@@ -96,6 +95,19 @@ if executable('tern')
   let g:tern#command = ['tern']
   let g:tern#arguments = ['--persistent']
 endif
+
+"= Framework support
+"==================================================
+call dein#add('jwalton512/vim-blade', {'on_ft': 'blade'})
+call dein#add('noahfrederick/vim-composer', {'on_cmd': 'Composer'})
+call dein#add('tpope/vim-dispatch', {'on_cmd': 'Console'})
+call dein#add('tpope/vim-projectionist', {
+  \ 'on_cmd': ['Econtroller', 'Eview'],
+  \ 'on_source': 'vim-dispatch'})
+call dein#add('noahfrederick/vim-laravel', {
+  \ 'on_cmd': 'Artisan',
+  \ 'on_map': 'gf',
+  \ 'on_source': ['vim-dispatch', 'vim-projectionist']})
 
 "= User interface
 "==================================================

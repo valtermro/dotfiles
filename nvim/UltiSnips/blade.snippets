@@ -1,0 +1,54 @@
+extends html
+
+#= Extends HTML
+snippet form "basic form element"
+<form method="${1:POST}" action="$2" class="form">
+	{{ csrf_field() }}$3
+</form>$0
+endsnippet
+
+snippet ext "@extends and @section('content')"
+@extends('${1:layouts.${2:master}}')$0
+
+@section('content')
+	$4
+@endsection$0
+endsnippet
+
+snippet yie "@yield"
+@yield('${1:content}')$0
+endsnippet
+
+snippet inc "@include"
+@include('$1')$0
+endsnippet
+
+snippet sec "@section"
+@section('$1')
+	$2
+@endsection$0
+endsnippet
+
+snippet if "@if"
+@if ($1)
+	$2
+@endif$0
+endsnippet
+
+snippet for "@for"
+@for ($${1:i} = 0; $$1 < $${2:length}; $$1++$3)
+	$3
+@endfor$0
+endsnippet
+
+snippet foe "@foreach"
+@foreach ($$1 as $$2)
+	$3
+@endforeach$0
+endsnippet
+
+snippet foek "@foreach with key"
+@foreach ($$1 as $${2:key} => $${3:value})
+	$3
+@endforeach$0
+endsnippet

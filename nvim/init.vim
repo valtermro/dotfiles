@@ -35,19 +35,6 @@ set ignorecase
 set nohlsearch
 set smartcase
 
-" use `nvim/[after/]ftplugin` may cause problems with plugins
-augroup ft_plugin
-  autocmd!
-  autocmd FileType php setl tabstop=4 | setl softtabstop=4 | setl shiftwidth=4
-  autocmd FileType python setl tabstop=4 | setl softtabstop=4 | setl shiftwidth=4
-augroup END
-
-" use `nvim/[after/]ftdetect` may cause problems with plugins
-augroup ft_detect
-  autocmd!
-  autocmd BufRead,BufNewFile *.tmux set ft=tmux-conf
-  autocmd BufRead,BufNewFile *.mutt set ft=muttrc
-augroup END
-
+source $XDG_CONFIG_HOME/nvim/filetype.vim
 source $XDG_CONFIG_HOME/nvim/mappings.vim
 source $XDG_CONFIG_HOME/nvim/plugged.vim
