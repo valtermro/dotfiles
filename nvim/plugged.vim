@@ -24,20 +24,12 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 "==================================================
 call dein#add('w0rp/ale')
 
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
+let g:ale_set_signs = 0
 let g:ale_echo_msg_format = '[%linter%] %s'
-
-augroup override_ale_sign_colors
-  autocmd!
-  autocmd ColorScheme * highlight link ALEErrorSign FoldColumn
-  autocmd ColorScheme * highlight link ALEWarningSign FoldColumn
-augroup END
 
 "= Source control
 "==================================================
 call dein#add('tpope/vim-fugitive')
-call dein#add('airblade/vim-gitgutter')
 call dein#add('jreybert/vimagit', {'on_cmd': 'Magit'})
 
 augroup fugitive_config
