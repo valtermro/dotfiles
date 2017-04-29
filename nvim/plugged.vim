@@ -60,6 +60,10 @@ let g:deoplete#enable_smart_case = 1
 
 let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
+augroup fix_delimtmate_in_php
+  autocmd!
+  autocmd FileType php let b:delimitMate_matchpairs = '(:),[:],{:}'
+augroup END
 
 let g:UltiSnipsExpandTrigger='<Tab>'
 let g:UltiSnipsJumpForwardTrigger='<Tab>'
