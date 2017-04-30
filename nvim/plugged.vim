@@ -135,6 +135,7 @@ endif
 set noshowmode
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers= 0
+let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline_theme = 'base16_oceanicnext'
 let g:airline_section_z = '%{g:airline_symbols.linenr} %l:%v [%p%%|%L]'
