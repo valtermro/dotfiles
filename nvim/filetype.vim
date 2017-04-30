@@ -10,5 +10,6 @@ augroup END
 augroup filetype_plugin
   autocmd FileType php,blade setl tabstop=4 | setl softtabstop=4 | setl shiftwidth=4
   autocmd FileType python setl tabstop=4 | setl softtabstop=4 | setl shiftwidth=4
+  autocmd FileType xml setl tabstop=4 | setl softtabstop=4 | setl shiftwidth=4
 augroup END
 
