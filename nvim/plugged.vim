@@ -8,7 +8,6 @@ call dein#add('haya14busa/dein-command.vim')
 "= Basic features
 "==================================================
 call dein#add('editorconfig/editorconfig-vim')
-call dein#add('Yggdroot/indentLine')
 call dein#add('pbrisbin/vim-mkdir')
 call dein#add('dkprice/vim-easygrep')
 call dein#add('nelstrom/vim-visual-star-search')
