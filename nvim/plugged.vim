@@ -59,6 +59,20 @@ call dein#add('Shougo/neco-vim', {'on_ft': 'vim', 'depends': 'deoplete.nvim'})
 set completeopt=menu,menuone,noinsert,noselect
 let g:deoplete#enable_smart_case = 1
 
+" `g:deoplete#enable_at_startup` causes a huge lag when first entering insert mode.
+augroup deoplete_startup
+  autocmd!
+  autocmd VimEnter * call deoplete#enable()
+augroup END
+
+function! Multiple_cursors_before()
+  let b:deoplete_disable_auto_complete = 2
+endfunction
+
+function! Multiple_cursors_after()
+  let b:deoplete_disable_auto_complete = 0
+endfunction
+
 let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
 
