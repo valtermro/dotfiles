@@ -157,3 +157,10 @@ let g:airline_section_z = '%{g:airline_symbols.linenr} %l:%v [%p%%|%L]'
 "= Dein footer
 "==================================================
 call dein#end()
+
+filetype plugin on
+
+augroup force_options
+  autocmd!
+  autocmd BufReadPost * setl formatoptions-=o
+augroup END

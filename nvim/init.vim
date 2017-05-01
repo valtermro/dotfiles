@@ -1,10 +1,13 @@
-filetype plugin indent on
+filetype indent on
 set hidden
 set nobackup
 set noswapfile
 set nowritebackup
 set pastetoggle=<F10>
 set fileformats=unix,dos,mac
+
+set nowrap
+" set textwidth=100
 
 set expandtab
 set smartindent
@@ -27,9 +30,6 @@ set scrolloff=3
 set showbreak=\ ❯
 set invlist
 set listchars=tab:›\ ,trail:⋅,extends:❯,precedes:❮ ",eol:¬
-
-set nowrap
-set textwidth=85
 
 set ignorecase
 set nohlsearch
