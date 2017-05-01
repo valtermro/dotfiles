@@ -9,7 +9,6 @@ call dein#add('haya14busa/dein-command.vim')
 "==================================================
 call dein#add('editorconfig/editorconfig-vim')
 call dein#add('pbrisbin/vim-mkdir')
-call dein#add('dkprice/vim-easygrep')
 call dein#add('nelstrom/vim-visual-star-search')
 call dein#add('tpope/vim-repeat')
 call dein#add('tpope/vim-surround')
