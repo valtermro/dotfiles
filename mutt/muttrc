@@ -8,6 +8,7 @@ set thorough_search = yes
 set delete = yes
 # set quit= no
 set mark_old = no
+set confirmappend = no
 set sendmail_wait = 0
 
 set tmpdir = /tmp
