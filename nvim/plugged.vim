@@ -25,6 +25,8 @@ call dein#add('w0rp/ale')
 
 let g:ale_set_signs = 0
 let g:ale_echo_msg_format = '[%linter%] %s'
+let g:ale_linters = get(g:, 'ale_linters', {})
+let g:ale_linters.html= []
 
 "= Source control
 "==================================================
