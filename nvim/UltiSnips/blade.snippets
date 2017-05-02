@@ -1,12 +1,15 @@
 extends html
 
 #= Extends HTML
+#==================================================
 snippet form "basic form element"
-<form method="${1:POST}" action="$2" class="form">
-	{{ csrf_field() }}$3
+<form class="${3:form}" method="${1:POST}" action="$2">
+	{{ csrf_field() }}$4
 </form>$0
 endsnippet
 
+#= Templating
+#==================================================
 snippet ext "@extends and @section('content')"
 @extends('${1:layouts.${2:master}}')$0
 
@@ -29,6 +32,8 @@ snippet sec "@section"
 @endsection$0
 endsnippet
 
+#= Flow control
+#==================================================
 snippet if "@if"
 @if ($1)
 	$2

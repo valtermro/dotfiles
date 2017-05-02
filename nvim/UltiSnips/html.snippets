@@ -21,38 +21,45 @@ snippet div "basic div element"
 endsnippet
 
 snippet form "basic form element"
-<form method="${1:POST}" action="$2" class="form">
-	$3
+<form class="${3:form}" method="${1:POST}" action="$2">
+	$4
 </form>$0
 endsnippet
 
 snippet input "basic input element"
-<input class="${1:input}" type="${2:text}"$3>$0
+<input class="${1:input}" type="${2:text}">$0
 endsnippet
 
 snippet button "basic button element"
-<button class="${1:btn}" type="${2:button}"$3>$4</button>
+<button class="${1:btn}" type="${2:button}">${3:action}</button>
 endsnippet
 
 snippet finput "full input element"
-<input class="${1:input}" type="${2:text}" id="${3:name}" ${4:name="$3"}>$0
+<input class="${1:input}" type="${2:text}" id="${3:name}"${4: name="${5:$3}"}>$0
 endsnippet
 
 snippet fbutton "full button element"
-<button class="${1:btn}" type="${2:button}" id="${3:action}" ${4:name="$3"}>${5:Button}</button>$0
+<button class="${1:btn}" type="${2:button}" id="${3:action}"${4: name="${5:$3}"}>${6:action}</button>$0
 endsnippet
 
 #= Nested blocks
 #==================================================
 snippet fgi ".form-group>label+input"
 <div class="form-group">
-	<label for="${1:name}" class="label">$2:</label>
-	<input type="${3:text}" id="$1" name="$1" class="form-control">
+	<label for="${1:name}">${2:label}:</label>
+	<input class="form-control" type="${3:text}" id="$1" name="$1">
+</div>$0
+endsnippet
+
+snippet fgt ".form-group>textarea"
+<div class="form-group">
+	<label for="${1:name}">${2:label}:</label>
+	<textarea class="form-control" id="$1" name="$1"></textarea>$3
 </div>$0
 endsnippet
 
 snippet fgs ".form-group>button"
 <div class="form-group">
-	<button type="submit" class="btn btn-primary">$2</button>$3
+	<button class="btn btn-primary" type="submit">${2:Submit}</button>$3
 </div>$0
 endsnippet
