@@ -25,4 +25,4 @@ for account in $accounts; do
 done
 
 # let tmux know how many new emails where found
-echo "✉ $count"
+echo "✉ $count "

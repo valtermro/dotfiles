@@ -2,9 +2,9 @@
 
 augroup filetype_detect
   autocmd!
-  autocmd BufRead,BufNewFile *.tmux set ft=tmux-conf
-  autocmd BufRead,BufNewFile *.mutt set ft=muttrc
-  autocmd BufRead,BufNewFile *.blade.php set ft=blade
+  autocmd BufRead,BufNewFile *.tmux setf tmux
+  autocmd BufRead,BufNewFile *.mutt setf muttrc
+  autocmd BufRead,BufNewFile *.blade.php setf blade
 augroup END
 
 augroup filetype_plugin
