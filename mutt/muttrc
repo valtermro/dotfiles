@@ -1,5 +1,7 @@
 set my_msmtprc = $XDG_CONFIG_HOME/msmtp/config
 
+#= Basics {{{1
+#==================================================
 set mbox_type = Maildir
 set timeout = 3
 set mail_check = 0
@@ -23,8 +25,147 @@ unignore from: to: cc: date: subject:
 unhdr_order *
 hdr_order from: to: cc: date: subject:
 
-source $XDG_CONFIG_HOME/mutt/views.mutt
-source $XDG_CONFIG_HOME/mutt/mappings.mutt
-source $XDG_CONFIG_HOME/mutt/colors/default.mutt
+#= Views {{{1
+#==================================================
+#- Status, and side bars
+#--------------------------------------------------
+set sidebar_visible = yes
+set sidebar_width = 20
+set sidebar_divider_char = ' │'
 
+set status_chars  = ' *%A'
+set status_format = '───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───'
+
+#- Index view
+#--------------------------------------------------
+set date_format = '%m/%d'
+set index_format = '[%Z]  %D  %-20.20F  %s'
+set sort = threads
+set sort_aux = reverse-last-date-received
+set uncollapse_jump = yes
+set sort_re = yes
+set reply_regexp = '^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*'
+
+#- Pager view
+#--------------------------------------------------
+set pager_index_lines = 10
+set pager_context = 3
+set pager_stop = yes
+set menu_scroll =yes
+set tilde = yes
+set markers = no
+set quote_regexp = '^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+'
+alternative_order text/plain text/enriched text/html
+
+#- Compose view
+#--------------------------------------------------
+set edit_headers = yes
+set envelope_from = yes
+set sig_dashes = yes
+set include = yes
+set fcc_attach = yes
+set mime_forward = no
+set forward_decode = yes
+set reverse_name = yes
+set forward_quote = yes
+set forward_format = 'Fwd: %s'
+set attribution = 'On %d, %n <%a> wrote:'
+
+#= Mappings {{{1
+#==================================================
+bind index gg first-entry
+bind index G last-entry
+bind index <space> collapse-thread
+
+bind index,pager R group-reply
+bind index,pager J sidebar-next
+bind index,pager K sidebar-prev
+bind index,pager L sidebar-open
+bind index,pager N search-opposite
+
+macro index C '<copy-message>?<toggle-mailboxes>' 'copy a message to a mailbox'
+macro index M '<save-message>?<toggle-mailboxes>' 'move a message to a mailbox'
+macro index \Cr 'T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>' 'mark all messages as read'
+
+bind pager k  previous-line
+bind pager j  next-line
+bind pager gg top
+bind pager G  bottom
+
+# View attachments properly.
+bind attach <return> view-mailcap
+
+#= Colors {{{1
+#==================================================
+#- Basics
+#--------------------------------------------------
+color normal      color248  default
+color tree        default   default  # arrow in threads
+color tilde       color242  default  # '~' in pager view
+color attachment  color3    default  # attachment name
+color search      color0    color16  # pager searched term
+color status      color6    default  # status bar (top & bottom)
+color indicator   color3    color18  # current message/folder
+color error       color9    default  # error messages (status bar)
+color message     color7    default  # any other message (status bar)
+
+#- Index view
+#--------------------------------------------------
+color index  default   default  '~O'           # old messages
+color index  color166  default  '~E'           # expired messages
+color index  color4    default  '~Q'           # messages that have been replied to
+color index  color4    default  '~N'           # new messages
+color index  color39   color0   '~N~p!~F'      # new messages to me
+color index  color1    default  '~P'           # messages from me
+color index  color244  default  '~R'           # read messages
+color index  color34   default  '~F'           # flagged messages
+color index  color9    default  '~D'           # deleted messages
+color index  color160  default  '~D~U'         # deleted unread messages
+color index  color244  color18  '~v~(!~N)'     # collapsed thread with no unread
+color index  color4    color18  '~v~(~N)'      # collapsed thread with some unread
+color index  color39   color18  '~N~v~(~N)'    # collapsed thread with unread parent
+color index  color2    color18  '~v~(~F)!~N'   # collapsed thread with flagged, no unread
+color index  color34   color18  '~v~(~F~N)'    # collapsed thread with some unread & flagged
+color index  color47   color18  '~N~v~(~F~N)'  # collapsed thread with unread parent & flagged
+color index  color2    color18  '~N~v~(~F)'    # collapsed thread with unread parent, no unread inside, but some flagged
+color index  color39   color18  '~v~(~p)'      # collapsed thread with unread parent, no unread inside, some to me directly
+color index  color9    color18  '~v~(~D)'      # thread with deleted (doesn't differentiate between all or partial)
+
+#- Message headers
+#--------------------------------------------------
+color header  color244  default  '^'
+color header  color136  default  '^(From)'
+color header  color136    default  '^(To)'
+color header  color5    default  '^(Cc)|(Bcc)'
+color header  color33   default  '^(Subject)'
+
+#- Body
+#--------------------------------------------------
+color quoted   color33   default
+color quoted1  color37   default
+color quoted2  color136  default
+color quoted3  color160  default
+color quoted4  color166  default
+
+color signature  color240  default
+color bold       color235  default
+color underline  color235  default
+color normal     default   default
+
+color body  color245  default  '[;:][-o][)/(|]'     # emoticons
+color body  color245  default  '[;:][)(|]'          # emoticons
+color body  color245  default  '[ ][*][^*]*[*][ ]?' # more emoticon?'
+color body  color245  default  '[ ]?[*][^*]*[*][ ]' # more emoticon?'
+color body  color245  default  '[*]?((N)?ACK|CU|LOL|SCNR|BRB|BTW|CWYL|\
+                               |FWIW|vbg|GD&R|HTH|HTHBE|IMHO|IMNSHO|\
+                               |IRL|RTFM|ROTFL|ROFL|YMMV)[*]?'
+
+#- Sidebar
+#--------------------------------------------------
+color sidebar_indicator default   color18
+color sidebar_new       color3    default
+color sidebar_divider   color245  default
+
+#= Accounts {{{1
+#==================================================
 source $XDG_CONFIG_HOME/mutt/accounts/valtermro@outlook.com/config.mutt

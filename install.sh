@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# vim: fdm=marker
 
 #= Definitions {{{1
 #================================================
@@ -15,7 +14,6 @@ source $SELF_DIR/zshenv
 
 to_install=()
 conflicted=()
-#= endsection }}}1
 
 #= Helpers {{{1
 #================================================
@@ -141,7 +139,6 @@ function is_installed {
 function login_shell {
   echo $(grep "^$1" /etc/passwd | grep $(whoami) | cut -d ':' -f 7)
 }
-#= endsection }}}1
 
 #= Validate dependencies {{{1
 #================================================
@@ -149,12 +146,11 @@ if ! is_installed 'git'; then
   echo 'Installer depends on git. Please install it and try again.'
   exit $ERR_DEP
 fi
-#= endsection }}}1
 
 #= Select configs to install {{{1
 #================================================
 ask_install 'git'
-ask_install 'zsh' '' 'zsh' 'setxkbmap'
+ask_install 'zsh' '' 'zsh'
 ask_install 'tmux' 'zsh'
 ask_install 'neovim' 'zsh' 'nvim'
 ask_install 'mutt' '' 'offlineimap' 'gpg' 'pass' 'msmtp'
@@ -167,7 +163,6 @@ if is_installed 'dconf' && is_installed 'gsettings'; then
     fi
   fi
 fi
-#= endsection }}}1
 
 #= Install {{{1
 #================================================
@@ -178,7 +173,7 @@ fi
 
 echo 'Installing configs'
 
-#- Git {{{2
+#- Git
 #------------------------------------------------
 if should_install 'git'; then
   backup ~/.gitconfig
@@ -186,7 +181,7 @@ if should_install 'git'; then
   dot_link 'git' $XDG_CONFIG_HOME
 fi
 
-#- Zsh {{{2
+#- Zsh
 #------------------------------------------------
 if should_install 'zsh'; then
   if [[ $(login_shell) != $(which zsh) ]]; then
@@ -195,33 +190,29 @@ if should_install 'zsh'; then
   fi
 
   # move old files out of our way
-  backup ~/.zshrc
   backup ~/.histfile
 
   make_dir $XDG_CACHE_HOME/zsh
   make_dir $XDG_CONFIG_HOME
   make_dir $XDG_DATA_HOME
 
+  dot_link 'zshrc' $HOME
   dot_link 'zshenv' $HOME
-  dot_link 'zsh' $XDG_CONFIG_HOME
 
   echo 'Installing base16 colorschemes'
   rm_dir $XDG_DATA_HOME/base16-shell
   git_clone 'chriskempson/base16-shell' $XDG_DATA_HOME
 fi
 
-#- Tmux {{{2
+#- Tmux
 #------------------------------------------------
 if should_install 'tmux'; then
-  backup ~/.tmux.conf
-  echo 'source $XDG_CONFIG_HOME/tmux/init.tmux' > ~/.tmux.conf
-
   make_dir $X_LIB_HOME
-  dot_link 'tmux' $XDG_CONFIG_HOME
+  dot_link 'tmux.conf' $HOME
   dot_link 'lib/tmux' $X_LIB_HOME
 fi
 
-#- Neovim {{{2
+#- Neovim
 #------------------------------------------------
 if should_install 'neovim'; then
   dot_link 'nvim' $XDG_CONFIG_HOME
@@ -242,7 +233,7 @@ if should_install 'neovim'; then
   nvim +UpdateRemotePlugins +qall
 fi
 
-#- Mutt {{{2
+#- Mutt
 #------------------------------------------------
 if should_install 'mutt'; then
   if ask 'Create a new gpg key'; then
@@ -276,7 +267,7 @@ if should_install 'mutt'; then
   dot_link 'msmtp' $XDG_CONFIG_HOME
 fi
 
-#- Terminal emulator {{{2
+#- Terminal emulator
 #------------------------------------------------
 if should_install 'terminal emulator'; then
   echo 'Installing fonts'
@@ -304,7 +295,6 @@ if should_install 'terminal emulator'; then
     fi
   fi
 fi
-#= endsection }}}1
 
 #= Wrap up {{{1
 #=================================================
@@ -339,4 +329,3 @@ if should_install 'zsh'; then
 elif should_install 'terminal emulator'; then
   echo 'Please, open a new terminal window.'
 fi
-#= endsection }}}1
