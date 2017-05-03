@@ -280,9 +280,9 @@ fi
 #------------------------------------------------
 if should_install 'terminal emulator'; then
   echo 'Installing fonts'
-  make_dir ~/.fonts
-  rm_dir ~/.fonts/top-programming-fonts
-  git_clone 'hbin/top-programming-fonts' ~/.fonts
+  make_dir $XDG_DATA_HOME/fonts
+  rm_dir $XDG_DATA_HOME/fonts/top-programming-fonts
+  git_clone 'hbin/top-programming-fonts' $XDG_DATA_HOME/fonts
 
   term_profile_id=valtermro_dotfiles
 
