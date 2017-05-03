@@ -255,7 +255,6 @@ if should_install 'mutt'; then
       gpg --full-gen-key
     fi
   fi
-  exit
 
   printf 'A gpg-id to initialize `pass`, please: '
   read -e id
