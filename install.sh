@@ -189,8 +189,10 @@ fi
 #- Zsh {{{2
 #------------------------------------------------
 if should_install 'zsh'; then
-  echo 'Setting zsh as the default login shell'
-  chsh -s $(which zsh) $(whoami)
+  if [[ $(login_shell) != $(which zsh) ]]; then
+    echo 'Setting zsh as the default login shell'
+    chsh -s $(which zsh) $(whoami)
+  fi
 
   # move old files out of our way
   backup ~/.zshrc
