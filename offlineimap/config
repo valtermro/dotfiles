@@ -15,7 +15,7 @@ autorefresh = 5
 
 [Repository valtermro@outlook.local]
 type = Maildir
-localfolders = $X_VAR_HOME/mail/valtermro@outlook.com
+localfolders = /var/mail/$USER/valtermro@outlook.com
 nametrans = name_trans('remote-local', 'valtermro@outlook.com')
 
 [Repository valtermro@outlook.com]

@@ -8,7 +8,7 @@ set postpone = yes
 set copy = no
 set attribution = 'From: %n <%a>\nSent: %[!%Y-%m-%d %H:%M:%S GMT%z]\nTo: %r\nSubject: %s\n'
 
-set folder = $X_VAR_HOME/mail/valtermro@outlook.com
+set folder = /var/mail/valter/valtermro@outlook.com
 set spoolfile = +Inbox
 set postponed = +Drafts
 
