@@ -1,6 +1,7 @@
 "= Basics {{{1
 "==================================================
 filetype indent on
+
 set hidden
 set nobackup
 set noswapfile
@@ -46,6 +47,8 @@ augroup filetype_detect
   autocmd BufRead,BufNewFile *.tmux setf tmux
   autocmd BufRead,BufNewFile *.mutt setf muttrc
   autocmd BufRead,BufNewFile *.blade.php setf blade
+
+  autocmd BufRead,BufNewFile */git/* setf gitconfig
 augroup END
 
 augroup filetype_plugin
@@ -157,8 +160,8 @@ augroup END
 call dein#add('scrooloose/nerdtree')
 call dein#add('ctrlpvim/ctrlp.vim')
 
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let NERDTreeShowHidden = 1
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 nnoremap <silent> <Leader>ne :NERDTreeToggle<CR>
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # This script is a condensed version of Eric Gebhart's view_attachment.sh, modified
-# to work with on linux systems where `open` should be replaced with `xdg-open` 
+# to work with on linux systems where `open` should be replaced with `xdg-open`
 #
 # The original script can be found here > https://git.io/v9Jac.
 #
