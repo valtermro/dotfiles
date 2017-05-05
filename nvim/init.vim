@@ -82,9 +82,9 @@ nnoremap <M-h> <C-W>h
 cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
 
-nnoremap <Leader>cul :set cursorline!<CR>
+nnoremap <leader>cul :set cursorline!<CR>
 
-nnoremap <Leader>= mtgg=G't
+nnoremap <leader>= mtgg=G't
 
 nnoremap X "_dd
 nnoremap D "_D
@@ -158,12 +158,14 @@ augroup END
 "- Navigation
 "--------------------------------------------------
 call dein#add('scrooloose/nerdtree')
-call dein#add('ctrlpvim/ctrlp.vim')
+call dein#add('junegunn/fzf', {'path': $XDG_DATA_HOME.'/fzf', 'merged': 0})
+call dein#add('junegunn/fzf.vim')
 
 let NERDTreeShowHidden = 1
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-nnoremap <silent> <Leader>ne :NERDTreeToggle<CR>
+nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-x><C-p> :Buffers<CR>
+nnoremap <silent> <leader>ne :NERDTreeToggle<CR>
 
 "- Completion, snippets and alike
 "--------------------------------------------------

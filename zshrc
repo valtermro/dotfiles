@@ -116,20 +116,6 @@ if [[ ! -f ~/.base16_theme ]]; then
   base16_oceanicnext
 fi
 
-#= Completion {{{1
-#==================================================
-autoload -Uz compinit
-compinit -i -d $XDG_CACHE_HOME/zsh/compdump
-
-setopt EXTENDED_GLOB
-unsetopt GLOB_DOTS
-
-# fuzzy completion. taken from https://superuser.com/a/815317
-zstyle ':completion:*' matcher-list '' \
-  'm:{a-z\-}={A-Z\_}' \
-  'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
-  'r:|?=** m:{a-z\-}={A-Z\_}'
-
 #= History {{{1
 #==================================================
 setopt APPEND_HISTORY
@@ -148,8 +134,30 @@ SAVEHIST=1000
 #= Mappings {{{1
 #==================================================
 bindkey -v
-bindkey '^r' history-incremental-search-backward
 
 # Let capslock be control
 setxkbmap -option ctrl:nocaps
+#= Completion {{{1
+#==================================================
+autoload -Uz compinit
+compinit -i -d $XDG_CACHE_HOME/zsh/compdump
 
+setopt EXTENDED_GLOB
+unsetopt GLOB_DOTS
+
+# fuzzy completion. taken from https://superuser.com/a/815317
+zstyle ':completion:*' matcher-list '' \
+  'm:{a-z\-}={A-Z\_}' \
+  'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
+  'r:|?=** m:{a-z\-}={A-Z\_}'
+
+#= FZF {{{1
+#==================================================
+# https://github.com/junegunn/fzf.git
+
+export PATH=$PATH:$XDG_DATA_HOME/fzf/bin
+
+source $XDG_DATA_HOME/fzf/shell/key-bindings.zsh
+if [[ -o interactive ]]; then
+  source $XDG_DATA_HOME/fzf/shell/completion.zsh
+fi

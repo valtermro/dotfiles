@@ -94,9 +94,17 @@ function backup {
   fi
 }
 
+function rm_file {
+  local file=$1
+
+  if [[ -f $file ]]; then
+    echo "Removing old ${file}"
+    rm -rf $file
+  fi
+}
+
 function rm_dir {
   local dir=$1
-  local bkp=$2
 
   if [[ -d $dir ]]; then
     echo "Removing old ${dir}"
@@ -199,7 +207,15 @@ if should_install 'zsh'; then
   dot_link 'zshrc' $HOME
   dot_link 'zshenv' $HOME
 
+  echo 'Installing fzf'
+  rm_dir $XDG_DATA_HOME/fzf
+  git_clone 'junegunn/fzf' $XDG_DATA_HOME
+  rm_dir $XDG_DATA_HOME/fzf/doc
+  $XDG_DATA_HOME/fzf/install --bin
+
   echo 'Installing base16 colorschemes'
+  rm_file $HOME/.base16_theme
+  rm_file $HOME/.vimrc_background
   rm_dir $XDG_DATA_HOME/base16-shell
   git_clone 'chriskempson/base16-shell' $XDG_DATA_HOME
 fi
