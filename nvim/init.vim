@@ -54,11 +54,6 @@ nnoremap <C-Right> :vertical resize +5<CR>
 nnoremap <C-Down> :resize -5<CR>
 nnoremap <C-Left> :vertical resize -5<CR>
 
-nnoremap <M-k> <C-W>k
-nnoremap <M-j> <C-W>j
-nnoremap <M-l> <C-W>l
-nnoremap <M-h> <C-W>h
-
 cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
 
