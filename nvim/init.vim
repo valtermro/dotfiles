@@ -6,6 +6,7 @@ set hidden
 set nobackup
 set noswapfile
 set nowritebackup
+set mouse=nvc
 set pastetoggle=<F10>
 set fileformats=unix,dos,mac
 
