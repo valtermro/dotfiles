@@ -38,27 +38,6 @@ set ignorecase
 set nohlsearch
 set smartcase
 
-"= Filetype {{{1
-"==================================================
-" neovim's ftdetect and ftplugin directories may cause problems with some plugins
-
-augroup filetype_detect
-  autocmd!
-  autocmd BufRead,BufNewFile *.tmux setf tmux
-  autocmd BufRead,BufNewFile *.mutt setf muttrc
-  autocmd BufRead,BufNewFile *.blade.php setf blade
-
-  autocmd BufRead,BufNewFile */git/* setf gitconfig
-augroup END
-
-augroup filetype_plugin
-  autocmd FileType php,blade setl tabstop=4 | setl softtabstop=4 | setl shiftwidth=4
-  autocmd FileType python setl tabstop=4 | setl softtabstop=4 | setl shiftwidth=4
-  autocmd FileType xml setl tabstop=4 | setl softtabstop=4 | setl shiftwidth=4
-
-  autocmd FileType vim,zsh,tmux,muttrc,sh setl foldmethod=marker
-augroup END
-
 "= Mappings {{{1
 "==================================================
 nnoremap ' `
@@ -116,7 +95,7 @@ onoremap <silent> al :<C-U>normal! $v0<CR>
 xnoremap <silent> af :<C-U>normal! GVgg<CR>
 onoremap <silent> af :normal GVgg<CR>
 
-"= Pugins {{{1
+"= Plugins {{{1
 "==================================================
 set runtimepath+=$XDG_DATA_HOME/dein.vim/repos/github.com/Shougo/dein.vim/
 call dein#begin($XDG_DATA_HOME.'/dein.vim')
@@ -285,3 +264,19 @@ augroup force_options
   autocmd!
   autocmd BufReadPost * setl formatoptions-=o
 augroup END
+"= Filetype {{{1
+"==================================================
+augroup filetype_detect
+  autocmd!
+  autocmd BufRead,BufNewFile *.mutt setf muttrc
+  autocmd BufRead,BufNewFile */git/* setf gitconfig
+augroup END
+
+augroup filetype_plugin
+  autocmd FileType php setl tabstop=4 softtabstop=4 shiftwidth=4
+  autocmd FileType python setl tabstop=4 softtabstop=4 shiftwidth=4
+  autocmd FileType xml setl tabstop=4 softtabstop=4 shiftwidth=4
+
+  autocmd FileType vim,zsh,tmux,muttrc,sh setl foldmethod=marker
+augroup END
+
