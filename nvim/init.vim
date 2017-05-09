@@ -265,6 +265,7 @@ augroup filetype_detect
   autocmd!
   autocmd BufRead,BufNewFile *.mutt setf muttrc
   autocmd BufRead,BufNewFile */git/* setf gitconfig
+  autocmd BufRead,BufNewFile .babelrc setf json
 augroup END
 
 augroup filetype_plugin
