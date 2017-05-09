@@ -251,7 +251,7 @@ call dein#end()
 "==================================================
 filetype plugin on
 
-augroup force_options
+augroup post_plugin_fix
   autocmd!
   autocmd BufReadPost * setl formatoptions-=o
 augroup END
@@ -265,6 +265,7 @@ augroup filetype_detect
 augroup END
 
 augroup filetype_plugin
+  autocmd!
   autocmd FileType php setl tabstop=4 softtabstop=4 shiftwidth=4
   autocmd FileType python setl tabstop=4 softtabstop=4 shiftwidth=4
   autocmd FileType xml setl tabstop=4 softtabstop=4 shiftwidth=4
