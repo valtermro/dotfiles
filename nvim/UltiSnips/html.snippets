@@ -2,13 +2,27 @@ priority -50
 
 #= Generic blocks
 #==================================================
+snippet html "Basic HTML markup"
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>${1:Hello World}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	$2
+</body>
+</html>$0
+endsnippet
+
 snippet itag "generic inline tag"
 <${1:span} class="${2:$1}">$3</$1>$0
 endsnippet
 
 snippet btag "generic block tag"
 <${1:div} class="${2:$1}">
-	$3
+	${3:${VISUAL}}
 </$1>$0
 endsnippet
 
@@ -16,8 +30,32 @@ endsnippet
 #==================================================
 snippet div "basic div element"
 <div class="${1:container}">
-	$2
+	${2:${VISUAL}}
 </div>$0
+endsnippet
+
+snippet section "basic section element"
+<section class="${1:container}">
+	${2:${VISUAL}}
+</section>$0
+endsnippet
+
+snippet article "basic article element"
+<article class="${1:container}">
+	${2:${VISUAL}}
+</article>$0
+endsnippet
+
+snippet header "basic header element"
+<header class="${1:container}">
+	${2:${VISUAL}}
+</header>$0
+endsnippet
+
+snippet footer "basic footer element"
+<footer class="${1:container}">
+	${2:${VISUAL}}
+</footer>$0
 endsnippet
 
 snippet form "basic form element"

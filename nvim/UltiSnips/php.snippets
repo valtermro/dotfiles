@@ -124,6 +124,28 @@ endsnippet
 
 #= PHPUnit
 #==================================================
+snippet tcls "Test class"
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
+class `!p snip.rv = snip.basename` extends TestCase
+{
+	use DatabaseMigrations;
+
+	/** @test */
+	public function it_${2:name}()
+	{
+		$this->expectException('Illuminate\Auth\AuthenticationException');
+
+		$this->post('/threads/1/replies', []);
+	}
+}
+endsnippet
+
 snippet tup "Test setUp"
 public function setUp()
 {
@@ -143,9 +165,7 @@ public function tearDown()
 endsnippet
 
 snippet tme "Test method"
-/**
- * @test
- */
+/** @test */
 public function $1()
 {
 	$2
