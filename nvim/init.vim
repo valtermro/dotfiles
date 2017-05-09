@@ -61,6 +61,9 @@ nnoremap <leader>cul :set cursorline!<CR>
 
 nnoremap <leader>= mtgg=G't
 
+nnoremap <leader>p "+p
+xnoremap <leader>p "+p
+
 nnoremap X "_dd
 nnoremap D "_D
 nnoremap S "_S
