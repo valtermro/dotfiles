@@ -114,6 +114,47 @@ call dein#add('terryma/vim-multiple-cursors')
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
+"- Language support
+"--------------------------------------------------
+call dein#add('tpope/vim-endwise')
+call dein#add('othree/html5.vim')
+call dein#add('gregsexton/MatchTag')
+call dein#add('hail2u/vim-css3-syntax')
+call dein#add('keith/tmux.vim')
+call dein#add('elzr/vim-json')
+call dein#add('moll/vim-node')
+call dein#add('othree/yajs.vim')
+call dein#add('othree/es.next.syntax.vim')
+call dein#add('othree/jsdoc-syntax.vim')
+call dein#add('heavenshell/vim-jsdoc')
+call dein#add('posva/vim-vue')
+call dein#add('StanAngeloff/php.vim')
+call dein#add('noahfrederick/vim-composer')
+
+let g:vim_json_syntax_conceal = 0
+
+let g:jsdoc_allow_input_prompt = 1
+let g:jsdoc_param_description_separator = ' - '
+let g:jsdoc_tags = {'returns': 'return'}
+
+if executable('tern')
+  call dein#add('ternjs/tern_for_vim')
+  call dein#add('carlitux/deoplete-ternjs')
+
+  let g:tern_request_timeout = 1
+  let g:tern_map_keys = 1
+  let g:tern_show_signature_in_pum = 1
+  let g:tern#command = ['tern']
+  let g:tern#arguments = ['--persistent']
+endif
+
+"- Framework support
+"--------------------------------------------------
+call dein#add('tpope/vim-dispatch')
+call dein#add('tpope/vim-projectionist')
+call dein#add('jwalton512/vim-blade')
+call dein#add('noahfrederick/vim-laravel')
+
 "- Code quality
 "--------------------------------------------------
 call dein#add('w0rp/ale')
@@ -121,7 +162,10 @@ call dein#add('w0rp/ale')
 let g:ale_set_signs = 0
 let g:ale_echo_msg_format = '[%linter%] %s'
 let g:ale_linters = get(g:, 'ale_linters', {})
+let g:ale_linter_aliases = get(g:, 'ale_linter_aliases', {})
+let g:ale_linter_aliases.vue = ['html', 'javascript', 'scss']
 let g:ale_linters.html= []
+let g:ale_linters.vue = ['eslint', 'stylelint']
 
 "- Source control
 "--------------------------------------------------
@@ -181,45 +225,6 @@ augroup END
 let g:UltiSnipsExpandTrigger='<Tab>'
 let g:UltiSnipsJumpForwardTrigger='<Tab>'
 let g:UltiSnipsJumpBackwardTrigger='<S-Tab>'
-
-"- Language support
-"--------------------------------------------------
-call dein#add('tpope/vim-endwise')
-call dein#add('othree/html5.vim')
-call dein#add('gregsexton/MatchTag')
-call dein#add('hail2u/vim-css3-syntax')
-call dein#add('keith/tmux.vim')
-call dein#add('elzr/vim-json')
-call dein#add('othree/yajs.vim')
-call dein#add('othree/es.next.syntax.vim')
-call dein#add('othree/jsdoc-syntax.vim')
-call dein#add('heavenshell/vim-jsdoc')
-call dein#add('StanAngeloff/php.vim')
-
-let g:vim_json_syntax_conceal = 0
-
-let g:jsdoc_allow_input_prompt = 1
-let g:jsdoc_param_description_separator = ' - '
-let g:jsdoc_tags = {'returns': 'return'}
-
-if executable('tern')
-  call dein#add('ternjs/tern_for_vim')
-  call dein#add('carlitux/deoplete-ternjs')
-
-  let g:tern_request_timeout = 1
-  let g:tern_map_keys = 1
-  let g:tern_show_signature_in_pum = 1
-  let g:tern#command = ['tern']
-  let g:tern#arguments = ['--persistent']
-endif
-
-"- Framework support
-"--------------------------------------------------
-call dein#add('jwalton512/vim-blade')
-call dein#add('noahfrederick/vim-composer')
-call dein#add('tpope/vim-dispatch')
-call dein#add('tpope/vim-projectionist')
-call dein#add('noahfrederick/vim-laravel')
 
 "- User interface
 "--------------------------------------------------
