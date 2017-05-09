@@ -163,15 +163,6 @@ ask_install 'tmux' 'zsh'
 ask_install 'neovim' 'zsh' 'nvim'
 ask_install 'mutt' '' 'offlineimap' 'gpg' 'pass' 'msmtp'
 
-# terminal profile should be available only on systems where it has been tested
-if is_installed 'dconf' && is_installed 'gsettings'; then
-  if [[ $(dconf dump /org/mate/terminal/profiles/) ]]; then
-    if [[ $DIST_ID == 'Sabayon' || $DIST_ID == 'LinuxMint' ]]; then
-      ask_install 'terminal emulator'
-    fi
-  fi
-fi
-
 #= Install {{{1
 #================================================
 if [[ -z $to_install ]]; then
@@ -283,35 +274,6 @@ if should_install 'mutt'; then
   dot_link 'msmtp' $XDG_CONFIG_HOME
 fi
 
-#- Terminal emulator
-#------------------------------------------------
-if should_install 'terminal emulator'; then
-  echo 'Installing fonts'
-  make_dir $XDG_DATA_HOME/fonts
-  rm_dir $XDG_DATA_HOME/fonts/top-programming-fonts
-  git_clone 'hbin/top-programming-fonts' $XDG_DATA_HOME/fonts
-
-  term_profile_id=valtermro_dotfiles
-
-  # Mate desktop.
-  if [[ $(dconf dump /org/mate/terminal/profiles/) ]]; then
-    echo 'Setting up a profile for mate terminal'
-    term_profile_schema=org.mate.terminal.global
-    term_profile_list=$(gsettings get $term_profile_schema profile-list)
-    dconf_profile_path=/org/mate/terminal/profiles/$term_profile_id/
-    dconf_dump_file=$SELF_DIR/dconf_dump/org_mate_terminal_profiles_coding
-
-    if [[ ! $term_profile_list =~ $term_profile_id ]]; then
-      term_profile_list=${term_profile_list/]/," '${term_profile_id}']"}
-
-      gsettings set $term_profile_schema profile-list "${term_profile_list}"
-      gsettings set $term_profile_schema default-profile "${term_profile_id}"
-      dconf load $dconf_profile_path < $dconf_dump_file
-      term_conf_installed=true
-    fi
-  fi
-fi
-
 #= Wrap up {{{1
 #=================================================
 echo
@@ -342,6 +304,4 @@ if should_install 'zsh'; then
     echo 'Could not set zsh as the default login shell!'
     exit $ERR_RUNTIME
   fi
-elif should_install 'terminal emulator'; then
-  echo 'Please, open a new terminal window.'
 fi
