@@ -183,7 +183,7 @@ fi
 #- Zsh
 #------------------------------------------------
 if should_install 'zsh'; then
-  if [[ $(login_shell) != $(which zsh) ]]; then
+  if [[ $(login_shell) != '/bin/zsh' && $(login_shell) != $(which zsh) ]]; then
     echo 'Setting zsh as the default login shell'
     chsh -s $(which zsh) $(whoami)
   fi
@@ -298,7 +298,7 @@ if should_install 'tmux' || should_install 'neovim'; then
 fi
 
 if should_install 'zsh'; then
-  if [[ $(login_shell) == $(which zsh) ]]; then
+  if [[ $(login_shell) == '/bin/zsh' || $(login_shell) == $(which zsh) ]]; then
     echo 'Be sure to logout/login to validate the changes.'
   else
     echo 'Could not set zsh as the default login shell!'
