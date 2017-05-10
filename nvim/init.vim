@@ -10,6 +10,9 @@ set mouse=nvc
 set pastetoggle=<F10>
 set fileformats=unix,dos,mac
 
+set exrc
+set secure
+
 set nowrap
 " set textwidth=100
 
