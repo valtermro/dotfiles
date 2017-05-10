@@ -190,7 +190,7 @@ let g:NERDTreeShowHidden = 1
 let g:NERDTreeIgnore = ['.git', 'node_modules', 'vendor']
 
 nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <C-x><C-p> :Buffers<CR>
+nnoremap <silent> <C-g><C-p> :Buffers<CR>
 nnoremap <silent> <leader>ne :NERDTreeToggle<CR>
 
 "- Completion, snippets and alike
