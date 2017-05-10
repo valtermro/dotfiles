@@ -4,7 +4,7 @@ ignored_mailboxes=('Deleted' 'Drafts' 'Sent')
 count=0
 
 # if offlineimap isn't running, do nothing
-if [[ ! $(ps aux | grep $(which offlineimap)$) ]]; then
+if [[ ! $(which offlineimap) || ! $(ps aux | grep $(which offlineimap)$) ]]; then
   exit 0
 fi
 
