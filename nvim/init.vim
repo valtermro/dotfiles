@@ -186,7 +186,8 @@ call dein#add('scrooloose/nerdtree')
 call dein#add('junegunn/fzf', {'path': $XDG_DATA_HOME.'/fzf', 'merged': 0})
 call dein#add('junegunn/fzf.vim')
 
-let NERDTreeShowHidden = 1
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeIgnore = ['.git', 'node_modules', 'vendor']
 
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-x><C-p> :Buffers<CR>
