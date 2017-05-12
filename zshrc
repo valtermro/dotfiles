@@ -106,6 +106,23 @@ if type nvim >/dev/null; then
   alias vi='nvim'
 fi
 
+#= Functions {{{1
+#==================================================
+function add2path {
+  local dir=$(realpath $1)
+
+  if [[ ! -d $dir ]]; then
+    echo 'Failed: invalid path'
+    return 1
+  fi
+
+  if [[ ! "$PATH" =~ "$dir" ]]; then
+    export PATH=$PATH:$dir
+  else
+    echo 'Already on $PATH'
+  fi
+}
+
 #= Colors {{{1
 #==================================================
 export TERM=xterm-256color
