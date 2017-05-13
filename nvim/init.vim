@@ -24,6 +24,7 @@ set shiftwidth=2
 
 set wildignore+=*/tmp/*,*/node_modules/*,*/vendor/*
 set wildmode=longest,list
+set completeopt=menuone,noinsert,noselect
 
 set number
 set relativenumber
@@ -124,11 +125,10 @@ call dein#add('othree/html5.vim')
 call dein#add('gregsexton/MatchTag')
 call dein#add('hail2u/vim-css3-syntax')
 call dein#add('keith/tmux.vim')
+call dein#add('pangloss/vim-javascript')
+call dein#add('othree/jsdoc-syntax.vim')
 call dein#add('elzr/vim-json')
 call dein#add('moll/vim-node')
-call dein#add('othree/yajs.vim')
-call dein#add('othree/es.next.syntax.vim')
-call dein#add('othree/jsdoc-syntax.vim')
 call dein#add('heavenshell/vim-jsdoc')
 call dein#add('posva/vim-vue')
 call dein#add('StanAngeloff/php.vim')
@@ -144,11 +144,11 @@ if executable('tern')
   call dein#add('ternjs/tern_for_vim')
   call dein#add('carlitux/deoplete-ternjs')
 
+  let g:tern#command = ['tern']
+  let g:tern#arguments = ['--prersistent', '--no-port-file']
   let g:tern_request_timeout = 1
   let g:tern_map_keys = 1
   let g:tern_show_signature_in_pum = 1
-  let g:tern#command = ['tern']
-  let g:tern#arguments = ['--persistent']
 endif
 
 "- Framework support
@@ -167,7 +167,8 @@ let g:ale_echo_msg_format = '[%linter%] %s'
 let g:ale_linters = get(g:, 'ale_linters', {})
 let g:ale_linter_aliases = get(g:, 'ale_linter_aliases', {})
 let g:ale_linter_aliases.vue = ['html', 'javascript', 'scss']
-let g:ale_linters.html= []
+let g:ale_linters.html = []
+let g:ale_linters.javascript = ['eslint']
 let g:ale_linters.vue = ['eslint', 'stylelint']
 
 "- Source control
@@ -201,7 +202,6 @@ call dein#add('SirVer/ultisnips')
 call dein#add('mattn/emmet-vim')
 call dein#add('Shougo/neco-vim')
 
-set completeopt=menu,menuone,noinsert,noselect
 let g:deoplete#enable_smart_case = 1
 
 " `g:deoplete#enable_at_startup` causes a huge lag when first entering insert mode.
