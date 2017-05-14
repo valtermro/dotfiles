@@ -3,12 +3,14 @@
 filetype indent on
 
 set hidden
+set fileformats=unix,dos,mac
+set mouse=nvc
+set pastetoggle=<F10>
+set scrolloff=3
+
 set nobackup
 set noswapfile
 set nowritebackup
-set mouse=nvc
-set pastetoggle=<F10>
-set fileformats=unix,dos,mac
 
 set exrc
 set secure
@@ -18,26 +20,28 @@ set nowrap
 
 set expandtab
 set smartindent
-set tabstop=2
-set softtabstop=2
 set shiftwidth=2
+set softtabstop=2
+set tabstop=2
 
+set completeopt=menuone,noinsert,noselect
 set wildignore+=*/tmp/*,*/node_modules/*,*/vendor/*
 set wildmode=longest,list
-set completeopt=menuone,noinsert,noselect
 
 set number
 set relativenumber
 set showcmd
-set splitright
 set colorcolumn=80
+
+set splitright
 set diffopt+=vertical
+
 set foldcolumn=0
 set foldlevelstart=0
-set scrolloff=3
-set showbreak=\ ❯
+
 set invlist
 set listchars=tab:›\ ,trail:⋅,extends:❯,precedes:❮ ",eol:¬
+set showbreak=\ ❯
 
 set ignorecase
 set nohlsearch
@@ -47,8 +51,9 @@ set smartcase
 "==================================================
 nnoremap ' `
 nnoremap ` '
+nnoremap gI `.
 
-nnoremap [3 <C-^>
+nnoremap [<Tab> <C-^>
 
 nnoremap Q n.
 nnoremap <C-q> ;.
@@ -61,10 +66,6 @@ nnoremap <C-Left> :vertical resize -5<CR>
 cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
 
-nnoremap <leader>cul :set cursorline!<CR>
-
-nnoremap <leader>= mtgg=G't
-
 nnoremap <leader>p "+p
 xnoremap <leader>p "+p
 
@@ -76,13 +77,14 @@ xnoremap x "_x
 nnoremap / /\v
 nnoremap ? ?\v
 nnoremap + :set hlsearch<CR>mt*`t
-nnoremap - :set nohlsearch<CR>
 nnoremap <C-l> :nohlsearch<CR>
 
 nnoremap <C-E> 5<C-E>
 nnoremap <C-Y> 5<C-Y>
 nnoremap <C-O> <C-O>zz
 nnoremap <C-I> <C-I>zz
+
+inoremap <C-c> <Esc>
 
 "= Motions {{{1
 "==================================================
