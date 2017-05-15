@@ -235,30 +235,21 @@ let g:UltiSnipsJumpBackwardTrigger='<S-Tab>'
 "- User interface
 "--------------------------------------------------
 call dein#add('chriskempson/base16-vim')
-call dein#add('vim-airline/vim-airline')
-call dein#add('vim-airline/vim-airline-themes')
-
-let base16colorspace = 256
 
 if ! filereadable(expand('~/.vimrc_background'))
   colorscheme desert
 else
-  source ~/.vimrc_background
-  augroup override_colors
-    autocmd!
-    autocmd ColorScheme * highlight! link Search CursorLine
-  augroup END
+  let base16colorspace = 256
+  silent! source ~/.vimrc_background
 endif
 
-set noshowmode
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers= 0
-let g:airline#extensions#tabline#show_splits = 0
-let g:airline#extensions#tabline#tab_min_count = 2
-let g:airline_theme = 'base16_oceanicnext'
-let g:airline_section_z = '%{g:airline_symbols.linenr} %l:%v [%p%%|%L]'
+augroup override_colors
+  autocmd!
+  autocmd ColorScheme * highlight! link Search CursorLine
+augroup END
 
 "- Dein footer
+"--------------------------------------------------
 call dein#end()
 
 "= Post-plugin fixes {{{1
@@ -269,6 +260,119 @@ augroup post_plugin_fix
   autocmd!
   autocmd BufReadPost * setl formatoptions-=o
 augroup END
+
+"= Statusline {{{1
+"==================================================
+set statusline=
+set statusline+=%([%R%H%W%{&paste?',PST':''}]%)
+set statusline+=%([%{fugitive#head(7)}]%)
+set statusline+=%f%-2{&mod?'*':'\ '}
+set statusline+=%{StatusLineLinterInfo()}
+set statusline+=%=
+set statusline+=%4l:%-3v
+set statusline+=%#StatusLineWarning#
+set statusline+=%{StatusLineFileFormatWarning()}
+set statusline+=%{StatusLineFileEncodingWarning()}
+set statusline+=%{StatusLineIndentationWarning()}
+set statusline+=%{StatusLineTrailingSpacesWarning()}
+set statusline+=%*
+
+augroup status_line_setup "{{{2
+  autocmd!
+  autocmd ColorScheme * highlight StatusLineWarning cterm=none ctermbg=66 ctermfg=52
+
+  " update warnings when idle and after saving
+  autocmd CursorHold,BufWritePost *
+    \ unlet! b:statusline_indent_warning |
+    \ unlet! b:statusline_trailing_spaces_warning
+augroup END
+
+" StatusLineLinterInfo() " {{{2
+"--------------------------------------------------
+" displays a count of errors and warnings from ALE
+function! StatusLineLinterInfo()
+  if winwidth(0) < 40
+    return ''
+  endif
+
+  let l:count = ale#statusline#Count(bufnr('%'))
+  let status = ''
+
+  if l:count[0]
+    let status .= 'E:'.l:count[0]
+  endif
+
+  if l:count[1]
+    let status .= ' W:'.l:count[1]
+  endif
+
+  return l:status
+endfunction
+
+" StatusLineFileFormatWarning() {{{2
+"--------------------------------------------------
+function! StatusLineFileFormatWarning()
+  if &fileformat ==# 'unix'
+    return ''
+  endif
+  return '['.&fileformat.']'
+endfunction
+
+" StatusLineFileEncodingWarning() {{{2
+"--------------------------------------------------
+function! StatusLineFileEncodingWarning()
+  if &fileencoding ==# '' || &fileencoding ==# 'utf-8'
+    return ''
+  endif
+  return '['.&fileencoding.']'
+endfunction
+
+" StatusLineIndentationWarning() {{{2
+"--------------------------------------------------
+" warns about mixed and wrong indentation, based on the `expandtab` option
+" based on https://github.com/scrooloose/vimfiles/blob/master/vimrc#L228,L248
+function! StatusLineIndentationWarning()
+  if !&modifiable
+    return ''
+  endif
+  if exists('b:statusline_indent_warning')
+    return b:statusline_indent_warning
+  endif
+
+  let b:statusline_indent_warning = ''
+  let l:tabs = search('^\t', 'nw')
+  let l:spaces = search('^ \{'.&tabstop.',}[^\t]', 'nw')
+
+  if l:tabs && l:spaces
+    let b:statusline_indent_warning = '[mixed-indent]'
+  elseif (spaces && !&expandtab) || (tabs && &expandtab)
+    let b:statusline_indent_warning = '[wrong-indent]'
+  endif
+
+  return b:statusline_indent_warning
+endfunction
+
+" StatusLineTrailingWarning() {{{2
+"--------------------------------------------------
+" based on https://github.com/scrooloose/vimfiles/blob/master/vimrc#L195,L210
+function! StatusLineTrailingSpacesWarning()
+  if !&modifiable
+    return ''
+  endif
+
+  if exists('b:statusline_trailing_spaces_warning')
+    return b:statusline_trailing_spaces_warning
+  endif
+
+  let b:statusline_trailing_spaces_warning = ''
+
+  let l:trailing = search('\s\+$', 'nw')
+  if l:trailing
+    let b:statusline_trailing_spaces_warning = '[trailing:'.l:trailing.']'
+  endif
+
+  return b:statusline_trailing_spaces_warning
+endfunction
 
 "= Filetype {{{1
 "==================================================
