@@ -11,11 +11,12 @@
 [alias]
   s = status
   b = branch
-  s = status -s
-  aa = add -A
+  s = status --short
+  aa = add --all
   st = status
   co = checkout
   cm = commit
   cma = commit --amend
-  cmm = commit -m
+  cmm = commit --message
+  tags = tag --list
   lol = log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
