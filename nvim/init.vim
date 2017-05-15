@@ -356,7 +356,7 @@ endfunction
 "--------------------------------------------------
 " based on https://github.com/scrooloose/vimfiles/blob/master/vimrc#L195,L210
 function! StatusLineTrailingSpacesWarning()
-  if !&modifiable
+  if !&modifiable || &filetype ==# 'markdown'
     return ''
   endif
 
