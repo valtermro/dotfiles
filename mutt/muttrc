@@ -24,10 +24,11 @@ ignore *
 unignore from: to: cc: date: subject:
 unhdr_order *
 hdr_order from: to: cc: date: subject:
+#= endsection }}}1
 
 #= Views {{{1
 #==================================================
-#- Status, and side bars
+#- Status, and side bars {{{2
 #--------------------------------------------------
 set sidebar_visible = yes
 set sidebar_width = 20
@@ -36,7 +37,7 @@ set sidebar_divider_char = ' │'
 set status_chars  = ' *%A'
 set status_format = '───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───'
 
-#- Index view
+#- Index view {{{2
 #--------------------------------------------------
 set date_format = '%m/%d'
 set index_format = '[%Z]  %D  %-20.20F  %s'
@@ -46,7 +47,7 @@ set uncollapse_jump = yes
 set sort_re = yes
 set reply_regexp = '^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*'
 
-#- Pager view
+#- Pager view {{{2
 #--------------------------------------------------
 set pager_index_lines = 10
 set pager_context = 3
@@ -57,7 +58,7 @@ set markers = no
 set quote_regexp = '^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+'
 alternative_order text/plain text/enriched text/html
 
-#- Compose view
+#- Compose view {{{2
 #--------------------------------------------------
 set edit_headers = yes
 set envelope_from = yes
@@ -70,6 +71,7 @@ set reverse_name = yes
 set forward_quote = yes
 set forward_format = 'Fwd: %s'
 set attribution = 'On %d, %n <%a> wrote:'
+#= endsection }}}1
 
 #= Mappings {{{1
 #==================================================
@@ -94,10 +96,11 @@ bind pager G  bottom
 
 # View attachments properly.
 bind attach <return> view-mailcap
+#= endsection }}}1
 
 #= Colors {{{1
 #==================================================
-#- Basics
+#- Basics {{{2
 #--------------------------------------------------
 color normal      color248  default
 color tree        default   default  # arrow in threads
@@ -109,7 +112,7 @@ color indicator   color3    color18  # current message/folder
 color error       color9    default  # error messages (status bar)
 color message     color7    default  # any other message (status bar)
 
-#- Index view
+#- Index view {{{2
 #--------------------------------------------------
 color index  default   default  '~O'           # old messages
 color index  color166  default  '~E'           # expired messages
@@ -131,7 +134,7 @@ color index  color2    color18  '~N~v~(~F)'    # collapsed thread with unread pa
 color index  color39   color18  '~v~(~p)'      # collapsed thread with unread parent, no unread inside, some to me directly
 color index  color9    color18  '~v~(~D)'      # thread with deleted (doesn't differentiate between all or partial)
 
-#- Message headers
+#- Message headers {{{2
 #--------------------------------------------------
 color header  color244  default  '^'
 color header  color136  default  '^(From)'
@@ -139,7 +142,7 @@ color header  color136    default  '^(To)'
 color header  color5    default  '^(Cc)|(Bcc)'
 color header  color33   default  '^(Subject)'
 
-#- Body
+#- Body {{{2
 #--------------------------------------------------
 color quoted   color33   default
 color quoted1  color37   default
@@ -160,12 +163,14 @@ color body  color245  default  '[*]?((N)?ACK|CU|LOL|SCNR|BRB|BTW|CWYL|\
                                |FWIW|vbg|GD&R|HTH|HTHBE|IMHO|IMNSHO|\
                                |IRL|RTFM|ROTFL|ROFL|YMMV)[*]?'
 
-#- Sidebar
+#- Sidebar {{{2
 #--------------------------------------------------
 color sidebar_indicator default   color18
 color sidebar_new       color3    default
 color sidebar_divider   color245  default
+#= endsection }}}1
 
 #= Accounts {{{1
 #==================================================
 source $XDG_CONFIG_HOME/mutt/accounts/valtermro@outlook.com/config.mutt
+#= endsection }}}1

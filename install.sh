@@ -14,9 +14,12 @@ source $SELF_DIR/zshenv
 
 to_install=()
 conflicted=()
+#= endsection }}}1
 
 #= Helpers {{{1
 #================================================
+# should_install() {{{2
+#--------------------------------------------------
 function should_install {
   local what=$1
   if [[ "${to_install[@]}" =~ "${what}" ]]; then
@@ -25,6 +28,8 @@ function should_install {
   return 1
 }
 
+# ask() {{{2
+#--------------------------------------------------
 function ask {
   local what=$1
 
@@ -37,6 +42,8 @@ function ask {
   return 1
 }
 
+# ask_install() {{{2
+#--------------------------------------------------
 function ask_install {
   local what=$1; shift
   local conf_depend=$1; shift
@@ -67,6 +74,8 @@ function ask_install {
   fi
 }
 
+# make_dir() {{{2
+#--------------------------------------------------
 function make_dir {
   local dir=$1
   if [[ ! -d $dir ]]; then
@@ -75,6 +84,8 @@ function make_dir {
   fi
 }
 
+# git_clone() {{{2
+#--------------------------------------------------
 function git_clone {
   local repo=https://github.com/$1
   local dest=$2/$(basename $repo)
@@ -82,6 +93,8 @@ function git_clone {
   git clone --depth=1 $repo $dest
 }
 
+# backup() {{{2
+#--------------------------------------------------
 function backup {
   local fname=$1
 
@@ -94,6 +107,8 @@ function backup {
   fi
 }
 
+# rm_file() {{{2
+#--------------------------------------------------
 function rm_file {
   local file=$1
 
@@ -103,6 +118,8 @@ function rm_file {
   fi
 }
 
+# rm_dir() {{{2
+#--------------------------------------------------
 function rm_dir {
   local dir=$1
 
@@ -112,6 +129,8 @@ function rm_dir {
   fi
 }
 
+# dot_link() {{{2
+#--------------------------------------------------
 function dot_link {
   local what=$1
   local dest_dir=$2
@@ -135,6 +154,8 @@ function dot_link {
   ln -s $src $dest
 }
 
+# is_installed() {{{2
+#--------------------------------------------------
 function is_installed {
   local what=$1
 
@@ -144,9 +165,12 @@ function is_installed {
   return 1
 }
 
+# login_shell() {{{2
+#--------------------------------------------------
 function login_shell {
   echo $(grep "^$1" /etc/passwd | grep $(whoami) | cut -d ':' -f 7)
 }
+#= endsection }}}1
 
 #= Validate dependencies {{{1
 #================================================
@@ -154,6 +178,7 @@ if ! is_installed 'git'; then
   echo 'Installer depends on git. Please install it and try again.'
   exit $ERR_DEP
 fi
+#= endsection }}}1
 
 #= Select configs to install {{{1
 #================================================
@@ -162,6 +187,7 @@ ask_install 'zsh' '' 'zsh'
 ask_install 'tmux' 'zsh'
 ask_install 'neovim' 'zsh' 'nvim'
 ask_install 'mutt' '' 'offlineimap' 'gpg' 'pass' 'msmtp'
+#= endsection }}}1
 
 #= Install {{{1
 #================================================
@@ -172,7 +198,7 @@ fi
 
 echo 'Installing configs'
 
-#- Git
+#- Git {{{2
 #------------------------------------------------
 if should_install 'git'; then
   backup ~/.gitconfig
@@ -180,7 +206,7 @@ if should_install 'git'; then
   dot_link 'git' $XDG_CONFIG_HOME
 fi
 
-#- Zsh
+#- Zsh {{{2
 #------------------------------------------------
 if should_install 'zsh'; then
   if [[ $(login_shell) != '/bin/zsh' && $(login_shell) != $(which zsh) ]]; then
@@ -211,7 +237,7 @@ if should_install 'zsh'; then
   git_clone 'chriskempson/base16-shell' $XDG_DATA_HOME
 fi
 
-#- Tmux
+#- Tmux {{{2
 #------------------------------------------------
 if should_install 'tmux'; then
   make_dir $X_LIB_HOME
@@ -219,7 +245,7 @@ if should_install 'tmux'; then
   dot_link 'lib/tmux' $X_LIB_HOME
 fi
 
-#- Neovim
+#- Neovim {{{2
 #------------------------------------------------
 if should_install 'neovim'; then
   dot_link 'nvim' $XDG_CONFIG_HOME
@@ -240,7 +266,7 @@ if should_install 'neovim'; then
   nvim +UpdateRemotePlugins +qall
 fi
 
-#- Mutt
+#- Mutt {{{2
 #------------------------------------------------
 if should_install 'mutt'; then
   if ask 'Create a new gpg key'; then
@@ -273,6 +299,7 @@ if should_install 'mutt'; then
   dot_link 'mutt' $XDG_CONFIG_HOME
   dot_link 'msmtp' $XDG_CONFIG_HOME
 fi
+#= endsection }}}1
 
 #= Wrap up {{{1
 #=================================================
@@ -305,3 +332,4 @@ if should_install 'zsh'; then
     exit $ERR_RUNTIME
   fi
 fi
+#= endsection }}}1

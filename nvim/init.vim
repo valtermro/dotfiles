@@ -1,113 +1,13 @@
-"= Basics {{{1
+"= Plugged {{{1
 "==================================================
-filetype indent on
-
-set hidden
-set fileformats=unix,dos,mac
-set mouse=nvc
-set pastetoggle=<F10>
-set scrolloff=3
-
-set nobackup
-set noswapfile
-set nowritebackup
-
-set exrc
-set secure
-
-set nowrap
-" set textwidth=100
-
-set expandtab
-set smartindent
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-
-set completeopt=menuone,noinsert,noselect
-set wildignore+=*/tmp/*,*/node_modules/*,*/vendor/*
-set wildmode=longest,list
-
-set number
-set relativenumber
-set showcmd
-set colorcolumn=80
-
-set splitright
-set diffopt+=vertical
-
-set foldcolumn=0
-set foldlevelstart=0
-
-set invlist
-set listchars=tab:›\ ,trail:⋅,extends:❯,precedes:❮ ",eol:¬
-set showbreak=\ ❯
-
-set ignorecase
-set nohlsearch
-set smartcase
-
-"= Mappings {{{1
-"==================================================
-nnoremap ' `
-nnoremap ` '
-nnoremap gI `.
-
-nnoremap [<Tab> <C-^>
-
-nnoremap Q n.
-nnoremap <C-q> ;.
-
-nnoremap <C-Up> :resize +5<CR>
-nnoremap <C-Right> :vertical resize +5<CR>
-nnoremap <C-Down> :resize -5<CR>
-nnoremap <C-Left> :vertical resize -5<CR>
-
-cnoremap <C-k> <Up>
-cnoremap <C-j> <Down>
-
-nnoremap <leader>p "+p
-xnoremap <leader>p "+p
-
-nnoremap X "_dd
-nnoremap D "_D
-nnoremap S "_S
-xnoremap x "_x
-
-nnoremap / /\v
-nnoremap ? ?\v
-nnoremap + :set hlsearch<CR>mt*`t
-nnoremap <C-l> :nohlsearch<CR>
-
-nnoremap <C-E> 5<C-E>
-nnoremap <C-Y> 5<C-Y>
-nnoremap <C-O> <C-O>zz
-nnoremap <C-I> <C-I>zz
-
-inoremap <C-c> <Esc>
-
-"= Motions {{{1
-"==================================================
-" all no-blank characters in the current line
-xnoremap <silent> il :<C-U>normal! $v^<CR>
-onoremap <silent> il :<C-U>normal! $v^<CR>
-
-" The entire line except the EOF character
-xnoremap <silent> al :<C-U>normal! $v0<CR>
-onoremap <silent> al :<C-U>normal! $v0<CR>
-
-" the entire file
-xnoremap <silent> af :<C-U>normal! GVgg<CR>
-onoremap <silent> af :normal GVgg<CR>
-
-"= Plugins {{{1
-"==================================================
+"- Dein header {{{2
+"--------------------------------------------------
 set runtimepath+=$XDG_DATA_HOME/dein.vim/repos/github.com/Shougo/dein.vim/
 call dein#begin($XDG_DATA_HOME.'/dein.vim')
 call dein#add('Shougo/dein.vim')
 call dein#add('haya14busa/dein-command.vim')
 
-"- Basic features
+"- Basic features {{{2
 "--------------------------------------------------
 call dein#add('editorconfig/editorconfig-vim')
 call dein#add('pbrisbin/vim-mkdir')
@@ -120,7 +20,7 @@ call dein#add('terryma/vim-multiple-cursors')
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
-"- Language support
+"- Language support {{{2
 "--------------------------------------------------
 call dein#add('tpope/vim-endwise')
 call dein#add('othree/html5.vim')
@@ -153,14 +53,14 @@ if executable('tern')
   let g:tern_show_signature_in_pum = 1
 endif
 
-"- Framework support
+"- Framework support {{{2
 "--------------------------------------------------
 call dein#add('tpope/vim-dispatch')
 call dein#add('tpope/vim-projectionist')
 call dein#add('jwalton512/vim-blade')
 call dein#add('noahfrederick/vim-laravel')
 
-"- Code quality
+"- Code quality {{{2
 "--------------------------------------------------
 call dein#add('w0rp/ale')
 
@@ -173,7 +73,7 @@ let g:ale_linters.html = []
 let g:ale_linters.javascript = ['eslint']
 let g:ale_linters.vue = ['eslint', 'stylelint']
 
-"- Source control
+"- Source control {{{2
 "--------------------------------------------------
 call dein#add('tpope/vim-fugitive')
 call dein#add('jreybert/vimagit', {'on_cmd': 'Magit'})
@@ -183,7 +83,7 @@ augroup fugitive_config
   autocmd FileType gitcommit setl cursorline
 augroup END
 
-"- Navigation
+"- Navigation {{{2
 "--------------------------------------------------
 call dein#add('scrooloose/nerdtree')
 call dein#add('junegunn/fzf', {'path': $XDG_DATA_HOME.'/fzf', 'merged': 0})
@@ -196,7 +96,7 @@ nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-g><C-p> :Buffers<CR>
 nnoremap <silent> <leader>ne :NERDTreeToggle<CR>
 
-"- Completion, snippets and alike
+"- Completion, snippets and alike {{{2
 "--------------------------------------------------
 call dein#add('Shougo/deoplete.nvim')
 call dein#add('Raimondi/delimitMate')
@@ -232,15 +132,15 @@ let g:UltiSnipsExpandTrigger='<Tab>'
 let g:UltiSnipsJumpForwardTrigger='<Tab>'
 let g:UltiSnipsJumpBackwardTrigger='<S-Tab>'
 
-"- User interface
+"- Colors {{{2
 "--------------------------------------------------
 call dein#add('chriskempson/base16-vim')
 
-if ! filereadable(expand('~/.vimrc_background'))
+if !filereadable(expand('~/.vimrc_background'))
   colorscheme desert
 else
   let base16colorspace = 256
-  silent! source ~/.vimrc_background
+  source ~/.vimrc_background
 endif
 
 augroup override_colors
@@ -248,18 +148,155 @@ augroup override_colors
   autocmd ColorScheme * highlight! link Search CursorLine
 augroup END
 
-"- Dein footer
+"- Dein footer {{{2
 "--------------------------------------------------
 call dein#end()
+"= endsection }}}1
 
-"= Post-plugin fixes {{{1
+"= Basic settings {{{1
 "==================================================
-filetype plugin on
+filetype plugin indent on
 
-augroup post_plugin_fix
+"- Stuff that should be on by default (IMHO) {{{2
+"--------------------------------------------------
+set hidden
+set number
+set relativenumber
+set showcmd
+set fileformats=unix,dos,mac
+set mouse=nvc
+
+set pastetoggle=<F10>
+set scrolloff=3
+
+"- Backup, undo and swap files {{{2
+"--------------------------------------------------
+set noswapfile
+set nobackup
+set nowritebackup
+
+"- Enable project-wide .nvimrc {{{2
+"--------------------------------------------------
+set exrc
+set secure
+
+"- Line length control {{{2
+"--------------------------------------------------
+set nowrap
+" set textwidth=100
+set colorcolumn=80
+
+"- Indentantion {{{2
+"--------------------------------------------------
+set expandtab
+set smartindent
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+
+"- Completion {{{2
+"--------------------------------------------------
+set completeopt=menuone,noinsert,noselect
+set wildignore+=*/tmp/*,*/node_modules/*,*/vendor/*
+set wildmode=longest,list
+
+set splitright
+set diffopt+=vertical
+
+set foldcolumn=0
+set foldlevelstart=0
+
+"- Invisibles (not anymore!!) {{{2
+"--------------------------------------------------
+set invlist
+set listchars=tab:›\ ,trail:⋅,extends:❯,precedes:❮ ",eol:¬
+set showbreak=\ ❯
+
+"- Search {{{2
+"--------------------------------------------------
+set ignorecase
+set nohlsearch
+set smartcase
+
+"- Undo the mess that dein.vim does {{{2
+"--------------------------------------------------
+augroup undo_dein_and_plugins_mess
   autocmd!
+
   autocmd BufReadPost * setl formatoptions-=o
 augroup END
+"= endsection }}}1
+
+"= Mappings {{{1
+"==================================================
+"- Fix-it Felix {{{2
+"--------------------------------------------------
+" <C-c> is kinda like <Esc>, but in insert mode it has some quirks...
+inoremap <C-c> <Esc>
+
+" my keyboard makes it hard to type a single "`"
+nnoremap ' `
+nnoremap ` '
+
+" because <C-^> is unrechable on my keyboard and <C-6> is too hard
+nnoremap [<Tab> <C-^>
+
+"- Do it again? {{{2
+"--------------------------------------------------
+nnoremap Q n.
+nnoremap <C-q> ;.
+
+"- "Navigating" is necessary {{{2
+"--------------------------------------------------
+" can't you go any faster??
+nnoremap <C-E> 5<C-E>
+nnoremap <C-Y> 5<C-Y>
+
+" centralize after a jump on jumplist
+nnoremap <C-O> <C-O>zz
+nnoremap <C-I> <C-I>zz
+
+" easy command history navigation
+cnoremap <C-k> <Up>
+cnoremap <C-j> <Down>
+
+"- Yank/Delete/Put {{{2
+"--------------------------------------------------
+" paste from the system's clipboard
+nnoremap <leader>p "+p
+xnoremap <leader>p "+p
+
+" strip text without overriding the unnamed register
+nnoremap X "_dd
+nnoremap D "_D
+nnoremap S "_S
+xnoremap x "_x
+
+"- Search {{{2
+"--------------------------------------------------
+" very magic search is a magic thing, don't you think?
+nnoremap / /\v
+nnoremap ? ?\v
+
+" hightlight occurences of the word under the cursor
+nnoremap + :set hlsearch<CR>mt*`t
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+"= endsection }}}1
+
+"= Motions {{{1
+"==================================================
+" all no-blank characters in the current line
+xnoremap <silent> il :<C-U>normal! $v^<CR>
+onoremap <silent> il :<C-U>normal! $v^<CR>
+
+" The entire line except the EOF character
+xnoremap <silent> al :<C-U>normal! $v0<CR>
+onoremap <silent> al :<C-U>normal! $v0<CR>
+
+" the entire file
+xnoremap <silent> af :<C-U>normal! GVgg<CR>
+onoremap <silent> af :normal GVgg<CR>
+"= endsection }}}1
 
 "= Statusline {{{1
 "==================================================
@@ -373,9 +410,12 @@ function! StatusLineTrailingSpacesWarning()
 
   return b:statusline_trailing_spaces_warning
 endfunction
+"= endsection }}}1
 
 "= Filetype {{{1
 "==================================================
+"- ftdetect {{{2
+"--------------------------------------------------
 augroup filetype_detect
   autocmd!
   autocmd BufRead,BufNewFile *.mutt setf muttrc
@@ -383,6 +423,8 @@ augroup filetype_detect
   autocmd BufRead,BufNewFile .babelrc setf json
 augroup END
 
+"- ftplugin {{{2
+"--------------------------------------------------
 augroup filetype_plugin
   autocmd!
   autocmd FileType php setl tabstop=4 softtabstop=4 shiftwidth=4
@@ -393,3 +435,4 @@ augroup filetype_plugin
 
   autocmd FileType vim setl keywordprg=:help
 augroup END
+"= endsection }}}1

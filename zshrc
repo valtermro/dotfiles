@@ -15,13 +15,16 @@ if [[ -d $X_LIB_HOME/zsh ]]; then
     source $fname
   done
 fi
+#= endsection }}}1
 
 #= Prompt {{{1
 #==================================================
+#- Basic settings {{{2
+#--------------------------------------------------
 setopt PROMPT_SUBST
 setopt TRANSIENT_RPROMPT
 
-#- Git stuff
+#- Git stuff {{{2
 #--------------------------------------------------
 autoload -Uz vcs_info
 branch_color=16
@@ -30,7 +33,7 @@ zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git*' formats '(%F{$branch_color}%b%f) '
 zstyle ':vcs_info:git*' actionformats '(%F{$action_color}%a%f|%F{$branch_color}%b%f) '
 
-#- Vi mode
+#- Vi mode {{{2
 #--------------------------------------------------
 export KEYTIMEOUT=1
 
@@ -50,7 +53,7 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-#- Jobs
+#- Jobs {{{2
 #--------------------------------------------------
 function job_info {
   local job_list=$(jobs)
@@ -74,7 +77,7 @@ function update_prompt_on_clear {
 zle -N update_prompt_on_clear
 bindkey '^l' update_prompt_on_clear
 
-#- At least, the prompt
+#- At least, the prompt {{{2
 #--------------------------------------------------
 function precmd {
   vcs_info
@@ -86,6 +89,7 @@ function precmd {
 
 PROMPT='$vcs_info_msg_0_%F{$vi_mode_color}⇨%f '
 RPROMPT='[%F{16}S:$suspended_jobs %F{4}R:$running_jobs%f]'
+#= endsection }}}1
 
 #= Aliases {{{1
 #==================================================
@@ -105,6 +109,7 @@ if type nvim >/dev/null; then
   export EDITOR='nvim'
   alias vi='nvim'
 fi
+#= endsection }}}1
 
 #= Functions {{{1
 #==================================================
@@ -122,6 +127,7 @@ function add2path {
     echo 'Already on $PATH'
   fi
 }
+#= endsection }}}1
 
 #= Colors {{{1
 #==================================================
@@ -132,6 +138,7 @@ if [[ ! -f ~/.base16_theme ]]; then
   echo "Using oceanicnext colorscheme"
   base16_oceanicnext
 fi
+#= endsection }}}1
 
 #= History {{{1
 #==================================================
@@ -147,6 +154,7 @@ setopt HIST_SAVE_NO_DUPS
 HISTFILE=$XDG_CACHE_HOME/zsh/histfile
 HISTSIZE=500
 SAVEHIST=1000
+#= endsection }}}1
 
 #= Mappings {{{1
 #==================================================
@@ -154,6 +162,8 @@ bindkey -v
 
 # Let capslock be control
 setxkbmap -option ctrl:nocaps
+#= endsection }}}1
+
 #= Completion {{{1
 #==================================================
 autoload -Uz compinit
@@ -167,6 +177,7 @@ zstyle ':completion:*' matcher-list '' \
   'm:{a-z\-}={A-Z\_}' \
   'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
   'r:|?=** m:{a-z\-}={A-Z\_}'
+#= endsection }}}1
 
 #= FZF {{{1
 #==================================================
@@ -178,3 +189,4 @@ source $XDG_DATA_HOME/fzf/shell/key-bindings.zsh
 if [[ -o interactive ]]; then
   source $XDG_DATA_HOME/fzf/shell/completion.zsh
 fi
+#= endsection }}}1
