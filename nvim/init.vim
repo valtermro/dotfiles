@@ -299,8 +299,8 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 "= Motions {{{1
 "==================================================
 " all no-blank characters in the current line
-xnoremap <silent> il :<C-U>normal! $v^<CR>
-onoremap <silent> il :<C-U>normal! $v^<CR>
+xnoremap <silent> il :<C-U>normal! g_v^<CR>
+onoremap <silent> il :<C-U>normal! g_v^<CR>
 
 " The entire line except the EOF character
 xnoremap <silent> al :<C-U>normal! $v0<CR>
