@@ -186,7 +186,7 @@ ask_install 'git'
 ask_install 'zsh' '' 'zsh'
 ask_install 'tmux' 'zsh'
 ask_install 'neovim' 'zsh' 'nvim'
-ask_install 'mutt' '' 'offlineimap' 'gpg' 'pass' 'msmtp'
+ask_install 'mutt' '' 'offlineimap' 'gpg' 'pass' 'msmtp' 'w3m'
 #= endsection }}}1
 
 #= Install {{{1
