@@ -16,7 +16,6 @@ call dein#add('tpope/vim-repeat')
 call dein#add('tpope/vim-surround')
 call dein#add('tpope/vim-unimpaired')
 call dein#add('tomtom/tcomment_vim')
-call dein#add('terryma/vim-multiple-cursors')
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
@@ -124,14 +123,6 @@ augroup deoplete_startup
   autocmd!
   autocmd VimEnter * call deoplete#enable()
 augroup END
-
-function! Multiple_cursors_before()
-  let b:deoplete_disable_auto_complete = 2
-endfunction
-
-function! Multiple_cursors_after()
-  let b:deoplete_disable_auto_complete = 0
-endfunction
 
 let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
