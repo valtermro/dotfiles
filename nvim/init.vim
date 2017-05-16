@@ -86,15 +86,28 @@ augroup END
 "- Navigation {{{2
 "--------------------------------------------------
 call dein#add('scrooloose/nerdtree')
-call dein#add('junegunn/fzf', {'path': $XDG_DATA_HOME.'/fzf', 'merged': 0})
-call dein#add('junegunn/fzf.vim')
+call dein#add('vim-ctrlspace/vim-ctrlspace')
 
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeIgnore = ['.git$', 'node_modules', 'vendor']
 
-nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <C-g><C-p> :Buffers<CR>
 nnoremap <silent> <leader>ne :NERDTreeToggle<CR>
+
+let g:CtrlSpaceCacheDir = $XDG_CACHE_HOME.'/ctrl_space'
+let g:CtrlSpaceMaxHeight = 15
+let g:CtrlSpaceSearchTiming = 50
+let g:CtrlSpaceUseTabline = 1
+
+nnoremap <silent> <C-space> :CtrlSpace<CR>
+" the usual fuzzy file finder mapping
+nnoremap <silent> <C-p> :CtrlSpace O<CR>
+" open tab list, by default <C-t> is used with the tag stack, which I don't use so it's ok to override it
+nnoremap <silent> <C-t> :CtrlSpace l<CR>
+
+highlight link CtrlSpaceSearch IncSearch
+if !isdirectory(g:CtrlSpaceCacheDir)
+  call mkdir(g:CtrlSpaceCacheDir, 0700)
+endif
 
 "- Completion, snippets and alike {{{2
 "--------------------------------------------------

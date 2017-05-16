@@ -159,6 +159,7 @@ SAVEHIST=1000
 #= Mappings {{{1
 #==================================================
 bindkey -v
+bindkey '^R' history-incremental-search-backward
 
 # Let capslock be control
 setxkbmap -option ctrl:nocaps
@@ -177,16 +178,4 @@ zstyle ':completion:*' matcher-list '' \
   'm:{a-z\-}={A-Z\_}' \
   'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
   'r:|?=** m:{a-z\-}={A-Z\_}'
-#= endsection }}}1
-
-#= FZF {{{1
-#==================================================
-# https://github.com/junegunn/fzf.git
-
-export PATH=$PATH:$XDG_DATA_HOME/fzf/bin
-
-source $XDG_DATA_HOME/fzf/shell/key-bindings.zsh
-if [[ -o interactive ]]; then
-  source $XDG_DATA_HOME/fzf/shell/completion.zsh
-fi
 #= endsection }}}1

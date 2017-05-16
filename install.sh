@@ -224,12 +224,6 @@ if should_install 'zsh'; then
   dot_link 'zshrc' $HOME
   dot_link 'zshenv' $HOME
 
-  echo 'Installing fzf'
-  rm_dir $XDG_DATA_HOME/fzf
-  git_clone 'junegunn/fzf' $XDG_DATA_HOME
-  rm_dir $XDG_DATA_HOME/fzf/doc
-  $XDG_DATA_HOME/fzf/install --bin
-
   echo 'Installing base16 colorschemes'
   rm_file $HOME/.base16_theme
   rm_file $HOME/.vimrc_background
