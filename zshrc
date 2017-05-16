@@ -113,6 +113,87 @@ fi
 
 #= Functions {{{1
 #==================================================
+# tm() {{{2
+#--------------------------------------------------
+# A helper for creating new, and attaching to, tmux sessions.
+#
+# If a session name is give, it tries attach to that session.
+# If a session with the given name doesn't exits, the function tries to create
+# it before attach.
+# 
+# When called without arguments, a selection menu, with all existing sessions as
+# well as an options to create a new one is displayed.
+#
+# In any case, when trying to attach to a session while already inside one, the
+# option to either switch sessions or abort is given.
+function tm {
+  local session=$1
+  local sess_list=$(tmux list-sessions -F '#{session_name}')
+  local curr_sess=$(tmux display-message -p '#{session_name}')
+
+  if [[ $session ]]; then
+    if [[ ! "$sess_list" =~ "$session" ]]; then
+      __my_tmux_session_create $session
+    fi
+    __my_tmux_session_attach $session
+    return 0
+  fi
+
+  local options=($(echo $sess_list | grep -v $curr_sess) 'New session')
+  COLUMNS=20
+  PS3='Pick an option: '
+  select session in "${options[@]}"; do
+    if [[ $session == 'New session' ]]; then
+      printf 'Session name: '
+      read -e session
+      __my_tmux_session_create "$session"
+    fi
+
+    __my_tmux_session_attach "$session"
+    break
+  done
+}
+
+#- __my_tmux_session_attach() {{{2
+#--------------------------------------------------
+# Tries to create a new tmux session.
+# The session, if created, is created in detached mode.
+function __my_tmux_session_create {
+  local session=$1
+
+  tmux new -ds "$session"
+  if [[ $? != 0 ]]; then
+    echo "Could not create session '$session'"
+    exit 1
+  fi
+}
+
+#- __my_tmux_session_attach() {{{2
+#--------------------------------------------------
+# Tries to attach to a tmux session.
+#
+# If already inside a tmux session given the option to switch to the target
+# session or abort.
+function __my_tmux_session_attach {
+  local session=$1
+
+  if [[ $TMUX ]]; then
+    printf "Reattach current client to $session? [y/N] "
+    read -E a
+
+    if [[ $a == 'y' || $a == 'Y' ]]; then
+      tmux switch-client -t "$session"
+    fi
+    return 0
+  fi
+
+  tmux attach -t "$session"
+}
+
+#- add2path() {{{2
+#--------------------------------------------------
+# Appends the given directory to $PATH.
+# The change is valid for the current session only.
 function add2path {
   local dir=$(realpath $1)
 
