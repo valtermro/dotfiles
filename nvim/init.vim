@@ -425,6 +425,7 @@ augroup filetype_detect
   autocmd BufRead,BufNewFile *.mutt setf muttrc
   autocmd BufRead,BufNewFile */git/* setf gitconfig
   autocmd BufRead,BufNewFile .babelrc setf json
+  autocmd BufRead,BufNewFile .stylelintrc setf json
 augroup END
 
 "- ftplugin {{{2
