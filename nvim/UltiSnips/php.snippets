@@ -3,7 +3,8 @@ priority -50
 #= Basic declarations
 #==================================================
 snippet fun "function declaration"
-function $1($2) {
+function $1($2)
+{
 	$3
 }$0
 endsnippet
@@ -139,10 +140,8 @@ class `!p snip.rv = snip.basename` extends TestCase
 	/** @test */
 	public function it_${2:name}()
 	{
-		$this->expectException('Illuminate\Auth\AuthenticationException');
-
-		$this->post('/threads/1/replies', []);
-	}
+		$3
+	}$0
 }
 endsnippet
 
