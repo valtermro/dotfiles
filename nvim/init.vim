@@ -34,6 +34,7 @@ call dein#add('heavenshell/vim-jsdoc')
 call dein#add('posva/vim-vue')
 call dein#add('StanAngeloff/php.vim')
 call dein#add('noahfrederick/vim-composer')
+call dein#add('chr4/nginx.vim')
 
 let g:vim_json_syntax_conceal = 0
 
