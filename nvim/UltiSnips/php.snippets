@@ -125,7 +125,7 @@ endsnippet
 
 #= PHPUnit
 #==================================================
-snippet tcls "Test class"
+snippet laratest "Test class"
 <?php
 
 namespace Tests\Feature;
@@ -138,13 +138,31 @@ class `!p snip.rv = snip.basename` extends TestCase
 	use DatabaseMigrations;
 
 	/** @test */
-	public function it_${2:name}()
+	public function it_${2:does_something}()
 	{
 		$3
 	}$0
 }
 endsnippet
 
+snippet lumentest "Test class"
+<?php
+
+namespace Tests;
+
+use Laravel\Lumen\Testing\DatabaseMigrations;
+
+class `!p snip.rv = snip.basename` extends TestCase
+{
+	use DatabaseMigrations;
+
+	/** @test */
+	public function it_${2:does_something}()
+	{
+		$3
+	}$0
+}
+endsnippet
 snippet tup "Test setUp"
 public function setUp()
 {
