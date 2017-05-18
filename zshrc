@@ -120,7 +120,7 @@ fi
 # If a session name is give, it tries attach to that session.
 # If a session with the given name doesn't exits, the function tries to create
 # it before attach.
-# 
+#
 # When called without arguments, a selection menu, with all existing sessions as
 # well as an options to create a new one is displayed.
 #
@@ -128,8 +128,7 @@ fi
 # option to either switch sessions or abort is given.
 function tm {
   local session=$1
-  local sess_list=$(tmux list-sessions -F '#{session_name}')
-  local curr_sess=$(tmux display-message -p '#{session_name}')
+  local sess_list=$(tmux list-sessions -F '#{session_name}' 2>/dev/null)
 
   if [[ $session ]]; then
     if [[ ! "$sess_list" =~ "$session" ]]; then
@@ -139,13 +138,13 @@ function tm {
     return 0
   fi
 
-  local options=($(echo $sess_list | grep -v $curr_sess) 'New session')
+  local options=($(echo $sess_list) 'New session')
   COLUMNS=20
   PS3='Pick an option: '
   select session in "${options[@]}"; do
     if [[ $session == 'New session' ]]; then
       printf 'Session name: '
-      read -e session
+      read session
       __my_tmux_session_create "$session"
     fi
 
@@ -162,10 +161,6 @@ function __my_tmux_session_create {
   local session=$1
 
   tmux new -ds "$session"
-  if [[ $? != 0 ]]; then
-    echo "Could not create session '$session'"
-    exit 1
-  fi
 }
 
 #- __my_tmux_session_attach() {{{2
@@ -178,7 +173,7 @@ function __my_tmux_session_attach {
   local session=$1
 
   if [[ $TMUX ]]; then
-    printf "Reattach current client to $session? [y/N] "
+    printf "Switch current client to $session? [y/N] "
     read -E a
 
     if [[ $a == 'y' || $a == 'Y' ]]; then
