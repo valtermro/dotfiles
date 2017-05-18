@@ -438,7 +438,7 @@ augroup filetype_plugin
   autocmd FileType xml setl tabstop=4 softtabstop=4 shiftwidth=4
 
   autocmd FileType vim,zsh,tmux,muttrc,sh setl foldmethod=marker
-
   autocmd FileType vim setl keywordprg=:help
+  autocmd FileType gitconfig setl noexpandtab
 augroup END
 "= endsection }}}1

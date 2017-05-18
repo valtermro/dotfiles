@@ -1,22 +1,23 @@
 [user]
-  name = valtermro
-  email = valtermro@outlook.com
+	name = valtermro
+	email = valtermro@outlook.com
 
 [core]
-  autocrlf = false
+	autocrlf = false
+	trustctime = false
 
 [push]
-  default = simple
+	default = simple
 
 [alias]
-  s = status
-  b = branch
-  s = status --short
-  aa = add --all
-  st = status
-  co = checkout
-  cm = commit
-  cma = commit --amend
-  cmm = commit --message
-  tags = tag --list
-  lol = log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+	s = status
+	b = branch
+	s = status --short
+	aa = add --all
+	st = status
+	co = checkout
+	cm = commit
+	cma = commit --amend
+	cmm = commit --message
+	tags = tag --list
+	lol = log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
