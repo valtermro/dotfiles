@@ -19,6 +19,34 @@ call dein#add('tomtom/tcomment_vim')
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
+"- Completion, snippets and alike {{{2
+"--------------------------------------------------
+call dein#add('Shougo/deoplete.nvim')
+call dein#add('Raimondi/delimitMate')
+call dein#add('SirVer/ultisnips')
+call dein#add('mattn/emmet-vim')
+call dein#add('Shougo/neco-vim')
+
+let g:deoplete#enable_smart_case = 1
+
+" `g:deoplete#enable_at_startup` causes a huge lag when first entering insert mode.
+augroup deoplete_startup
+  autocmd!
+  autocmd VimEnter * call deoplete#enable()
+augroup END
+
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_space = 1
+
+augroup fix_delimitMate_in_php_files
+  autocmd!
+  autocmd FileType php let b:delimitMate_matchpairs = '(:),[:],{:}'
+augroup END
+
+let g:UltiSnipsExpandTrigger='<Tab>'
+let g:UltiSnipsJumpForwardTrigger='<Tab>'
+let g:UltiSnipsJumpBackwardTrigger='<S-Tab>'
+
 "- Language support {{{2
 "--------------------------------------------------
 call dein#add('tpope/vim-endwise')
@@ -108,34 +136,6 @@ highlight link CtrlSpaceSearch IncSearch
 if !isdirectory(g:CtrlSpaceCacheDir)
   call mkdir(g:CtrlSpaceCacheDir, 0700)
 endif
-
-"- Completion, snippets and alike {{{2
-"--------------------------------------------------
-call dein#add('Shougo/deoplete.nvim')
-call dein#add('Raimondi/delimitMate')
-call dein#add('SirVer/ultisnips')
-call dein#add('mattn/emmet-vim')
-call dein#add('Shougo/neco-vim')
-
-let g:deoplete#enable_smart_case = 1
-
-" `g:deoplete#enable_at_startup` causes a huge lag when first entering insert mode.
-augroup deoplete_startup
-  autocmd!
-  autocmd VimEnter * call deoplete#enable()
-augroup END
-
-let g:delimitMate_expand_cr = 1
-let g:delimitMate_expand_space = 1
-
-augroup fix_delimitMate_in_php_files
-  autocmd!
-  autocmd FileType php let b:delimitMate_matchpairs = '(:),[:],{:}'
-augroup END
-
-let g:UltiSnipsExpandTrigger='<Tab>'
-let g:UltiSnipsJumpForwardTrigger='<Tab>'
-let g:UltiSnipsJumpBackwardTrigger='<S-Tab>'
 
 "- Colors {{{2
 "--------------------------------------------------
