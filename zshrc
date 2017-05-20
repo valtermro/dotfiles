@@ -1,3 +1,8 @@
+#= Basic settings {{{1
+#==================================================
+umask 077
+#= endsection }}}1
+
 #= Load user-defined scripts {{{1
 #==================================================
 if [[ -d $X_BIN_HOME ]]; then
