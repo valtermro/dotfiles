@@ -1,0 +1,287 @@
+#= Variables {{{1
+#==================================================
+#- Colors {{{2
+#--------------------------------------------------
+set $color_indicator        #303066
+set $color_focused_fg       #c0c0c0
+set $color_focused_bg       #606060
+set $color_focused_border   #606060
+set $color_unfocused_fg     #666666
+set $color_unfocused_bg     #333333
+set $color_unfocused_border #404040
+set $color_urgent_fg        #cecece
+set $color_urgent_bg        #993333
+set $color_urgent_border    #993333
+set $color_bar_fg           #999999
+set $color_bar_bg           #333333
+set $color_bar_separator    #999999
+
+#- Workspaces {{{2
+#--------------------------------------------------
+set $workspace1 "1:main"
+set $workspace2 "2:browser"
+set $workspace3 "3"
+set $workspace4 "4"
+set $workspace5 "5"
+set $workspace6 "6"
+set $workspace7 "7"
+set $workspace8 "8"
+set $workspace9 "9:chat"
+set $workspace10 "10:music"
+#= endsection }}}1
+
+#= Basic settings {{{1
+#==================================================
+# default font
+font pango:monospace 10
+
+# make focus change only on click
+focus_follows_mouse no
+
+# use windows key as modifier
+set $mod Mod4
+
+# set keyboard layout and map capslock to control
+exec_always "setxkbmap -layout br -option ctrl:nocaps"
+
+# start a terminal
+bindsym $mod+Return exec termite
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu
+# bindsym $mod+p exec dmenu_run -b -l 5 -p " " -nf "$color_unfocused_fg" -nb "$color_unfocused_bg" -sf "$color_focused_fg" -sb "$color_focused_bg"
+bindsym $mod+p exec i3-dmenu-desktop
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 on the fly
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -b 'Yes' 'i3-msg exit'"
+
+# if feh is installed and a file named `wallpaper` exists inside i3's configuration
+# directory, then use that file as the wallpaper
+exec_always feh --no-fehbg --bg-scale $XDG_CONFIG_HOME/i3/wallpaper
+#= endsection }}}1
+
+#= Theme {{{1
+#==================================================
+# remove title bar from windows but keep a visible border
+new_window pixel 2
+new_float normal
+
+#- Window colors {{{2
+#--------------------------------------------------
+# color class           border                  background          text                indicator               child border
+client.focused          $color_focused_border   $color_focused_bg   $color_focused_fg   $color_indicator        $color_focused_border
+client.unfocused        $color_unfocused_border $color_unfocused_bg $color_unfocused_fg $color_unfocused_border $color_unfocused_border
+client.focused_inactive $color_unfocused_border $color_unfocused_bg $color_unfocused_fg $color_unfocused_border $color_unfocused_border
+client.urgent           $color_urgent_border    $color_urgent_bg    $color_urgent_fg    $color_urgent_border    $color_urgent_border
+client.background       $color_focused_bg
+
+#- Status bar {{{2
+#--------------------------------------------------
+bar {
+  position bottom
+  status_command i3status -c $XDG_CONFIG_HOME/i3/i3status.conf
+
+  colors {
+    background $color_bar_bg
+    statusline $color_bar_fg
+    separator  $color_bar_separator
+
+    # color class        border               background          text
+    focused_workspace    $color_focused_bg    $color_focused_bg   $color_focused_fg
+    active_workspace     $color_focused_bg    $color_focused_bg   $color_focused_fg
+    inactive_workspace   $color_unfocused_bg  $color_unfocused_bg $color_unfocused_fg
+    urgent_workspace     $color_urgent_bg     $color_urgent_bg    $color_urgent_fg
+    # binding_mode         $color_urgent_bg     $color_urgent_bg    $color_urgent_fg
+  }
+}
+#= endsection }}}1
+
+#= Workspace settings {{{1
+#==================================================
+#- Switch workspaces {{{2
+#--------------------------------------------------
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+
+#- Move focused workspace {{{2
+#--------------------------------------------------
+bindsym $mod+Shift+Left move workspace to output left
+bindsym $mod+Shift+Right move workspace to output right
+
+#- Assign programs to specific workspaces {{{2
+#--------------------------------------------------
+assign [instance="beebeep"] $workspace9
+
+assign [instance="chromium"] $workspace2
+
+# https://github.com/i3/i3/issues/2060#issuecomment-155179472
+for_window [instance="spotify"] move to workspace $workspace10
+#= endsection }}}1
+
+#= Containers {{{1
+#==================================================
+bindsym $mod+f fullscreen toggle
+bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+minus move scratchpad
+
+#- Change container layout {{{2
+#--------------------------------------------------
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+#- Move focused container {{{2
+#--------------------------------------------------
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+#= endsection }}}1
+
+#= Display {{{1
+#==================================================
+# Screen brightness {{{2
+#--------------------------------------------------
+# For these binds to work you'll need to create the `brightctl` script and give
+# passwordless sudo access to it.
+#
+# For the script just create a file `/usr/local/bin/brightctl` with the following content:
+#
+#   #!/bin/bash
+#   bl_device=$(ls /sys/class/backlight)
+#   bl_device="/sys/class/backlight/${bl_device[0]}/brightness"
+#   if [[ $1 == up ]]; then
+#     echo $(($(cat $bl_device)+50)) > $bl_device
+#   elif [[ $1 == down ]]; then
+#     echo $(($(cat $bl_device)-50)) > $bl_device
+#   fi
+#   unset bl_device
+#
+# Note: the above script assumes that the first item (as listed by `ls`) inside
+# `/sys/class/backlight` is the one to control the brightness of.
+#
+# The permission problem can be solved by putting yourself in a group named, say,
+# `brightctl` and creating a file `/etc/sudoers.d/brightctl` (the name of the file
+# doesn't matter as long as it is inside `/etc/sudoers.d`) with the following in it:
+#
+#   %brightctl ALL=(ALL) NOPASSWD: /usr/local/bin/brightctl
+#
+bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightctl up
+bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightctl down
+# these settings depend on `xrandr` which is a command from `xorg-xrandr`
+set $internal_display "eDP-1"
+set $external_display "HDMI-1"
+
+#- Monitors {{{2
+#--------------------------------------------------
+# disable the external monitor
+bindsym $mod+Shift+F7 exec --no-startup-id \
+  xrandr \
+    --output $internal_display --primary --mode 1366x768 \
+    --output $external_display --off; \
+  restart
+
+# enable the external monitor
+bindsym $mod+Shift+F8 exec --no-startup-id \
+  xrandr \
+    --output $internal_display --mode 1366x768 --pos 0x312 \
+    --output $external_display --primary --mode 1920x1080 --pos 1366x0; \
+  restart
+#= endsection }}}1
+
+#= Windows {{{1
+#==================================================
+#- Split {{{2
+#--------------------------------------------------
+bindsym $mod+semicolon split toggle
+
+#- Move focus {{{2
+#--------------------------------------------------
+bindsym $mod+d  child
+bindsym $mod+a focus parent
+bindsym $mod+k focus up
+bindsym $mod+j focus down
+bindsym $mod+h focus left
+bindsym $mod+l focus right
+
+#- Move focused window {{{2
+#--------------------------------------------------
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+l move right
+
+#- Resize window mode {{{2
+#--------------------------------------------------
+bindsym $mod+r mode "resize"
+mode "resize" {
+  # Use [hjkl] to resize windows
+  bindsym k resize grow height 10 px or 10 ppt
+  bindsym l resize grow width 10 px or 10 ppt
+  bindsym j resize shrink height 10 px or 10 ppt
+  bindsym h resize shrink width 10 px or 10 ppt
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+#= endsection }}}1
+
+#= Floating windows {{{1
+#==================================================
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# use mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+#= endsection }}}1
+
+#= Media control {{{1
+#==================================================
+# Volume {{{2
+#--------------------------------------------------
+# These bindings are to work with alsa via the `amixer` package.
+
+# If the keyboard has dedicated keys for volume control
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%-
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+
+bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
+
+# If the keyboard hasn't dedicated keys
+bindsym $mod+F9 exec --no-startup-id amixer set Master 5%-
+bindsym $mod+F10 exec --no-startup-id amixer set Master 5%+
+bindsym $mod+F11 exec --no-startup-id amixer set Master toggle
+
+# Media player {{{2
+#--------------------------------------------------
+# These bindings depend on the `playerctl` package.
+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+#= endsection }}}1

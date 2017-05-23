@@ -111,7 +111,7 @@ alias la='ls -ACF'
 alias tree='tree -C'
 alias open='xdg-open'
 
-# match neovim's `so` command
+# match [neo]vim's `so` command
 alias so='source'
 #= endsection }}}1
 
@@ -240,9 +240,6 @@ SAVEHIST=1000
 #==================================================
 bindkey -v
 bindkey '^R' history-incremental-search-backward
-
-# Let capslock be control
-setxkbmap -option ctrl:nocaps
 #= endsection }}}1
 
 #= Completion {{{1

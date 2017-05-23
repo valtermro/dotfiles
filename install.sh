@@ -183,6 +183,7 @@ fi
 #= Select configs to install {{{1
 #================================================
 ask_install 'git'
+ask_install 'i3wm' '' 'termite'
 ask_install 'zsh' '' 'zsh'
 ask_install 'tmux' 'zsh'
 ask_install 'neovim' 'zsh' 'nvim'
@@ -204,6 +205,14 @@ if should_install 'git'; then
   backup ~/.gitconfig
   make_dir $XDG_CONFIG_HOME
   dot_link 'git' $XDG_CONFIG_HOME
+fi
+
+#- i3wm {{{2
+#------------------------------------------------
+if should_install 'i3wm'; then
+  make_dir $XDG_CONFIG_HOME
+
+  dot_link 'i3' $XDG_CONFIG_HOME
 fi
 
 #- Zsh {{{2

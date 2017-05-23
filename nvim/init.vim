@@ -63,6 +63,7 @@ call dein#add('posva/vim-vue')
 call dein#add('StanAngeloff/php.vim')
 call dein#add('noahfrederick/vim-composer')
 call dein#add('chr4/nginx.vim')
+call dein#add('PotatoesMaster/i3-vim-syntax')
 
 let g:vim_json_syntax_conceal = 0
 
@@ -435,6 +436,7 @@ augroup filetype_detect
   autocmd!
   autocmd BufRead,BufNewFile *.mutt setf muttrc
   autocmd BufRead,BufNewFile */git/* setf gitconfig
+
   autocmd BufRead,BufNewFile .babelrc setf json
   autocmd BufRead,BufNewFile .stylelintrc setf json
 augroup END
@@ -443,12 +445,14 @@ augroup END
 "--------------------------------------------------
 augroup filetype_plugin
   autocmd!
+  autocmd FileType vim,zsh,tmux,muttrc,sh,i3 setl foldmethod=marker
+  autocmd FileType vim setl keywordprg=:help
+  autocmd FileType gitconfig setl noexpandtab
+
   autocmd FileType php setl tabstop=4 softtabstop=4 shiftwidth=4
   autocmd FileType python setl tabstop=4 softtabstop=4 shiftwidth=4
   autocmd FileType xml setl tabstop=4 softtabstop=4 shiftwidth=4
-
-  autocmd FileType vim,zsh,tmux,muttrc,sh setl foldmethod=marker
-  autocmd FileType vim setl keywordprg=:help
-  autocmd FileType gitconfig setl noexpandtab
+  autocmd FileType c setl tabstop=4 softtabstop=4 shiftwidth=4
+  autocmd FileType go setl noexpandtab
 augroup END
 "= endsection }}}1
