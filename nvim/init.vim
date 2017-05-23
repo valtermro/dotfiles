@@ -265,10 +265,16 @@ nnoremap <C-I> <C-I>zz
 cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
 
+" I prefer vertical splits (still can open horizontal splits with `<C-w>F`
+nnoremap <C-w>f :vertical wincmd f<CR>
+
 "- Yank/Delete/Put {{{2
 "--------------------------------------------------
-" paste from the system's clipboard
+" copy/paste from the system's clipboard
+nnoremap <leader>Y "+Y
+nnoremap <leader>y "+y
 nnoremap <leader>p "+p
+xnoremap <leader>y "+y
 xnoremap <leader>p "+p
 
 " strip text without overriding the unnamed register
@@ -286,6 +292,10 @@ nnoremap ? ?\v
 " hightlight occurences of the word under the cursor
 nnoremap + :set hlsearch<CR>mt*`t
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+
+"- Insert mode {{{2
+"--------------------------------------------------
+inoremap <C-g>u <Esc>gUiwea
 "= endsection }}}1
 
 "= Motions {{{1

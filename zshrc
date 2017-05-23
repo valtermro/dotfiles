@@ -1,6 +1,10 @@
 #= Basic settings {{{1
 #==================================================
 umask 077
+
+if type nvim >/dev/null; then
+  export EDITOR='nvim'
+fi
 #= endsection }}}1
 
 #= Load user-defined scripts {{{1
@@ -109,11 +113,6 @@ alias open='xdg-open'
 
 # match neovim's `so` command
 alias so='source'
-
-if type nvim >/dev/null; then
-  export EDITOR='nvim'
-  alias vi='nvim'
-fi
 #= endsection }}}1
 
 #= Functions {{{1
