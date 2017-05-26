@@ -163,6 +163,16 @@ call dein#end()
 "==================================================
 filetype plugin indent on
 
+"- Cursor {{{2
+"--------------------------------------------------
+set guicursor=
+set guicursor+=n-v-c:block
+set guicursor+=a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+set guicursor+=r-cr:block-blinkon0
+set guicursor+=i-ci-ve:ver25
+set guicursor+=o:hor50-blinkon0
+set guicursor+=sm:block-blinkwait175-blinkoff150-blinkon175
+
 "- Stuff that should be on by default (IMHO) {{{2
 "--------------------------------------------------
 set hidden
