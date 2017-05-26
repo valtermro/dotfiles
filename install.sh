@@ -184,6 +184,7 @@ fi
 #================================================
 ask_install 'git'
 ask_install 'i3wm' '' 'termite'
+ask_install 'termite'
 ask_install 'zsh' '' 'zsh'
 ask_install 'tmux' 'zsh'
 ask_install 'neovim' 'zsh' 'nvim'
@@ -213,6 +214,16 @@ if should_install 'i3wm'; then
   make_dir $XDG_CONFIG_HOME
 
   dot_link 'i3' $XDG_CONFIG_HOME
+fi
+
+#- Termite {{{2
+#------------------------------------------------
+if should_install 'termite'; then
+  make_dir $XDG_CONFIG_HOME
+  make_dir $XDG_DATA_HOME/fonts/MonacoTTF
+
+  dot_link 'termite' $XDG_CONFIG_HOME
+  git_clone 'todylu/monaco.ttf' $XDG_DATA_HOME/fonts/MonacoTTF
 fi
 
 #- Zsh {{{2

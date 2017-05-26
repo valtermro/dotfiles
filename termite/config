@@ -1,0 +1,15 @@
+[options]
+allow_bold = true
+audible_bell = false
+browser = chromium
+clickable_url = true
+cursor_blink = system
+cursor_shape = block
+dynamic_title = false
+font = Monaco 11
+mouse_autohide = true
+resize_grip = true
+scroll_on_keystroke = false
+scroll_on_output = false
+urgent_on_bell = true
+visible_bell = true

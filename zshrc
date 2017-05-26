@@ -211,8 +211,6 @@ function add2path {
 
 #= Colors {{{1
 #==================================================
-export TERM=xterm-256color
-
 eval "$(${XDG_DATA_HOME}/base16-shell/profile_helper.sh)"
 if [[ ! -f ~/.base16_theme ]]; then
   echo "Using base16_eighties colorscheme"
