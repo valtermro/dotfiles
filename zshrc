@@ -157,7 +157,7 @@ function tm {
   done
 }
 
-#- __my_tmux_session_attach() {{{2
+#- __my_tmux_session_create() {{{2
 #--------------------------------------------------
 # Tries to create a new tmux session.
 # The session, if created, is created in detached mode.
