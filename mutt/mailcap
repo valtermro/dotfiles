@@ -1,20 +1,20 @@
 # Images
-image/jpg; $X_LIB_HOME/mutt/view_attachment.sh %s jpg
-image/jpeg; $X_LIB_HOME/mutt/view_attachment.sh %s jpg
-image/pjpeg; $X_LIB_HOME/mutt/view_attachment.sh %s jpg
-image/png; $X_LIB_HOME/mutt/view_attachment.sh %s png
-image/gif; $X_LIB_HOME/mutt/view_attachment.sh %s gif
+image/jpg; $X_DOTFILES/lib/mutt/view_attachment.sh %s jpg
+image/jpeg; $X_DOTFILES/lib/mutt/view_attachment.sh %s jpg
+image/pjpeg; $X_DOTFILES/lib/mutt/view_attachment.sh %s jpg
+image/png; $X_DOTFILES/lib/mutt/view_attachment.sh %s png
+image/gif; $X_DOTFILES/lib/mutt/view_attachment.sh %s gif
 
 # PDFs
-application/pdf; $X_LIB_HOME/mutt/view_attachment.sh %s pdf
+application/pdf; $X_DOTFILES/lib/mutt/view_attachment.sh %s pdf
 
 # HTML
 text/html; w3m -I %{charset} -T text/html; copiousoutput;
-# text/html; $X_LIB_HOME/mutt/view_attachment.sh %s html
+# text/html; $X_DOTFILES/lib/mutt/view_attachment.sh %s html
 
 # Plain text
 text/plain; $EDITOR -c 'startinsert' %s
-# text/plain; $X_LIB_HOME/mutt/view_attachment.sh %s txt
+# text/plain; $X_DOTFILES/lib/mutt/view_attachment.sh %s txt
 
 # Unidentified files
-application/octet-stream; $X_LIB_HOME/mutt/view_attachment.sh %s '-'
+application/octet-stream; $X_DOTFILES/lib/mutt/view_attachment.sh %s '-'

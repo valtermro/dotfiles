@@ -1,3 +1,7 @@
+# The root of the dotfile's repo.
+# Expect `zshenv` to be linked from the repo's root.
+export X_DOTFILES=$(dirname $(realpath ${(%):-%N}))
+
 # Set paths for user-specific data.
 #
 # In addition to the directories defined by the XDG specs, I also find it useful
@@ -21,7 +25,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 
+export X_ENV_HOME=$HOME/.config/env
 export X_LIB_HOME=$HOME/.local/lib
-export X_ENV_HOME=$HOME/.local/env
 export X_BIN_HOME=$HOME/.local/bin
 export X_VAR_HOME=$HOME/.local/var

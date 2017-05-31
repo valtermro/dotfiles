@@ -10,7 +10,8 @@ SELF_DIR=$(pwd)
 DIST_ID=$(lsb_release -si 2>/dev/null)
 
 # Get XDG paths
-source $SELF_DIR/zshenv
+# export X_DOTFILES... in zshenv will raise an error with bash
+source $SELF_DIR/zshenv 2>/dev/null
 
 to_install=()
 conflicted=()
@@ -254,9 +255,7 @@ fi
 #- Tmux {{{2
 #------------------------------------------------
 if should_install 'tmux'; then
-  make_dir $X_LIB_HOME
   dot_link 'tmux.conf' $HOME
-  dot_link 'lib/tmux' $X_LIB_HOME
 fi
 
 #- Neovim {{{2
@@ -303,11 +302,7 @@ if should_install 'mutt'; then
     pass insert mail/$(basename $acc)
   done
 
-  make_dir $X_LIB_HOME
   make_dir $XDG_CONFIG_HOME
-
-  dot_link 'lib/mutt' $X_LIB_HOME
-  dot_link 'lib/offlineimap' $X_LIB_HOME
 
   dot_link 'offlineimap' $XDG_CONFIG_HOME
   dot_link 'mutt' $XDG_CONFIG_HOME
