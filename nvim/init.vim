@@ -374,6 +374,7 @@ endfunction
 
 " StatusLineFileFormatWarning() {{{2
 "--------------------------------------------------
+" warns if the current file format is not unix
 function! StatusLineFileFormatWarning()
   if &fileformat ==# 'unix'
     return ''
@@ -383,6 +384,7 @@ endfunction
 
 " StatusLineFileEncodingWarning() {{{2
 "--------------------------------------------------
+" warns if the current file encoding is not utf-8
 function! StatusLineFileEncodingWarning()
   if &fileencoding ==# '' || &fileencoding ==# 'utf-8'
     return ''
@@ -463,6 +465,6 @@ augroup filetype_plugin
   autocmd FileType python setl tabstop=4 softtabstop=4 shiftwidth=4
   autocmd FileType xml setl tabstop=4 softtabstop=4 shiftwidth=4
   autocmd FileType c setl tabstop=4 softtabstop=4 shiftwidth=4
-  autocmd FileType go setl noexpandtab
+  autocmd FileType go setl noexpandtab tabstop=4 softtabstop=4 shiftwidth=4
 augroup END
 "= endsection }}}1
