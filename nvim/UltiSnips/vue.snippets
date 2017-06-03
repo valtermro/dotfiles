@@ -1,8 +1,10 @@
 extends html
+extends scss
+extends javascript
 
 # Extends html
 #==================================================
-snippet tem "template"
+snippet template "template"
 <template>
 	<div>
 		$1
@@ -10,7 +12,7 @@ snippet tem "template"
 </template>$0
 endsnippet
 
-snippet scr "script"
+snippet script "script"
 <script>
 export default {
 	$1
@@ -18,7 +20,7 @@ export default {
 </script>$0
 endsnippet
 
-snippet sty "style"
+snippet style "style"
 <style${1: scoped} lang="${2:scss}">
 $3
 </style>$0

@@ -8,59 +8,119 @@ snippet html "Basic HTML markup"
 <head>
 	<meta charset="UTF-8">
 	<title>${1:Hello World}</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 <body>
-	$2
+	${2:${VISUAL}}$0
 </body>
-</html>$0
+</html>
 endsnippet
 
 snippet itag "generic inline tag"
-<${1:span} class="${2:$1}">$3</$1>$0
+<${1:span}${2: class="${3:$1}"}>${3:${VISUAL}}$4</$1>$0
 endsnippet
 
 snippet btag "generic block tag"
-<${1:div} class="${2:$1}">
-	${3:${VISUAL}}
+<${1:div}${2: class="${3:$1}"}>
+	${3:${VISUAL}}$4
 </$1>$0
 endsnippet
 
 #= Basic tags
 #==================================================
+snippet meta "basic meta tag"
+<meta name="$1" content="$2">$0
+endsnippet
+
+snippet metaview "viewport metatag"
+<meta name="viewport" content="width=device-width,initial-scale=1">$0
+endsnippet
+
+snippet link "basic link tag"
+<link rel="stylesheet" href="$1">$0
+endsnippet
+
+snippet style "basic style tag"
+<style>
+	$1
+</style>$0
+endsnippet
+
+snippet script "basic script tag"
+<script>
+	$1
+</script>$0
+endsnippet
+
+snippet scripts "script tag with src attribute"
+<script src="$1"></script>$0
+endsnippet
+
+snippet anc "basic anchor tag"
+<a class="${1:nav-button}" href="${2:#}">${3:${VISUAL}}$4</a>$0
+endsnippet
+
+snippet img "basic image tag"
+<img class="${1:image}" src="$2" alt="$3">$0
+endsnippet
+
+snippet h1 "basic h1 tag"
+<h1 class="${1:title}">${2:${VISUAL}}$3</h1>$0
+endsnippet
+
+snippet h2 "basic h2 tag"
+<h2 class="${1:title}">${2:${VISUAL}}$3</h2>$0
+endsnippet
+
+snippet h3 "basic h3 tag"
+<h3 class="${1:title}">${2:${VISUAL}}$3</h3>$0
+endsnippet
+
+snippet h4 "basic h4 tag"
+<h4 class="${1:title}">${2:${VISUAL}}$3</h4>$0
+endsnippet
+
+snippet h5 "basic h5 tag"
+<h5 class="${1:title}">${2:${VISUAL}}$3</h5>$0
+endsnippet
+
+snippet h6 "basic h6 tag"
+<h6 class="${1:title}">${2:${VISUAL}}$3</h6>$0
+endsnippet
+
 snippet div "basic div element"
 <div class="${1:container}">
-	${2:${VISUAL}}
+	${2:${VISUAL}}$3
 </div>$0
 endsnippet
 
 snippet section "basic section element"
 <section class="${1:container}">
-	${2:${VISUAL}}
+	${2:${VISUAL}}$3
 </section>$0
 endsnippet
 
 snippet article "basic article element"
 <article class="${1:container}">
-	${2:${VISUAL}}
+	${2:${VISUAL}}$3
 </article>$0
 endsnippet
 
 snippet header "basic header element"
 <header class="${1:container}">
-	${2:${VISUAL}}
+	${2:${VISUAL}}$3
 </header>$0
 endsnippet
 
 snippet footer "basic footer element"
 <footer class="${1:container}">
-	${2:${VISUAL}}
+	${2:${VISUAL}}$3
 </footer>$0
 endsnippet
 
 snippet form "basic form element"
-<form class="${3:form}" method="${1:POST}" action="$2">
-	$4
+<form class="${1:form}" method="${2:POST}" action="$3">
+	${4:${VISUAL}}$5
 </form>$0
 endsnippet
 

@@ -2,19 +2,19 @@ priority -50
 
 #= Basic selector
 #==================================================
-snippet slt "tag selector"
+snippet tag "tag selector"
 ${1:tag} {
 	$2
 }$0
 endsnippet
 
-snippet slc "class selector"
+snippet cls "class selector"
 .${1:class} {
 	$2
 }$0
 endsnippet
 
-snippet sli "id selector"
+snippet id "id selector"
 #${1:id} {
 	$2
 }$0
@@ -22,8 +22,20 @@ endsnippet
 
 #= Basic properties
 #==================================================
-snippet bac "background"
-background: ${1:background};$0
+snippet bac "background-color"
+background-color: ${1:darkblue};
+endsnippet
+
+snippet bai "background-image"
+background-image: url(${1:background});$0
+endsnippet
+
+snippet bap "background-position"
+background-position: ${1:center} ${2:center};$0
+endsnippet
+
+snippet bas "background-size"
+background-size: ${1:cover};
 endsnippet
 
 snippet bor "border"
