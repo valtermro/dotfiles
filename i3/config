@@ -219,7 +219,7 @@ bindsym $mod+semicolon split toggle
 
 #- Move focus {{{2
 #--------------------------------------------------
-bindsym $mod+d  child
+bindsym $mod+d focus child
 bindsym $mod+a focus parent
 bindsym $mod+k focus up
 bindsym $mod+j focus down
