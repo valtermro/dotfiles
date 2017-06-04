@@ -104,7 +104,7 @@ bar {
 }
 #= endsection }}}1
 
-#= Workspace settings {{{1
+#= Workspaces {{{1
 #==================================================
 #- Switch workspaces {{{2
 #--------------------------------------------------
@@ -136,6 +136,7 @@ for_window [instance="spotify"] move to workspace $workspace10
 
 #= Containers {{{1
 #==================================================
+force_focus_wrapping yes
 bindsym $mod+f fullscreen toggle
 bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+minus move scratchpad
