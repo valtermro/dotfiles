@@ -55,7 +55,6 @@ let g:UltiSnipsJumpBackwardTrigger='<S-Tab>'
 "--------------------------------------------------
 call dein#add('tpope/vim-endwise')
 call dein#add('othree/html5.vim')
-call dein#add('gregsexton/MatchTag')
 call dein#add('hail2u/vim-css3-syntax')
 call dein#add('keith/tmux.vim')
 call dein#add('pangloss/vim-javascript')
