@@ -38,6 +38,10 @@ augroup END
 let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
 
+" Raimondi/delimitMate defines a <C-g>g mapping that moves the cursor to after
+" the last inserted pair, let's build upon that to append a semicolon to the line
+imap <C-g>; <C-g>g;<Esc>
+
 augroup fix_delimitMate_in_php_files
   autocmd!
   autocmd FileType php let b:delimitMate_matchpairs = '(:),[:],{:}'
@@ -245,6 +249,12 @@ augroup END
 
 "= Mappings {{{1
 "==================================================
+"- Please, save me! {{{2
+"--------------------------------------------------
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>
+xnoremap <C-s> <Esc>:w<CR>
+
 "- Fix-it Felix {{{2
 "--------------------------------------------------
 " <C-c> is kinda like <Esc>, but in insert mode it has some quirks...
