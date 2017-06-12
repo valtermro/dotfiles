@@ -103,11 +103,12 @@ RPROMPT='[%F{16}S:$suspended_jobs %F{4}R:$running_jobs%f]'
 #= Aliases {{{1
 #==================================================
 alias ls='ls --color=auto'
+alias ll='ls -lhF'
+alias la='ls -ACF'
+alias du='du -h'
 alias grep='grep --colour=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-alias ll='ls -lhF'
-alias la='ls -ACF'
 alias tree='tree -C'
 alias open='xdg-open'
 
