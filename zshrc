@@ -118,6 +118,18 @@ alias so='source'
 
 #= Functions {{{1
 #==================================================
+# mkcd() {{{2
+#--------------------------------------------------
+# Creates a new directory and `cd` into it.
+function mkcd {
+  local dir=$1
+
+  if [ ! -d $dir ]; then
+    mkdir -p $dir
+  fi
+  cd $dir
+}
+
 # tm() {{{2
 #--------------------------------------------------
 # A helper for creating new, and attaching to, tmux sessions.
