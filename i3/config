@@ -161,6 +161,13 @@ bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
 #= endsection }}}1
 
+#= Statup applications {{{1
+#==================================================
+exec --no-startup-id termite
+exec --no-startup-id chromium
+exec --no-startup-id udiskie
+#= endsection }}}1
+
 #= Display {{{1
 #==================================================
 # Screen brightness {{{2
