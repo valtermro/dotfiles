@@ -62,7 +62,6 @@ call dein#add('othree/jsdoc-syntax.vim')
 call dein#add('elzr/vim-json')
 call dein#add('moll/vim-node')
 call dein#add('heavenshell/vim-jsdoc')
-call dein#add('posva/vim-vue')
 call dein#add('StanAngeloff/php.vim')
 call dein#add('noahfrederick/vim-composer')
 call dein#add('chr4/nginx.vim')
@@ -447,33 +446,4 @@ function! StatusLineTrailingSpacesWarning()
 
   return b:statusline_trailing_spaces_warning
 endfunction
-"= endsection }}}1
-
-"= Filetype {{{1
-"==================================================
-"- ftdetect {{{2
-"--------------------------------------------------
-augroup filetype_detect
-  autocmd!
-  autocmd BufRead,BufNewFile *.mutt setf muttrc
-  autocmd BufRead,BufNewFile */git/* setf gitconfig
-
-  autocmd BufRead,BufNewFile .babelrc setf json
-  autocmd BufRead,BufNewFile .stylelintrc setf json
-augroup END
-
-"- ftplugin {{{2
-"--------------------------------------------------
-augroup filetype_plugin
-  autocmd!
-  autocmd FileType vim,zsh,tmux,muttrc,sh,i3 setl foldmethod=marker
-  autocmd FileType vim setl keywordprg=:help
-  autocmd FileType gitconfig setl noexpandtab
-
-  autocmd FileType php setl tabstop=4 softtabstop=4 shiftwidth=4
-  autocmd FileType python setl tabstop=4 softtabstop=4 shiftwidth=4
-  autocmd FileType xml setl tabstop=4 softtabstop=4 shiftwidth=4
-  autocmd FileType c setl tabstop=4 softtabstop=4 shiftwidth=4
-  autocmd FileType go setl noexpandtab tabstop=4 softtabstop=4 shiftwidth=4
-augroup END
 "= endsection }}}1
