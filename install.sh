@@ -184,11 +184,11 @@ fi
 #= Select configs to install {{{1
 #================================================
 ask_install 'git'
+ask_install 'zsh' '' 'zsh'
+ask_install 'vim' 'zsh'
+ask_install 'tmux' 'zsh'
 ask_install 'i3wm' '' 'termite'
 ask_install 'termite'
-ask_install 'zsh' '' 'zsh'
-ask_install 'tmux' 'zsh'
-ask_install 'neovim' 'zsh' 'nvim'
 ask_install 'mutt' '' 'offlineimap' 'gpg' 'pass' 'msmtp' 'w3m'
 #= endsection }}}1
 
@@ -258,25 +258,14 @@ if should_install 'tmux'; then
   dot_link 'tmux.conf' $HOME
 fi
 
-#- Neovim {{{2
+#- Vim {{{2
 #------------------------------------------------
-if should_install 'neovim'; then
-  dot_link 'nvim' $XDG_CONFIG_HOME
+if should_install 'vim'; then
+  dot_link 'vim' $HOME
+  dot_link 'vimrc' $HOME
 
-  echo 'Installing dein.vim'
-  rm_dir $XDG_DATA_HOME/dein.vim
-  make_dir $XDG_DATA_HOME/dein.vim/repos/github.com
-  git_clone 'Shougo/dein.vim' $XDG_DATA_HOME/dein.vim/repos/github.com/Shougo
-
-  if is_installed 'tern'; then
-    dot_link 'tern-config' $HOME
-  fi
-
-  echo 'Starting neovim to install its plugins'
-  echo 'The window will freeze for a while, please wait.'
-  sleep 5
-  nvim -c 'silent! call dein#install()' +qall
-  nvim +UpdateRemotePlugins +qall
+  echo 'Installing vim plugins'
+  bash $SELF_DIR/vim/plugins.sh $SELF_DIR/vim
 fi
 
 #- Mutt {{{2
@@ -307,6 +296,8 @@ if should_install 'mutt'; then
   dot_link 'offlineimap' $XDG_CONFIG_HOME
   dot_link 'mutt' $XDG_CONFIG_HOME
   dot_link 'msmtp' $XDG_CONFIG_HOME
+
+  unset gpg_version
 fi
 #= endsection }}}1
 
@@ -320,14 +311,7 @@ if [[ $conflicted ]]; then
   echo 'You might want to check out, and remove, them.'
 fi
 
-if should_install 'neovim' && ! is_installed 'tern'; then
-  echo 'Neovim could be better at editing javascript if you install ternjs.'
-  echo 'If you do install ternjs, be sure to run `:Dein install` from inside neovim,'
-  echo 'and link `tern-config` to your home, or create your own.'
-  echo
-fi
-
-if should_install 'tmux' || should_install 'neovim'; then
+if should_install 'tmux' || should_install 'vim'; then
   if ! is_installed 'xclip'; then
     echo "xclip is required to interact with the system's clipboard."
   fi
@@ -342,3 +326,12 @@ if should_install 'zsh'; then
   fi
 fi
 #= endsection }}}1
+
+#= Cleanup {{{1
+#================================================
+unset ERR_DEP
+unset ERR_INNER_DEP
+unset ERR_NOOP
+unset ERR_RUNTIME
+unset SELF_DIR
+unset DIST_ID

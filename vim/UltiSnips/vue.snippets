@@ -2,20 +2,43 @@ extends html
 extends scss
 extends javascript
 
+# Vue
+#==================================================
+snippet vue ""
+<style lang="scss">
+</style>
+
+<template>
+<div>
+$2
+</div>
+</template>
+
+<script>
+export default {
+	data: () => ({
+		$1
+	}),
+};
+</script>
+endsnippet
+
 # Extends html
 #==================================================
 snippet template "template"
 <template>
-	<div>
-		$1
-	</div>
+<div>
+	$1
+</div>
 </template>$0
 endsnippet
 
 snippet script "script"
 <script>
 export default {
-	$1
+	data: () => ({
+		$1
+	}),
 };
 </script>$0
 endsnippet

@@ -1,10 +1,7 @@
 #= Basic settings {{{1
 #==================================================
 umask 077
-
-if type nvim >/dev/null; then
-  export EDITOR='nvim'
-fi
+export EDITOR=vim
 #= endsection }}}1
 
 #= Load user-defined scripts {{{1
@@ -112,7 +109,7 @@ alias egrep='egrep --color=auto'
 alias tree='tree -C'
 alias open='xdg-open'
 
-# match [neo]vim's `so` command
+# match vim's `so` command
 alias so='source'
 #= endsection }}}1
 

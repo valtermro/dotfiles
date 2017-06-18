@@ -3,5 +3,3 @@ if exists('b:did_ftplugin')
 endif
 
 runtime! ftplugin/html.vim
-
-setlocal suffixesadd+=.vue

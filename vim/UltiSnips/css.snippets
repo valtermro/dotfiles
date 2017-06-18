@@ -1,6 +1,6 @@
 priority -50
 
-#= Basic selector
+#= Basic selectors
 #==================================================
 snippet tag "tag selector"
 ${1:tag} {
@@ -72,6 +72,13 @@ endsnippet
 
 snippet pos "position"
 position: ${1:absolute};$0
+endsnippet
+
+#= Composed rules
+#==================================================
+snippet wh "width: N; height: N;"
+width: $1;
+height: $1;
 endsnippet
 
 #= At rules
