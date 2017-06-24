@@ -282,14 +282,20 @@ bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
 
 # If the keyboard hasn't dedicated keys
 bindsym $mod+F9 exec --no-startup-id amixer set Master 5%-
-bindsym $mod+F10 exec --no-startup-id amixer set Master 5%+
-bindsym $mod+F11 exec --no-startup-id amixer set Master toggle
+bindsym $mod+F10 exec --no-startup-id amixer set Master toggle
+bindsym $mod+F11 exec --no-startup-id amixer set Master 5%+
 
 # Media player {{{2
 #--------------------------------------------------
 # These bindings depend on the `playerctl` package.
 
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+# If the keyboard has dedicated keys for volume control
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+
+# If the keyboard hasn't dedicated keys
+bindsym $mod+Shift+F9 exec --no-startup-id playerctl previous
+bindsym $mod+Shift+F10 exec --no-startup-id playerctl play-pause
+bindsym $mod+Shift+F11 exec --no-startup-id playerctl next
 #= endsection }}}1
