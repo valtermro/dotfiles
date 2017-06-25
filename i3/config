@@ -121,8 +121,9 @@ bindsym $mod+0 workspace $workspace10
 
 #- Move focused workspace {{{2
 #--------------------------------------------------
-bindsym $mod+Shift+Left move workspace to output left
-bindsym $mod+Shift+Right move workspace to output right
+# bindsym $mod+Shift+Left move workspace to output left
+# bindsym $mod+Shift+Right move workspace to output right
+bindsym $mod+Shift+Tab move workspace to output left
 
 #- Assign programs to specific workspaces {{{2
 #--------------------------------------------------
