@@ -240,8 +240,8 @@ setopt HIST_NO_STORE
 setopt HIST_SAVE_NO_DUPS
 
 HISTFILE=$XDG_CACHE_HOME/zsh/histfile
-HISTSIZE=500
-SAVEHIST=1000
+HISTSIZE=2000
+SAVEHIST=2000
 #= endsection }}}1
 
 #= Mappings {{{1
