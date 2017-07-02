@@ -200,12 +200,13 @@ exec --no-startup-id udiskie
 #
 bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightctl up
 bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightctl down
+
+#- Monitors {{{2
+#--------------------------------------------------
 # these settings depend on `xrandr` which is a command from `xorg-xrandr`
 set $internal_display "eDP-1"
 set $external_display "HDMI-1"
 
-#- Monitors {{{2
-#--------------------------------------------------
 # disable the external monitor
 bindsym $mod+Shift+F7 exec --no-startup-id \
   xrandr \
@@ -213,7 +214,14 @@ bindsym $mod+Shift+F7 exec --no-startup-id \
     --output $external_display --off; \
   restart
 
-# enable the external monitor
+# put the external monitor at the left of the layout
+bindsym $mod+Shift+F6 exec --no-startup-id \
+  xrandr \
+    --output $internal_display --primary --mode 1366x768 --pos 1920x312 \
+    --output $external_display --mode 1920x1080 --pos 0x0; \
+  restart
+
+# put the external monitor at the right of the layout and set it as the primary display
 bindsym $mod+Shift+F8 exec --no-startup-id \
   xrandr \
     --output $internal_display --mode 1366x768 --pos 0x312 \
