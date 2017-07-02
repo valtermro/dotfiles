@@ -286,15 +286,14 @@ floating_modifier $mod
 # These bindings are to work with alsa via the `amixer` package.
 
 # If the keyboard has dedicated keys for volume control
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%-
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+
-bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer --decrease 5
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer --increase 5
+bindsym XF86AudioMute exec --no-startup-id pamixer --toggle-mute
 
 # If the keyboard hasn't dedicated keys
-bindsym $mod+F9 exec --no-startup-id amixer set Master 5%-
-bindsym $mod+F10 exec --no-startup-id amixer set Master toggle
-bindsym $mod+F11 exec --no-startup-id amixer set Master 5%+
-
+bindsym $mod+F9 exec --no-startup-id pamixer --decrease 5
+bindsym $mod+F10 exec --no-startup-id pamixer --toggle-mute
+bindsym $mod+F11 exec --no-startup-id pamixer --increase 5
 # Media player {{{2
 #--------------------------------------------------
 # These bindings depend on the `playerctl` package.
