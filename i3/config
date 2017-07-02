@@ -24,7 +24,7 @@ set $workspace3 "3"
 set $workspace4 "4"
 set $workspace5 "5"
 set $workspace6 "6"
-set $workspace7 "7"
+set $workspace7 "7:files"
 set $workspace8 "8:vm"
 set $workspace9 "9:chat"
 set $workspace10 "10:music"
@@ -129,6 +129,7 @@ bindsym $mod+Shift+Tab move workspace to output left
 #--------------------------------------------------
 assign [instance="beebeep"] $workspace9
 assign [instance="chromium"] $workspace2
+assign [instance="thunar"] $workspace7
 assign [instance="VirtualBox"] $workspace8
 
 # https://github.com/i3/i3/issues/2060#issuecomment-155179472
