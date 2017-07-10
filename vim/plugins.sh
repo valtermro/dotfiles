@@ -24,7 +24,6 @@ SirVer/ultisnips
 StanAngeloff/php.vim
 tomtom/tcomment_vim
 tpope/vim-dispatch
-tpope/vim-endwise
 tpope/vim-fugitive
 tpope/vim-projectionist
 tpope/vim-repeat

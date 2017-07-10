@@ -88,7 +88,7 @@ filetype plugin indent on
 syntax on
 
 set pastetoggle=<F10>
-set scrolloff=3
+set scrolloff=1
 
 set splitright
 set diffopt+=vertical

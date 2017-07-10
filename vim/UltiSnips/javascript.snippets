@@ -40,6 +40,14 @@ while ($1) ${2:{
 }}$0
 endsnippet
 
+snippet try "try/catch block"
+try {
+	${1:${VISUAL}}
+} catch (err) {
+	$3
+}$0
+endsnippet
+
 #= import/export
 #==================================================
 snippet imp "import statement"
