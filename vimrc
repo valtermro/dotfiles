@@ -1,5 +1,9 @@
 "= Plugin settings {{{1
 "==================================================
+"- built-in {{{2
+"--------------------------------------------------
+packadd matchit
+
 "- chriskempson/base16-vim {{{2
 "--------------------------------------------------
 if filereadable(expand('~/.vimrc_background'))
@@ -174,8 +178,6 @@ nnoremap <C-Y> 5<C-Y>
 
 nnoremap <C-O> <C-O>zz
 nnoremap <C-I> <C-I>zz
-
-nnoremap <C-w>f :vertical wincmd f<CR>
 
 "- Yank/Delete/Put {{{2
 "--------------------------------------------------
