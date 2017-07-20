@@ -2,6 +2,7 @@
 #==================================================
 umask 077
 export EDITOR=vim
+export TERM=xterm-256color
 #= endsection }}}1
 
 #= Load user-defined scripts {{{1
