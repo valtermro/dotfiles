@@ -1,4 +1,4 @@
-"= Plugin settings {{{1
+"= Plugins settings {{{1
 "==================================================
 "- built-in {{{2
 "--------------------------------------------------
@@ -224,7 +224,7 @@ set laststatus=2
 set statusline=
 set statusline+=%([%R%H%W%{&paste?',PST':''}]%)
 set statusline+=%([%{fugitive#head(7)}]%)
-set statusline+=%f%-2{&mod?'*':'\ '}
+set statusline+=%t%-2{&mod?'*':'\ '}
 set statusline+=%{StatusLineLinterInfo()}
 set statusline+=%=
 set statusline+=%4l:%-3v
