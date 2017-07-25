@@ -1,9 +1,0 @@
-account valtermro@outlook.com
-host smtp-mail.outlook.com
-port 587
-auth on
-tls on
-tls_trust_file /etc/ssl/certs/ca-certificates.crt
-from valtermro@outlook.com
-user valtermro@outlook.com
-passwordeval pass show mail/valtermro@outlook.com

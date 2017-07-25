@@ -189,7 +189,6 @@ ask_install 'vim' 'zsh'
 ask_install 'tmux' 'zsh'
 ask_install 'i3wm' '' 'termite'
 ask_install 'termite'
-ask_install 'mutt' '' 'offlineimap' 'gpg' 'pass' 'msmtp' 'w3m'
 #= endsection }}}1
 
 #= Install {{{1
@@ -268,37 +267,6 @@ if should_install 'vim'; then
   bash $SELF_DIR/vim/plugins.sh $SELF_DIR/vim
 fi
 
-#- Mutt {{{2
-#------------------------------------------------
-if should_install 'mutt'; then
-  if ask 'Create a new gpg key'; then
-    echo 'Generating gpg key'
-
-    gpg_version=$(gpg --version | head -n 1 | sed -r 's/^.*([0-9]+).[0-9]+.[0-9]+$/\1/')
-    if [[ $gpg_version < 2 ]]; then
-      gpg --gen-key
-    else
-      gpg --full-gen-key
-    fi
-  fi
-
-  printf 'A gpg-id to initialize `pass`, please: '
-  read -e id
-  pass init "${id}"
-
-  echo 'Registering passwords for known email accounts'
-  for acc in $SELF_DIR/mutt/accounts/*; do
-    pass insert mail/$(basename $acc)
-  done
-
-  make_dir $XDG_CONFIG_HOME
-
-  dot_link 'offlineimap' $XDG_CONFIG_HOME
-  dot_link 'mutt' $XDG_CONFIG_HOME
-  dot_link 'msmtp' $XDG_CONFIG_HOME
-
-  unset gpg_version
-fi
 #= endsection }}}1
 
 #= Wrap up {{{1
