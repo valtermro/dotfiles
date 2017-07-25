@@ -1,6 +1,6 @@
 priority -50
 
-#= Basic declarations
+#= Basic declarations {{{1
 #==================================================
 snippet fun "function declaration"
 function $1($2)
@@ -8,8 +8,9 @@ function $1($2)
 	${3:${VISUAL}}$4
 }$0
 endsnippet
+#= endsection }}}1
 
-#= Flow control
+#= Flow control {{{1
 #==================================================
 snippet if "if statement"
 if ($1) {
@@ -54,8 +55,9 @@ do {
 	${2:${VISUAL}}$3
 } while ($1);$0
 endsnippet
+#= endsection }}}1
 
-#= OOP
+#= OOP {{{1
 #==================================================
 snippet ns "namespace"
 namespace $1;$0
@@ -116,8 +118,9 @@ private static function $1($2)
 	$3
 }$0
 endsnippet
+#= endsection }}}1
 
-#= PHPUnit
+#= PHPUnit {{{1
 #==================================================
 snippet laratest "Test class"
 <?php
@@ -181,3 +184,4 @@ public function $1()
 	$2
 }$0
 endsnippet
+#= endsection }}}1

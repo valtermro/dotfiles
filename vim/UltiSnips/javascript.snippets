@@ -1,26 +1,30 @@
 priority -50
 
-snippet clog "console.log"
-console.log($1);$0
-endsnippet
-
-#= Basic declarations
+#= Basic expressions {{{1
 #==================================================
-snippet fun "function declaration"
-function $1($2) {
-	${3:${VISUAL}}$4
-}$0
+snippet clog "console.log"
+console.log(${0:${VISUAL}})
+endsnippet
+#= endsection }}}1
+
+#= Basic declarations {{{1
+#==================================================
+snippet fun ""
+const ${1:name} = ($2) => {
+	${0:${VISUAL}}
+};
 endsnippet
 
 snippet cls "class declaration"
 class $1 {
 	constructor($2) {
-		$3
-	}$0
+		$0
+	}
 }
 endsnippet
+#= endsection }}}1
 
-#= Flow control
+#= Flow control {{{1
 #==================================================
 snippet if "if statement"
 if ($1) ${2:{
@@ -36,19 +40,20 @@ endsnippet
 
 snippet whi "while loop"
 while ($1) ${2:{
-	${3:${VISUAL}}$4
-}}$0
+	${0:${VISUAL}}
+}}
 endsnippet
 
 snippet try "try/catch block"
 try {
 	${1:${VISUAL}}
 } catch (err) {
-	$3
-}$0
+	$0
+}
 endsnippet
+#= endsection }}}1
 
-#= import/export
+#= import/export {{{1
 #==================================================
 snippet imp "import statement"
 import $1 from '${2:$1}';
@@ -89,17 +94,49 @@ export default class $1 {
 	}$0
 }
 endsnippet
+#= endsection }}}1
 
-#= Mocha/Jasmine globals
+#= Mocha/Jasmine globals {{{1
 #==================================================
-snippet tde "describe(...)"
-describe('$1', () => {
-	${2:${VISUAL}}$0
+snippet be "before(...)"
+before(() => {
+	${1:${VISUAL}}$0
 });
 endsnippet
 
-snippet tit "it(...)"
-it('$1', () => {
-	${2:${VISUAL}}$0
+snippet bee "beforeEach(...)"
+beforeEach(() => {
+	${1:${VISUAL}}$0
 });
 endsnippet
+
+snippet af "after(...)"
+after(() => {
+	${1:${VISUAL}}$0
+});
+endsnippet
+
+snippet afe "afterEach(...)"
+afterEach(() => {
+	${1:${VISUAL}}$0
+});
+endsnippet
+
+snippet des "describe(...)"
+describe('$1', () => {
+	${0:${VISUAL}}
+});
+endsnippet
+
+snippet it "it(...)"
+it('$1', () => {
+	${0:${VISUAL}}
+});
+endsnippet
+
+snippet its "it.skip(...)"
+it.skip('$0', () => {
+	// TODO
+});
+endsnippet
+#= endsection }}}1

@@ -1,15 +1,16 @@
 priority -50
 extends css
 
-#= Sass selectors
+#= Scss selectors {{{1
 #==================================================
 snippet slp "placeholder selector"
 %${1:placeholder} {
 	$2
 }$0
 endsnippet
+#= endsection }}}1
 
-#= Basic constructors
+#= Basic constructors {{{1
 #==================================================
 snippet @fu "@function"
 @function ${1:name}(${2:args}) {
@@ -21,8 +22,10 @@ snippet @in "@include"
 @include ${1:mixin}(${2:args});$0
 endsnippet
 
-snippet @ex "@extend %placehoder"
-@extend %${1:placehoder};$0
+snippet @me "@include media"
+@include media(${1:size}) {
+	${0:${VISUAL}}
+}
 endsnippet
 
 snippet @ex "@extend %placehoder"
@@ -32,3 +35,4 @@ endsnippet
 snippet @exc "@extend .class"
 @extend .${1:class};$0
 endsnippet
+#= endsection }}}1

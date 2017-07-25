@@ -1,6 +1,6 @@
 extends html
 
-#= Extends HTML
+#= Extends HTML {{{1
 #==================================================
 snippet form "basic form element"
 <form${1: class="${2:form}"} method="${3:POST}" action="$4">
@@ -8,8 +8,9 @@ snippet form "basic form element"
 	${5:${VISUAL}}$6
 </form>$0
 endsnippet
+#= endsection }}}1
 
-#= Templating
+#= Templating {{{1
 #==================================================
 snippet ext "@extends and @section('content')"
 @extends('${1:layouts.${2:master}}')
@@ -32,8 +33,9 @@ snippet sec "@section"
 	${2:${VISUAL}}$3
 @endsection$0
 endsnippet
+#= endsection }}}1
 
-#= Flow control
+#= Flow control {{{1
 #==================================================
 snippet if "@if"
 @if ($1)
@@ -58,3 +60,4 @@ snippet foek "@foreach with key"
 	${3:${VISUAL}}$4
 @endforeach$0
 endsnippet
+#= endsection }}}1

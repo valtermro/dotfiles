@@ -2,7 +2,7 @@ extends html
 extends scss
 extends javascript
 
-# Vue
+#= Vue {{{1
 #==================================================
 snippet vue ""
 <template>
@@ -22,8 +22,9 @@ export default {
 <style lang="scss">
 </style>
 endsnippet
+#= endsection }}}1
 
-# Extends html
+#= Extends html {{{1
 #==================================================
 snippet template "template"
 <template>
@@ -48,3 +49,13 @@ snippet style "style"
 $3
 </style>$0
 endsnippet
+#= endsection }}}1
+
+#= Extends javascript {{{1
+#==================================================
+snippet met "vue instance method"
+${1:name}($2) {
+	${3:${VISUAL}}
+},
+endsnippet
+#= endsection }}}1

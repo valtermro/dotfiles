@@ -1,6 +1,6 @@
 priority -50
 
-#= Basic selectors
+#= Basic selectors {{{1
 #==================================================
 snippet tag "tag selector"
 ${1:tag} {
@@ -19,8 +19,9 @@ snippet id "id selector"
 	$2
 }$0
 endsnippet
+#= endsection }}}1
 
-#= Basic properties
+#= Basic properties {{{1
 #==================================================
 snippet bac "background-color"
 background-color: ${1:darkblue};
@@ -73,15 +74,17 @@ endsnippet
 snippet pos "position"
 position: ${1:absolute};$0
 endsnippet
+#= endsection }}}1
 
-#= Composed rules
+#= Composed rules {{{1
 #==================================================
 snippet wh "width: N; height: N;"
 width: $1;
 height: $1;
 endsnippet
+#= endsection }}}1
 
-#= At rules
+#= At rules {{{1
 #==================================================
 snippet @ke "@keyframes"
 @keyframes {
@@ -92,3 +95,4 @@ endsnippet
 snippet @im "@import"
 @import '${1:file}';
 endsnippet
+#= endsection }}}1
