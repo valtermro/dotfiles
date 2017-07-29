@@ -1,7 +1,6 @@
 INSTALL_DIR=$1/pack/valtermro/start
 PLUGINS=(
 PotatoesMaster/i3-vim-syntax
-Raimondi/delimitMate
 SirVer/ultisnips
 StanAngeloff/php.vim
 cakebaker/scss-syntax.vim
