@@ -108,8 +108,6 @@ augroup END
 "- Stuff that should be on by default (IMHO) {{{2
 "--------------------------------------------------
 set hidden
-set number
-set relativenumber
 set showcmd
 set fileformats=unix,dos,mac
 set mouse=nvc
