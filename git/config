@@ -18,6 +18,7 @@
 	co = checkout
 	cm = commit
 	cma = commit --amend
+	cmaa = commit --amend --reuse-message HEAD
 	cmm = commit --message
 	tags = tag --list
 	rbi = rebase --interactive

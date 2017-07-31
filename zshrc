@@ -109,6 +109,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias tree='tree -C'
 alias open='xdg-open'
+alias vi='vim'
 
 # match vim's `so` command
 alias so='source'

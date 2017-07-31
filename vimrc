@@ -16,6 +16,10 @@ augroup override_colors
   autocmd ColorScheme * highlight! link Search CursorLine
 augroup END
 
+"- tomtom/tcomment_vim {{{2
+"--------------------------------------------------
+nmap gc{ mt{jgc't't
+
 "- editorconfig/editorconfig-vim {{{2
 "--------------------------------------------------
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
@@ -70,11 +74,12 @@ let g:CtrlSpaceMaxHeight = 15
 let g:CtrlSpaceSearchTiming = 50
 let g:CtrlSpaceUseTabline = 1
 
-nnoremap <silent> <C-space> :CtrlSpace<CR>
+nnoremap <silent> <C-Space> :CtrlSpace<CR>
 nnoremap <silent> <C-p> :CtrlSpace O<CR>
 nnoremap <silent> <C-t> :CtrlSpace l<CR>
 
 highlight link CtrlSpaceSearch IncSearch
+
 if !isdirectory(g:CtrlSpaceCacheDir)
   call mkdir(g:CtrlSpaceCacheDir, 0700)
 endif
@@ -179,10 +184,16 @@ nnoremap <C-I> <C-I>zz
 
 "- Yank/Delete/Put {{{2
 "--------------------------------------------------
+" paste from the yank register
+nnoremap <Space>p "0p
+nnoremap <Space>P "0P
+xnoremap <Space>p "0p
+
 " copy/paste from the system's clipboard
-nnoremap <leader>Y "+Y
 nnoremap <leader>y "+y
+nnoremap <leader>Y "+Y
 nnoremap <leader>p "+p
+nnoremap <leader>P "+P
 xnoremap <leader>y "+y
 xnoremap <leader>p "+p
 
@@ -222,7 +233,7 @@ set laststatus=2
 set statusline=
 set statusline+=%([%R%H%W%{&paste?',PST':''}]%)
 set statusline+=%([%{fugitive#head(7)}]%)
-set statusline+=%f%-2{&mod?'*':'\ '}
+set statusline+=%t%-2{&mod?'*':'\ '}
 set statusline+=%{StatusLineLinterInfo()}
 set statusline+=%=
 set statusline+=%4l:%-3v
