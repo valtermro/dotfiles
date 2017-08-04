@@ -13,7 +13,9 @@ endif
 
 augroup override_colors
   autocmd!
-  autocmd ColorScheme * highlight! link Search CursorLine
+  autocmd ColorScheme *
+    \ highlight! link Search CursorLine |
+    \ highlight! Error ctermfg=9
 augroup END
 
 "- tomtom/tcomment_vim {{{2

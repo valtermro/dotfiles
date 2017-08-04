@@ -2,18 +2,18 @@
 #==================================================
 #- Colors {{{2
 #--------------------------------------------------
-set $color_indicator        #303066
-set $color_focused_fg       #c0c0c0
-set $color_focused_bg       #606060
-set $color_focused_border   #606060
-set $color_unfocused_fg     #666666
-set $color_unfocused_bg     #333333
-set $color_unfocused_border #404040
-set $color_urgent_fg        #cecece
-set $color_urgent_bg        #993333
-set $color_urgent_border    #993333
+set $color_indicator        #747369
+set $color_focused_fg       #a09f93
+set $color_focused_bg       #515151
+set $color_focused_border   #515151
+set $color_unfocused_fg     #747369
+set $color_unfocused_bg     #393939
+set $color_unfocused_border #393939
+set $color_urgent_fg        #2d2d2d
+set $color_urgent_bg        #f2777a
+set $color_urgent_border    #f2777a
 set $color_bar_fg           #999999
-set $color_bar_bg           #333333
+set $color_bar_bg           #2d2d2d
 set $color_bar_separator    #999999
 
 #- Workspaces {{{2
