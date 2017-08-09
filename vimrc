@@ -15,7 +15,8 @@ augroup override_colors
   autocmd!
   autocmd ColorScheme *
     \ highlight! link Search CursorLine |
-    \ highlight! Error ctermfg=9
+    \ highlight! Error ctermfg=9 ctermbg=none |
+    \ highlight! StatusLineWarning ctermfg=9 cterm=reverse
 augroup END
 
 "- tomtom/tcomment_vim {{{2
@@ -248,7 +249,6 @@ set statusline+=%*
 
 augroup status_line_setup "{{{2
   autocmd!
-  autocmd ColorScheme * highlight StatusLineWarning cterm=none ctermbg=66 ctermfg=52
 
   " update warnings when idle and after saving
   autocmd CursorHold,BufWritePost *
