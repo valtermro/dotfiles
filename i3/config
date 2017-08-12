@@ -1,3 +1,9 @@
+#==============================================================================
+# The following variables will be inserted by the script that parses this template
+#
+# * $X_DOTFILES
+#==============================================================================
+
 #= Variables {{{1
 #==================================================
 #- Colors {{{2
@@ -54,11 +60,8 @@ bindsym $mod+Shift+q kill
 # bindsym $mod+p exec dmenu_run -b -l 5 -p " " -nf "$color_unfocused_fg" -nb "$color_unfocused_bg" -sf "$color_focused_fg" -sb "$color_focused_bg"
 bindsym $mod+p exec i3-dmenu-desktop
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-
 # restart i3 on the fly
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+r exec --no-startup-id $X_DOTFILES/bin/load-i3-config
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -b 'Yes' 'i3-msg exit'"
@@ -86,8 +89,8 @@ client.background       $color_focused_bg
 #- Status bar {{{2
 #--------------------------------------------------
 bar {
-  position bottom
-  status_command i3status -c $XDG_CONFIG_HOME/i3/i3status.conf
+  position top
+  status_command i3status -c $X_DOTFILES/i3/i3status.conf
 
   colors {
     background $color_bar_bg
@@ -174,6 +177,7 @@ exec --no-startup-id udiskie
 #==================================================
 # Screen brightness {{{2
 #--------------------------------------------------
+# TODO: create the script in $X_DOTFILES/bin
 # For these binds to work you'll need to create the `brightctl` script and give
 # passwordless sudo access to it.
 #
@@ -203,30 +207,9 @@ bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightctl down
 
 #- Monitors {{{2
 #--------------------------------------------------
-# these settings depend on `xrandr` which is a command from `xorg-xrandr`
-set $internal_display "eDP-1"
-set $external_display "HDMI-1"
-
-# disable the external monitor
-bindsym $mod+Shift+F7 exec --no-startup-id \
-  xrandr \
-    --output $internal_display --primary --mode 1366x768 \
-    --output $external_display --off; \
-  restart
-
-# put the external monitor at the left of the layout
-bindsym $mod+Shift+F6 exec --no-startup-id \
-  xrandr \
-    --output $internal_display --primary --mode 1366x768 --pos 1920x312 \
-    --output $external_display --mode 1920x1080 --pos 0x0; \
-  restart
-
-# put the external monitor at the right of the layout and set it as the primary display
-bindsym $mod+Shift+F8 exec --no-startup-id \
-  xrandr \
-    --output $internal_display --mode 1366x768 --pos 0x312 \
-    --output $external_display --primary --mode 1920x1080 --pos 1366x0; \
-  restart
+bindsym $mod+Shift+F7 exec --no-startup-id exec $X_DOTFILES/bin/dlayout ionly; restart
+bindsym $mod+Shift+F6 exec --no-startup-id exec $X_DOTFILES/bin/dlayout eleft; restart
+bindsym $mod+Shift+F8 exec --no-startup-id exec $X_DOTFILES/bin/dlayout eright; restart
 #= endsection }}}1
 
 #= Windows {{{1

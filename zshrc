@@ -3,6 +3,7 @@
 umask 077
 export EDITOR=vim
 export TERM=xterm-256color
+export PATH=$PATH:$X_DOTFILES/bin
 setxkbmap -layout br -option ctrl:nocaps
 #= endsection }}}1
 

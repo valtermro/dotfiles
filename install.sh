@@ -211,9 +211,8 @@ fi
 #- i3wm {{{2
 #------------------------------------------------
 if should_install 'i3wm'; then
-  make_dir $XDG_CONFIG_HOME
-
-  dot_link 'i3' $XDG_CONFIG_HOME
+  make_dir $XDG_CONFIG_HOME/i3
+  $SELF_DIR/bin/load-i3-config $SELF_DIR
 fi
 
 #- Termite {{{2
