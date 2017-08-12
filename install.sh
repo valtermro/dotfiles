@@ -243,6 +243,7 @@ if should_install 'zsh'; then
 
   dot_link 'zshrc' $HOME
   dot_link 'zshenv' $HOME
+  dot_link 'zprofile' $HOME
 
   echo 'Installing base16 colorschemes'
   rm_file $HOME/.base16_theme
