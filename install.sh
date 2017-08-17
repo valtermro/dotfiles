@@ -187,7 +187,7 @@ ask_install 'git'
 ask_install 'zsh' '' 'zsh'
 ask_install 'vim' 'zsh'
 ask_install 'tmux' 'zsh'
-ask_install 'i3wm' '' 'termite'
+ask_install 'i3wm' '' 'termite' 'dmenu' 'i3-dmenu-desktop'
 ask_install 'termite'
 #= endsection }}}1
 
