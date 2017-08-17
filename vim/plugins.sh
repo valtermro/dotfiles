@@ -42,7 +42,7 @@ fi
 
 cd $INSTALL_DIR
 for plugin in "${PLUGINS[@]}"; do
-  git clone https://github.com/$plugin
+  git clone --depth=1 https://github.com/$plugin
 done
 
 unset INSTALL_DIR
