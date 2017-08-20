@@ -66,6 +66,9 @@ bindsym $mod+Shift+r exec --no-startup-id $X_DOTFILES/bin/load-i3-config
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -b 'Yes' 'i3-msg exit'"
 
+# Toggle i3bar on and off
+bindsym $mod+Shift+m bar mode toggle
+
 # if feh is installed and a file named `wallpaper` exists inside i3's configuration
 # directory, then use that file as the wallpaper
 exec_always feh --no-fehbg --bg-scale $XDG_CONFIG_HOME/i3/wallpaper
