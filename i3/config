@@ -210,9 +210,10 @@ bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightctl down
 
 #- Monitors {{{2
 #--------------------------------------------------
-bindsym $mod+Shift+F7 exec --no-startup-id exec $X_DOTFILES/bin/dlayout ionly; restart
-bindsym $mod+Shift+F6 exec --no-startup-id exec $X_DOTFILES/bin/dlayout eleft; restart
-bindsym $mod+Shift+F8 exec --no-startup-id exec $X_DOTFILES/bin/dlayout eright; restart
+bindsym $mod+Shift+F7 exec --no-startup-id $X_DOTFILES/bin/dlayout ionly; restart
+bindsym $mod+Shift+F6 exec --no-startup-id $X_DOTFILES/bin/dlayout eleft; restart
+bindsym $mod+Shift+F8 exec --no-startup-id $X_DOTFILES/bin/dlayout eright; restart
+exec $X_DOTFILES/lib/i3/init_display_layout.sh $workspace1; restart
 #= endsection }}}1
 
 #= Windows {{{1

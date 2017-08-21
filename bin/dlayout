@@ -1,26 +1,23 @@
 #!/bin/bash
 
-INTERNAL_DISPLAY='eDP1'
-EXTERNAL_DISPLAY='HDMI1'
+layout=$1
 
-LAYOUT=$1
-
-if [[ ! $LAYOUT ]]; then
+if [[ ! $layout ]]; then
   echo 'No layout specified'
   exit 1
 fi
 
-# TODO: Get dimensions/position dynamically
-if [[ $LAYOUT == 'eright' ]]; then
-  xrandr \
-    --output $INTERNAL_DISPLAY --mode 1366x768 --pos 0x312 \
-    --output $EXTERNAL_DISPLAY --primary --mode 1920x1080 --pos 1366x0; \
-elif [[ $LAYOUT == 'eleft' ]]; then
-  xrandr \
-    --output $INTERNAL_DISPLAY --mode 1366x768 --pos 1920x312 \
-    --output $EXTERNAL_DISPLAY --primary --mode 1920x1080 --pos 0x0; \
-elif [[ $LAYOUT == 'ionly' ]]; then
-  xrandr \
-    --output $INTERNAL_DISPLAY --primary --mode 1366x768 \
-    --output $EXTERNAL_DISPLAY --off; \
+all_displays=$(xrandr | grep '\<connected\>'| cut -d' ' -f1)
+internal_display=$(echo "$all_displays" | grep -v 'HDMI')
+external_display=$(echo "$all_displays" | grep 'HDMI')
+
+if [[ $layout == 'ionly' ]]; then
+  xrandr --output $internal_display --primary --mode 1366x768 \
+         --output $external_display --off
+elif [[ $layout == 'eright' ]]; then
+  xrandr --output $internal_display --mode 1366x768 --pos 0x312 \
+         --output $external_display --primary --mode 1920x1080 --pos 1366x0
+elif [[ $layout == 'eleft' ]]; then
+  xrandr --output $internal_display --mode 1366x768 --pos 1920x312 \
+         --output $external_display --primary --mode 1920x1080 --pos 0x0
 fi
