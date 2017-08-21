@@ -14,7 +14,6 @@ endif
 augroup override_colors
   autocmd!
   autocmd ColorScheme *
-    \ highlight! link Search CursorLine |
     \ highlight! Error ctermfg=9 ctermbg=none |
     \ highlight! StatusLineWarning ctermfg=9 cterm=reverse
 augroup END
