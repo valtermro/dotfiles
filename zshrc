@@ -226,8 +226,8 @@ function add2path {
 #==================================================
 eval "$(${XDG_DATA_HOME}/base16-shell/profile_helper.sh)"
 if [[ ! -f ~/.base16_theme ]]; then
-  echo "Using base16_eighties colorscheme"
-  base16_eighties
+  echo "Using base16_solar-flare colorscheme"
+  base16_solar-flare
 fi
 #= endsection }}}1
 
