@@ -212,6 +212,24 @@ fi
 #------------------------------------------------
 if should_install 'i3wm'; then
   make_dir $XDG_CONFIG_HOME/i3
+
+  bl_device=$(ls /sys/class/backlight)
+  if [[ "${bl_device[0]}" ]]; then
+    echo
+    echo "In order to get the brightness control keys to work, you'll need to be able"
+    echo "to run '${SELF_DIR}/lib/i3/brightctl.sh' as root without password."
+    echo "I can help you here creating a group with that power and adding you to it."
+    echo "For that, I'll need your sudo password, just once."
+    if ask "Do you want to create the 'brightctl' group"; then
+      bl_device="/sys/class/backlight/${bl_device[0]}/brightness"
+      sudo groupadd brightctl 2>/dev/null
+      sudo usermod -aG brightctl $USER
+      echo "%brightctl ALL=(ALL) NOPASSWD: ${SELF_DIR}/lib/i3/brightctl.sh" > /tmp/brightctl.sudoers
+      sudo chown root: /tmp/brightctl.sudoers
+      sudo mv /tmp/brightctl.sudoers /etc/sudoers.d/99-brightctl
+    fi
+  fi
+
   $SELF_DIR/bin/load-i3-config $SELF_DIR
 fi
 

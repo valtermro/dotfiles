@@ -1,5 +1,5 @@
 #==============================================================================
-# The following variables will be inserted by the script that parses this template
+# The following variables will be replaced with their values by `bin/load-i3-config`
 #
 # * $X_DOTFILES
 #==============================================================================
@@ -180,33 +180,9 @@ exec --no-startup-id udiskie
 #==================================================
 # Screen brightness {{{2
 #--------------------------------------------------
-# TODO: create the script in $X_DOTFILES/bin
-# For these binds to work you'll need to create the `brightctl` script and give
-# passwordless sudo access to it.
 #
-# For the script just create a file `/usr/local/bin/brightctl` with the following content:
-#
-#   #!/bin/bash
-#   bl_device=$(ls /sys/class/backlight)
-#   bl_device="/sys/class/backlight/${bl_device[0]}/brightness"
-#   if [[ $1 == up ]]; then
-#     echo $(($(cat $bl_device)+50)) > $bl_device
-#   elif [[ $1 == down ]]; then
-#     echo $(($(cat $bl_device)-50)) > $bl_device
-#   fi
-#   unset bl_device
-#
-# Note: the above script assumes that the first item (as listed by `ls`) inside
-# `/sys/class/backlight` is the one to control the brightness of.
-#
-# The permission problem can be solved by putting yourself in a group named, say,
-# `brightctl` and creating a file `/etc/sudoers.d/brightctl` (the name of the file
-# doesn't matter as long as it is inside `/etc/sudoers.d`) with the following in it:
-#
-#   %brightctl ALL=(ALL) NOPASSWD: /usr/local/bin/brightctl
-#
-bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightctl up
-bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightctl down
+bindsym XF86MonBrightnessUp exec --no-startup-id sudo $X_DOTFILES/lib/i3/brightctl.sh up
+bindsym XF86MonBrightnessDown exec --no-startup-id sudo $X_DOTFILES/lib/i3/brightctl.sh down
 
 #- Monitors {{{2
 #--------------------------------------------------
