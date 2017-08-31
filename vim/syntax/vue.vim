@@ -4,7 +4,7 @@ endif
 
 "= Template {{{1
 "==================================================
-syn region vueTemplate keepend start=+<template+ end=+</template>+ fold contains=@vueTemplate,vueRegionTag
+syn region vueTemplate keepend start=+^<template+ end=+^</template>+ fold contains=@vueTemplate,vueRegionTag
 syn include @vueTemplate syntax/html.vim
 unlet! b:current_syntax
 " load parts of https://github.com/othree/html5.vim
