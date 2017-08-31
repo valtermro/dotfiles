@@ -118,6 +118,12 @@ set hidden
 set showcmd
 set fileformats=unix,dos,mac
 set mouse=nvc
+" Fix mouse inside tmux (issue with termite)
+if has('mouse_sgr')
+  set ttymouse=sgr
+else
+  set ttymouse=xterm2
+end
 
 "- Backup, undo and swap files {{{2
 "--------------------------------------------------
