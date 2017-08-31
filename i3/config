@@ -8,10 +8,10 @@
 #==================================================
 #- Colors {{{2
 #--------------------------------------------------
-set $color_indicator        #747369
+set $color_indicator        #6666cc
 set $color_focused_fg       #a09f93
 set $color_focused_bg       #515151
-set $color_focused_border   #515151
+set $color_focused_border   #666666
 set $color_unfocused_fg     #747369
 set $color_unfocused_bg     #393939
 set $color_unfocused_border #393939
