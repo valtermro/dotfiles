@@ -14,6 +14,9 @@ external_display=$(echo "$all_displays" | grep 'HDMI')
 if [[ $layout == 'ionly' ]]; then
   xrandr --output $internal_display --primary --mode 1366x768 \
          --output $external_display --off
+elif [[ $layout == 'eonly' ]]; then
+  xrandr --output $internal_display --off \
+         --output $external_display --primary --mode 1920x1080 --pos 1366x0
 elif [[ $layout == 'eright' ]]; then
   xrandr --output $internal_display --mode 1366x768 --pos 0x312 \
          --output $external_display --primary --mode 1920x1080 --pos 1366x0
