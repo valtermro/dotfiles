@@ -190,6 +190,13 @@ nnoremap <C-Y> 5<C-Y>
 nnoremap <C-O> <C-O>zz
 nnoremap <C-I> <C-I>zz
 
+nnoremap L $
+nnoremap H _
+xnoremap L $
+xnoremap H _
+onoremap L $
+onoremap H _
+
 "- Yank/Delete/Put {{{2
 "--------------------------------------------------
 " paste from the yank register
