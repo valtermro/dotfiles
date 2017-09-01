@@ -133,10 +133,11 @@ bindsym $mod+Shift+Tab move workspace to output left
 
 #- Assign programs to specific workspaces {{{2
 #--------------------------------------------------
-assign [instance="beebeep"] $workspace9
 assign [instance="chromium"] $workspace2
 assign [instance="thunar"] $workspace7
 assign [instance="VirtualBox"] $workspace8
+assign [instance="beebeep"] $workspace9
+for_window [instance="beebeep"] floating enable
 
 # https://github.com/i3/i3/issues/2060#issuecomment-155179472
 for_window [instance="spotify"] move to workspace $workspace10
