@@ -4,7 +4,8 @@ dotfiles_dir=$1
 [[ ! $dotfiles_dir ]] && dotfiles_dir=$X_DOTFILES
 
 template_file=$dotfiles_dir/i3/config
-config_file=~/.config/i3/config
+# config_file=~/.config/i3/config
+config_file=/tmp/i3config
 
 cat <<HEADER > $config_file
 #
@@ -20,6 +21,7 @@ cat <<HEADER > $config_file
 HEADER
 
 # parse the template
+parsed_config=$(
 cat $template_file |\
   # remove comments
   sed '/^\s*#/d' |\
@@ -28,9 +30,12 @@ cat $template_file |\
   sed '/^\s*$/d' |\
 
   # replace $X_DOTFILES with its value
-  sed "s/\$X_DOTFILES/$(echo $dotfiles_dir | sed 's#/#\\/#g')/g" |\
+  sed "s/\$X_DOTFILES/$(echo $dotfiles_dir | sed 's#/#\\/#g')/g"
+)
 
-  # add the parsed content to the config file
-  tee > $config_file
+# i3-msg 'restart'
 
-i3-msg 'restart'
+echo "$parsed_config"
+  #
+  # # add the parsed content to the config file
+  # tee > $config_file
