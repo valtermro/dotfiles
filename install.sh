@@ -13,6 +13,7 @@ DIST_ID=$(lsb_release -si 2>/dev/null)
 # export X_DOTFILES... in zshenv will raise an error with bash
 source $SELF_DIR/zshenv 2>/dev/null
 
+logout_needed=false
 to_install=()
 conflicted=()
 #= endsection }}}1
@@ -187,7 +188,7 @@ ask_install 'git'
 ask_install 'zsh' '' 'zsh'
 ask_install 'vim' 'zsh'
 ask_install 'tmux' 'zsh'
-ask_install 'i3wm' '' 'termite' 'dmenu' 'i3-dmenu-desktop'
+ask_install 'i3wm' '' 'termite' 'dmenu' 'i3status' 'i3-dmenu-desktop'
 ask_install 'termite'
 #= endsection }}}1
 
@@ -227,6 +228,7 @@ if should_install 'i3wm'; then
       echo "%brightctl ALL=(ALL) NOPASSWD: ${SELF_DIR}/lib/i3/brightctl.sh" > /tmp/brightctl.sudoers
       sudo chown root: /tmp/brightctl.sudoers
       sudo mv /tmp/brightctl.sudoers /etc/sudoers.d/99-brightctl
+      logout_needed=true
     fi
   fi
 
@@ -305,11 +307,15 @@ fi
 
 if should_install 'zsh'; then
   if [[ $(login_shell) == '/bin/zsh' || $(login_shell) == $(which zsh) ]]; then
-    echo 'Be sure to logout/login to validate the changes.'
+    logout_needed=true
   else
     echo 'Could not set zsh as the default login shell!'
     exit $ERR_RUNTIME
   fi
+fi
+
+if [[ $logout_needed == true ]]; then
+  echo 'Be sure to logout/login to validate the changes.'
 fi
 #= endsection }}}1
 
