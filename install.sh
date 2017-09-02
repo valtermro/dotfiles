@@ -232,6 +232,7 @@ if should_install 'i3wm'; then
     fi
   fi
 
+
   $SELF_DIR/bin/load-i3-config $SELF_DIR
 fi
 
@@ -296,22 +297,26 @@ echo
 if [[ $conflicted ]]; then
   echo 'The following files were moved to <file>.backup.<timestamp>:'
   printf '  %s\n' "${conflicted[@]}"
-  echo 'You might want to check out, and remove, them.'
-fi
-
-if should_install 'tmux' || should_install 'vim'; then
-  if ! is_installed 'xclip'; then
-    echo "xclip is required to interact with the system's clipboard."
-  fi
+  echo 'You might want to review them.'
 fi
 
 if should_install 'zsh'; then
   if [[ $(login_shell) == '/bin/zsh' || $(login_shell) == $(which zsh) ]]; then
     logout_needed=true
   else
-    echo 'Could not set zsh as the default login shell!'
+    echo 'Error:: Could not set zsh as the default login shell!'
     exit $ERR_RUNTIME
   fi
+fi
+
+if should_install 'tmux' || should_install 'vim'; then
+  if ! is_installed 'xclip'; then
+    echo "Warning:: xclip is required for interacting with the system's clipboard."
+  fi
+fi
+
+if should_install 'i3wm' && ! is_installed 'twmnd'; then
+  echo 'Warning:: twmn is required if you want to have desktop notifications with i3'
 fi
 
 if [[ $logout_needed == true ]]; then

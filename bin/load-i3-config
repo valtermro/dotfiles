@@ -4,8 +4,7 @@ dotfiles_dir=$1
 [[ ! $dotfiles_dir ]] && dotfiles_dir=$X_DOTFILES
 
 template_file=$dotfiles_dir/i3/config
-# config_file=~/.config/i3/config
-config_file=/tmp/i3config
+config_file=~/.config/i3/config
 
 cat <<HEADER > $config_file
 #
@@ -33,9 +32,25 @@ cat $template_file |\
   sed "s/\$X_DOTFILES/$(echo $dotfiles_dir | sed 's#/#\\/#g')/g"
 )
 
-# i3-msg 'restart'
 
-echo "$parsed_config"
-  #
-  # # add the parsed content to the config file
-  # tee > $config_file
+if [[ $(type -p twmnd) ]]; then
+  parsed_config=$(
+  echo "$parsed_config" |\
+    # load twmnd before udiskie
+    sed -r 's/^((exec.+)udiskie.+$)/\2twmnd\n\1/' |\
+    # enable notifications
+    sed -r '/^exec.+udiskie.+$/ s/N//'
+  )
+
+  # Enable the twmn configuration included in the repo.
+  # NOTE: If there already is a configuration file, it'll be overwritten.
+  twmn_config_dst=$XDG_CONFIG_HOME/twmn
+  twmn_config_src=$dotfiles_dir/twmn
+  if [[ ! -L $twmn_config_dst || $(readlink $twmn_config_dst) != $twmn_config_src ]]; then
+    rm -rf $twmn_config_dst
+    ln -s $twmn_config_src $twmn_config_dst
+  fi
+fi
+
+echo "$parsed_config" > $config_file
+i3-msg 'restart'
