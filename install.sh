@@ -311,12 +311,17 @@ fi
 
 if should_install 'tmux' || should_install 'vim'; then
   if ! is_installed 'xclip'; then
-    echo "Warning:: xclip is required for interacting with the system's clipboard."
+    echo "Warning:: 'xclip' is required for interacting with the system's clipboard."
   fi
 fi
 
-if should_install 'i3wm' && ! is_installed 'twmnd'; then
-  echo 'Warning:: twmn is required if you want to have desktop notifications with i3'
+if should_install 'i3wm'; then
+  if ! is_installed 'twmnd'; then
+    echo "Warning:: 'twmn' is required if you want to have desktop notifications with i3wm"
+  fi
+  if ! is_installed 'compton'; then
+    echo "Warning:: You might want to install 'compton' for a better experience with i3wm"
+  fi
 fi
 
 if [[ $logout_needed == true ]]; then
