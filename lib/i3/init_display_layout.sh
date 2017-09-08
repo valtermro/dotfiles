@@ -8,4 +8,3 @@ if [[ $external_display ]]; then
   i3-msg "workspace $main_workspace; move workspace to output $external_display"
   i3-msg "restart"
 fi
-

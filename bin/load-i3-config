@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# When running `install.sh` $X_DOTFILES will not be set but its value is passed
+# as the first argument for this script. After the `install.sh` has finished its
+# job, and the new shell configuration has been loaded, $X_DOTFILES should be defined
+# so its value is used.
 dotfiles_dir=$1
 [[ ! $dotfiles_dir ]] && dotfiles_dir=$X_DOTFILES
 
@@ -7,9 +11,10 @@ template_file=$dotfiles_dir/i3/config
 config_file=~/.config/i3/config
 config_contents=$(cat $template_file)
 
+# On the fly configurations {{{1
+#==================================================
+# Test if optional packages are installed and, if so, use them.
 
-# Edit the template on the fly to load some optional packages
-# ===========================================================
 if [[ $(type -p twmnd) ]]; then
   config_contents=$(
   echo "$config_contents" |\
@@ -19,7 +24,7 @@ if [[ $(type -p twmnd) ]]; then
     sed -E '/^exec.+udiskie.+$/ s/N//'
   )
 
-  # Enable the twmn configuration included in the repo.
+  # Enable the featured twmn configuration.
   # NOTE: If there already is a configuration file, it'll be overwritten.
   twmn_config_dst=$XDG_CONFIG_HOME/twmn
   twmn_config_src=$dotfiles_dir/twmn
@@ -27,31 +32,74 @@ if [[ $(type -p twmnd) ]]; then
     rm -rf $twmn_config_dst
     ln -s $twmn_config_src $twmn_config_dst
   fi
+  unset twmn_config_dst twmn_config_src
 fi
 
 if [[ $(type -p compton) ]]; then
   config_contents=$(
   echo "$config_contents" |\
-    sed -E '0,/^exec --no-startup-id/s#^((exec .+ ).+$)#\2compton -b --config $X_DOTFILES/compton/compton.conf\n\1#'
+    sed -E '0,/^exec --no-startup-id/s#^((exec .+ ).+$)#\2compton -b --config $X_DOTFILES/i3/compton.conf\n\1#'
   )
 fi
+#= endsection }}}1
 
+# Variable parsing {{{1
+#==================================================
+# Variables defined in the file itself {{{2
+#--------------------------------------------------
+var_defs=$(
+echo "$config_contents" |\
+  # get all variable definitions except the one for '$mod'
+  grep -E 'set \$[^mod]+' |\
 
-# Parse the template, write the result to the config file and load it.
-# ====================================================================
+  # we don't care about the commented ones
+  sed -E '/^\s*#/ d' |\
+
+  # the 'set' keyword is no longer needed
+  sed 's/set //' |\
+
+  # make it easier to loop through declarations
+  # NOTE: '=' in a declaration will break the parser
+  sed -E 's/\s+/=/'
+)
+# remove the declarations
+config_contents=$(echo "$config_contents" | sed -E 's/set \$[^mod].+$//')
+
+# do the replacement
+for def in $var_defs; do
+  config_contents=$(
+  echo "$config_contents" |\
+    sed "s/$(echo $def | cut -d'=' -f1)\b/$(echo $def | cut -d'=' -f2)/g"
+  )
+done
+unset var_defs def
+
+# Variables from the environment {{{2
+#--------------------------------------------------
+config_contents=$(
+echo "$config_contents" |\
+  # $X_DOTFILES is an environment variable
+  sed "s/\$X_DOTFILES/$(echo $dotfiles_dir | sed 's#/#\\/#g')/g"
+)
+#= endsection }}}1
+
+# Clean up {{{1
+#==================================================
 config_contents=$(
 echo "$config_contents" |\
   # remove comments
-  sed '/^\s*#/d' |\
+  sed -E '/^\s*#/d' |\
 
   # remove empty lines
-  sed '/^\s*$/d' |\
+  sed -E '/^\s*$/d' |\
 
-  # replace $X_DOTFILES with its value
-  sed "s/\$X_DOTFILES/$(echo $dotfiles_dir | sed 's#/#\\/#g')/g"
+  # remove repeated spaces
+  sed -E 's/([^ ])  +/\1 /g'
 )
+#= endsection }}}1
 
-# write the configuration file with a little warning header at the top of it
+# Write and load the parsed configuration {{{1
+#==================================================
 cat <<EOF > $config_file
 #
 #==============================================================================
@@ -67,3 +115,6 @@ $config_contents
 EOF
 
 i3-msg 'restart'
+#= endsection }}}1
+
+unset config_file template_file config_file config_file config_contents dotfiles_dir
