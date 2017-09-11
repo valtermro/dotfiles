@@ -222,6 +222,8 @@ xnoremap x "_x
 "--------------------------------------------------
 nnoremap / /\v
 nnoremap ? ?\v
+xnoremap / /\v
+xnoremap ? ?\v
 
 nnoremap + :set hlsearch<CR>mt*`t
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
