@@ -36,7 +36,7 @@ augroup END
 "- scrooloose/nerdtree {{{2
 "--------------------------------------------------
 let g:NERDTreeShowHidden = 1
-let g:NERDTreeIgnore = ['.git$', 'node_modules', 'vendor']
+let g:NERDTreeIgnore = ['.git$', '.vagrant', 'node_modules', 'vendor']
 
 nnoremap <silent> <leader>ne :NERDTreeToggle<CR>
 
