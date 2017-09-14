@@ -39,7 +39,7 @@ augroup END
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeIgnore = ['.git$', '.vagrant', 'node_modules', 'vendor']
 
-nnoremap <silent> <leader>ne :NERDTreeToggle<CR>
+nnoremap <silent> <leader>e :NERDTreeToggle<CR>
 
 "- Raimondi/delimitMate {{{2
 "--------------------------------------------------
@@ -228,6 +228,12 @@ xnoremap ? ?\v
 
 nnoremap + :set hlsearch<CR>mt*`t
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+
+"- UI {{{2
+"--------------------------------------------------
+nnoremap <silent><leader>cl :set cursorline!<CR>
+nnoremap <silent><leader>cc :set cursorcolumn!<CR>
+nnoremap <silent><leader>n :setlocal number! relativenumber!<CR>
 "= endsection }}}1
 
 "= Motions {{{1
