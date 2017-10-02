@@ -70,22 +70,9 @@ let g:ale_linters.html = []
 let g:ale_linters.javascript = ['eslint']
 let g:ale_linters.vue = ['eslint', 'stylelint']
 
-"- vim-ctrlspace/vim-ctrlspace {{{2
+"- ctrlpvim/ctrlp.vim {{{2
 "--------------------------------------------------
-let g:CtrlSpaceCacheDir = $XDG_CACHE_HOME.'/ctrl_space'
-let g:CtrlSpaceMaxHeight = 15
-let g:CtrlSpaceSearchTiming = 50
-let g:CtrlSpaceUseTabline = 1
-
-nnoremap <silent> <C-Space> :CtrlSpace<CR>
-nnoremap <silent> <C-p> :CtrlSpace O<CR>
-nnoremap <silent> <C-t> :CtrlSpace l<CR>
-
-highlight link CtrlSpaceSearch IncSearch
-
-if !isdirectory(g:CtrlSpaceCacheDir)
-  call mkdir(g:CtrlSpaceCacheDir, 0700)
-endif
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 "- elzr/vim-json {{{2
 "--------------------------------------------------

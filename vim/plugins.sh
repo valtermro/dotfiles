@@ -3,6 +3,7 @@ PLUGINS=(
 PotatoesMaster/i3-vim-syntax
 SirVer/ultisnips
 StanAngeloff/php.vim
+ctrlpvim/ctrlp.vim
 cakebaker/scss-syntax.vim
 chr4/nginx.vim
 chriskempson/base16-vim
@@ -30,7 +31,6 @@ tpope/vim-projectionist
 tpope/vim-repeat
 tpope/vim-surround
 tpope/vim-unimpaired
-vim-ctrlspace/vim-ctrlspace
 w0rp/ale
 )
 
