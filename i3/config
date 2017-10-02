@@ -192,11 +192,11 @@ bindsym XF86MonBrightnessDown exec --no-startup-id sudo $X_DOTFILES/lib/i3/brigh
 
 #- Monitors {{{2
 #--------------------------------------------------
-bindsym $mod+Shift+F5 exec --no-startup-id $X_DOTFILES/bin/dlayout eonly; restart
-bindsym $mod+Shift+F6 exec --no-startup-id $X_DOTFILES/bin/dlayout ionly; restart
-bindsym $mod+Shift+F7 exec --no-startup-id $X_DOTFILES/bin/dlayout eleft; restart
-bindsym $mod+Shift+F8 exec --no-startup-id $X_DOTFILES/bin/dlayout eright; restart
-exec $X_DOTFILES/lib/i3/init_display_layout.sh $workspace1; restart
+bindsym $mod+Shift+F5 exec --no-startup-id $X_DOTFILES/bin/dlayout eonly
+bindsym $mod+Shift+F6 exec --no-startup-id $X_DOTFILES/bin/dlayout ionly
+bindsym $mod+Shift+F7 exec --no-startup-id $X_DOTFILES/bin/dlayout eleft
+bindsym $mod+Shift+F8 exec --no-startup-id $X_DOTFILES/bin/dlayout eright
+exec $X_DOTFILES/lib/i3/init_display_layout.sh $workspace1
 #= endsection }}}1
 
 #= Windows {{{1
