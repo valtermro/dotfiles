@@ -38,7 +38,7 @@ fi
 if [[ $(type -p compton) ]]; then
   config_contents=$(
   echo "$config_contents" |\
-    sed -E '0,/^exec --no-startup-id/s#^((exec .+ ).+$)#\2compton -b --config $X_DOTFILES/i3/compton.conf\n\1#'
+    sed -E '0,/^exec --no-startup-id/s#^((exec .+ ).+$)#\2compton -b --config $X_DOTFILES/compton/compton.conf\n\1#'
   )
 fi
 #= endsection }}}1
