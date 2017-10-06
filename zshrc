@@ -111,8 +111,6 @@ alias egrep='egrep --color=auto'
 alias tree='tree -C'
 alias open='xdg-open'
 alias vi='vim'
-alias mount='sudo mount -o gid=users,fmask=113,dmask=002'
-alias umount='sudo umount'
 
 # match vim's `so` command
 alias so='source'
