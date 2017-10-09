@@ -209,6 +209,48 @@ if should_install 'git'; then
   dot_link 'git' $XDG_CONFIG_HOME
 fi
 
+#- Zsh {{{2
+#------------------------------------------------
+if should_install 'zsh'; then
+  if [[ $(login_shell) != '/bin/zsh' && $(login_shell) != $(which zsh) ]]; then
+    echo 'Setting zsh as the default login shell'
+    chsh -s $(which zsh) $(whoami)
+  fi
+
+  # move old files out of our way
+  backup ~/.histfile
+
+  make_dir $XDG_CACHE_HOME/zsh
+  make_dir $XDG_CONFIG_HOME
+  make_dir $XDG_DATA_HOME
+
+  dot_link 'zshrc' $HOME
+  dot_link 'zshenv' $HOME
+  dot_link 'zprofile' $HOME
+
+  echo 'Installing base16 colorschemes'
+  rm_file $HOME/.base16_theme
+  rm_file $HOME/.vimrc_background
+  rm_dir $XDG_DATA_HOME/base16-shell
+  git_clone 'chriskempson/base16-shell' $XDG_DATA_HOME
+fi
+
+#- Vim {{{2
+#------------------------------------------------
+if should_install 'vim'; then
+  dot_link 'vim' $HOME
+  dot_link 'vimrc' $HOME
+
+  echo 'Installing vim plugins'
+  bash $SELF_DIR/vim/plugins.sh $SELF_DIR/vim
+fi
+
+#- Tmux {{{2
+#------------------------------------------------
+if should_install 'tmux'; then
+  dot_link 'tmux.conf' $HOME
+fi
+
 #- i3wm {{{2
 #------------------------------------------------
 if should_install 'i3wm'; then
@@ -244,48 +286,6 @@ if should_install 'termite'; then
 
   dot_link 'termite' $XDG_CONFIG_HOME
   git_clone 'todylu/monaco.ttf' $XDG_DATA_HOME/fonts/MonacoTTF
-fi
-
-#- Zsh {{{2
-#------------------------------------------------
-if should_install 'zsh'; then
-  if [[ $(login_shell) != '/bin/zsh' && $(login_shell) != $(which zsh) ]]; then
-    echo 'Setting zsh as the default login shell'
-    chsh -s $(which zsh) $(whoami)
-  fi
-
-  # move old files out of our way
-  backup ~/.histfile
-
-  make_dir $XDG_CACHE_HOME/zsh
-  make_dir $XDG_CONFIG_HOME
-  make_dir $XDG_DATA_HOME
-
-  dot_link 'zshrc' $HOME
-  dot_link 'zshenv' $HOME
-  dot_link 'zprofile' $HOME
-
-  echo 'Installing base16 colorschemes'
-  rm_file $HOME/.base16_theme
-  rm_file $HOME/.vimrc_background
-  rm_dir $XDG_DATA_HOME/base16-shell
-  git_clone 'chriskempson/base16-shell' $XDG_DATA_HOME
-fi
-
-#- Tmux {{{2
-#------------------------------------------------
-if should_install 'tmux'; then
-  dot_link 'tmux.conf' $HOME
-fi
-
-#- Vim {{{2
-#------------------------------------------------
-if should_install 'vim'; then
-  dot_link 'vim' $HOME
-  dot_link 'vimrc' $HOME
-
-  echo 'Installing vim plugins'
-  bash $SELF_DIR/vim/plugins.sh $SELF_DIR/vim
 fi
 
 #= endsection }}}1
