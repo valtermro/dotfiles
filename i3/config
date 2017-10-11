@@ -6,6 +6,11 @@
 
 #= Variables {{{1
 #==================================================
+#- Applications {{{2
+#--------------------------------------------------
+set $browser chromium
+set $terminal termite
+
 #- Colors {{{2
 #--------------------------------------------------
 set $color_indicator        #6666cc
@@ -24,16 +29,16 @@ set $color_bar_separator    #999999
 
 #- Workspaces {{{2
 #--------------------------------------------------
-set $workspace1 "1:main"
-set $workspace2 "2:browser"
-set $workspace3 "3"
-set $workspace4 "4"
-set $workspace5 "5"
-set $workspace6 "6"
-set $workspace7 "7:files"
-set $workspace8 "8:vm"
-set $workspace9 "9:chat"
-set $workspace10 "10:music"
+set $workspace1 1:main
+set $workspace2 2:browser
+set $workspace3 3
+set $workspace4 4
+set $workspace5 5
+set $workspace6 6
+set $workspace7 7
+set $workspace8 8:vm
+set $workspace9 9:chat
+set $workspace10 10:music
 #= endsection }}}1
 
 #= Basic settings {{{1
@@ -51,7 +56,7 @@ set $mod Mod4
 exec_always "setxkbmap -layout br -option ctrl:nocaps"
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec $terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -73,12 +78,6 @@ bindsym $mod+Shift+m bar mode toggle
 # directory, then use that file as the wallpaper
 exec_always feh --no-fehbg --bg-scale $XDG_CONFIG_HOME/i3/wallpaper
 #= endsection }}}1
-
-#= Theme {{{1
-#==================================================
-# remove title bar from windows but keep a visible border
-new_window pixel 2
-new_float normal
 
 #- Window colors {{{2
 #--------------------------------------------------
@@ -133,11 +132,9 @@ bindsym $mod+Shift+Tab move workspace to output left
 
 #- Assign programs to specific workspaces {{{2
 #--------------------------------------------------
-assign [instance="chromium"] $workspace2
-assign [instance="thunar"] $workspace7
+assign [instance="$browser"] $workspace2
 assign [instance="VirtualBox"] $workspace8
 assign [instance="beebeep"] $workspace9
-for_window [instance="beebeep"] floating enable
 
 # https://github.com/i3/i3/issues/2060#issuecomment-155179472
 for_window [instance="spotify"] move to workspace $workspace10
@@ -175,8 +172,8 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 # `bin/load-i3-config` will check for the presence of some applications on the
 # system and update this section on the fly so they get loaded if installed.
 
-exec --no-startup-id termite
-exec --no-startup-id chromium
+exec --no-startup-id $terminal
+exec --no-startup-id $browser
 
 # The 'N' might be removed (by `bin/load-i3-config`) if twmn is installed, in which
 # case twmnd will be set up to be loaded before udiskie.
@@ -201,9 +198,13 @@ exec $X_DOTFILES/lib/i3/init_display_layout.sh $workspace1
 
 #= Windows {{{1
 #==================================================
-#- Split {{{2
+#= Layout {{{2
 #--------------------------------------------------
 bindsym $mod+semicolon split toggle
+
+new_window pixel 2
+new_float normal
+for_window [instance="beebeep"] floating enable
 
 #- Move focus {{{2
 #--------------------------------------------------
