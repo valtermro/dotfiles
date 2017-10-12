@@ -50,6 +50,7 @@ function ask_install {
   local what=$1; shift
   local conf_depend=$1; shift
   local pack_depend=$@
+  local pack_missing=()
 
   if ask "Install ${what} configs"; then
     if [[ $conf_depend ]] && ! should_install $conf_depend; then
@@ -58,16 +59,15 @@ function ask_install {
     fi
 
     if [[ $pack_depend ]]; then
-      missing=()
       for pack in $pack_depend; do
         if ! is_installed $pack; then
-          missing+=($pack)
+          pack_missing+=($pack)
         fi
       done
 
-      if [[ $missing ]]; then
+      if [[ $pack_missing ]]; then
         echo "${what}'s configs depend on the following packages:"
-        printf '  %s\n' "${missing[@]}"
+        printf '  %s\n' "${pack_missing[@]}"
         echo 'Exiting...'
         exit $ERR_DEP
       fi
@@ -217,7 +217,7 @@ if should_install 'zsh'; then
     chsh -s $(which zsh) $(whoami)
   fi
 
-  # move old files out of our way
+  # if this file stays there it'll cause problems...
   backup ~/.histfile
 
   make_dir $XDG_CACHE_HOME/zsh
@@ -243,6 +243,7 @@ if should_install 'vim'; then
 
   echo 'Installing vim plugins'
   bash $SELF_DIR/vim/plugins.sh $SELF_DIR/vim
+  vim -c 'helptags ALL' -c 'q'
 fi
 
 #- Tmux {{{2
@@ -276,6 +277,7 @@ if should_install 'i3wm'; then
 
 
   $SELF_DIR/bin/load-i3-config $SELF_DIR
+  unset bl_device
 fi
 
 #- Termite {{{2
@@ -331,9 +333,5 @@ fi
 
 #= Cleanup {{{1
 #================================================
-unset ERR_DEP
-unset ERR_INNER_DEP
-unset ERR_NOOP
-unset ERR_RUNTIME
-unset SELF_DIR
-unset DIST_ID
+unset ERR_DEP ERR_INNER_DEP ERR_NOOP ERR_RUNTIME SELF_DIR DIST_ID
+unset logout_needed to_install conflicted

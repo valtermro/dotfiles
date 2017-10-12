@@ -1,5 +1,5 @@
-INSTALL_DIR=$1/pack/valtermro/start
-PLUGINS=(
+install_dir=$1/pack/valtermro/start
+plugins=(
 PotatoesMaster/i3-vim-syntax
 SirVer/ultisnips
 StanAngeloff/php.vim
@@ -34,16 +34,15 @@ tpope/vim-unimpaired
 w0rp/ale
 )
 
-mkdir -p $INSTALL_DIR 2>/dev/null
+mkdir -p $install_dir 2>/dev/null
 if [[ $? != 0 ]]; then
   echo "Could not create $INSTALL_DIR"
   exit 1
 fi
 
-cd $INSTALL_DIR
-for plugin in "${PLUGINS[@]}"; do
+cd $install_dir
+for plugin in "${plugins[@]}"; do
   git clone --depth=1 https://github.com/$plugin
 done
 
-unset INSTALL_DIR
-unset PLUGINS
+unset install_dir plugins
