@@ -44,7 +44,7 @@ zstyle ':vcs_info:git*' actionformats '(%F{$action_color}%a%f|%F{$branch_color}%
 
 #- Vi mode {{{2
 #--------------------------------------------------
-export KEYTIMEOUT=1
+KEYTIMEOUT=1
 
 vi_mode_color=2
 function zle-line-init zle-keymap-select {
@@ -98,6 +98,8 @@ function precmd {
 
 PROMPT='$vcs_info_msg_0_%F{$vi_mode_color}⇨%f '
 RPROMPT='[%F{16}S:$suspended_jobs %F{4}R:$running_jobs%f]'
+
+unset vi_mode_color suspended_jobs running_jobs
 #= endsection }}}1
 
 #= Aliases {{{1
@@ -160,12 +162,11 @@ function tm {
   PS3='Pick an option: '
   select session in "${options[@]}"; do
     if [[ $session == 'New session' ]]; then
-      printf 'Session name: '
-      read session
-      __my_tmux_session_create "$session"
+      read 'session?Session name: '
+      __my_tmux_session_create $session
     fi
 
-    __my_tmux_session_attach "$session"
+    __my_tmux_session_attach $session
     break
   done
 }
@@ -177,7 +178,7 @@ function tm {
 function __my_tmux_session_create {
   local session=$1
 
-  tmux new -ds "$session"
+  tmux new -ds $session
 }
 
 #- __my_tmux_session_attach() {{{2
@@ -190,16 +191,15 @@ function __my_tmux_session_attach {
   local session=$1
 
   if [[ $TMUX ]]; then
-    printf "Switch current client to $session? [y/N] "
-    read -E a
+    read 'a?Switch current client to $session? [y/N] '
 
     if [[ $a == 'y' || $a == 'Y' ]]; then
-      tmux switch-client -t "$session"
+      tmux switch-client -t $session
     fi
     return 0
   fi
 
-  tmux attach -t "$session"
+  tmux attach -t $session
 }
 
 #- add2path() {{{2
@@ -215,7 +215,7 @@ function add2path {
   fi
 
   if [[ ! "$PATH" =~ "$dir" ]]; then
-    export PATH=$PATH:$dir
+    PATH=$PATH:$dir
   else
     echo 'Already on $PATH'
   fi

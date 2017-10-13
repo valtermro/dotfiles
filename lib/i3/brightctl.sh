@@ -6,4 +6,3 @@ if [[ $1 == up ]]; then
 elif [[ $1 == down ]]; then
   echo $(($(cat $bl_device)-50)) > $bl_device
 fi
-unset bl_device

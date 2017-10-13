@@ -41,8 +41,8 @@ if [[ $? != 0 ]]; then
 fi
 
 cd $install_dir
-for plugin in "${plugins[@]}"; do
+for plugin in ${plugins[@]}; do
   git clone --depth=1 https://github.com/$plugin
 done
 
-unset install_dir plugins
+unset install_dir plugins plugin

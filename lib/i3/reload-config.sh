@@ -4,8 +4,7 @@
 # as the first argument for this script. After the `install.sh` has finished its
 # job, and the new shell configuration has been loaded, $X_DOTFILES should be defined
 # so its value is used.
-dotfiles_dir=$1
-[[ ! $dotfiles_dir ]] && dotfiles_dir=$X_DOTFILES
+dotfiles_dir=${1:-$X_DOTFILES}
 
 template_file=$dotfiles_dir/i3/config
 config_file=~/.config/i3/config
@@ -14,6 +13,20 @@ config_contents=$(cat $template_file)
 # On the fly configurations {{{1
 #==================================================
 # Test if optional packages are installed and, if so, use them.
+
+function config_link {
+  local config_for=$1
+  local config_src=$dotfiles_dir/$config_for
+  local config_dst=$XDG_CONFIG_HOME/$config_for
+
+  if [[ ! -L $config_dst ]] && [[ -d $config_dst || -f $config_dst ]]; then
+    mv $config_dst $config_dst.backup.$(date +'%s')
+  elif [[ $(readlink $config_dst) != $config_src ]]; then
+    # `$config_dst` must be a symlink so it's safe to remove it
+    rm $config_dst
+    ln -s $config_src $config_dst
+  fi
+}
 
 if [[ $(type -p twmnd) ]]; then
   config_contents=$(
@@ -24,22 +37,16 @@ if [[ $(type -p twmnd) ]]; then
     sed -E '/^exec.+udiskie.+$/ s/N//'
   )
 
-  # Enable the featured twmn configuration.
-  # NOTE: If there already is a configuration file, it'll be overwritten.
-  twmn_config_dst=$XDG_CONFIG_HOME/twmn
-  twmn_config_src=$dotfiles_dir/twmn
-  if [[ ! -L $twmn_config_dst || $(readlink $twmn_config_dst) != $twmn_config_src ]]; then
-    rm -rf $twmn_config_dst
-    ln -s $twmn_config_src $twmn_config_dst
-  fi
-  unset twmn_config_dst twmn_config_src
+  config_link 'twmn'
 fi
 
 if [[ $(type -p compton) ]]; then
   config_contents=$(
   echo "$config_contents" |\
-    sed -E '0,/^exec --no-startup-id/s#^((exec .+ ).+$)#\2compton -b --config $X_DOTFILES/compton/compton.conf\n\1#'
+    sed -E '0,/^exec --no-startup-id/s#^((exec .+ ).+$)#\2compton -b --config $XDG_CONFIG_HOME/compton/compton.conf\n\1#'
   )
+
+  config_link 'compton'
 fi
 #= endsection }}}1
 
@@ -72,7 +79,6 @@ for def in $var_defs; do
     sed "s/$(echo $def | cut -d'=' -f1)\b/$(echo $def | cut -d'=' -f2)/g"
   )
 done
-unset var_defs def
 
 # Variables from the environment {{{2
 #--------------------------------------------------
@@ -116,5 +122,3 @@ EOF
 
 i3-msg 'restart'
 #= endsection }}}1
-
-unset config_file template_file config_file config_file config_contents dotfiles_dir
