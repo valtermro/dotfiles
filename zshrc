@@ -49,11 +49,11 @@ KEYTIMEOUT=1
 vi_mode_color=2
 function zle-line-init zle-keymap-select {
   if [[ $KEYMAP == 'vicmd' ]]; then
-    vi_mode_color=4
+    vi_mode_color=8
   elif [[ $KEYMAP == 'main' ]]; then
-    vi_mode_color=2
+    vi_mode_color=6
   else
-    vi_mode_color=255
+    vi_mode_color=15
   fi
 
   zle reset-prompt
@@ -96,7 +96,7 @@ function precmd {
   print -P '%F{4}%~%f'
 }
 
-PROMPT='$vcs_info_msg_0_%F{$vi_mode_color}⇨%f '
+PROMPT='$vcs_info_msg_0_%F{$vi_mode_color}$%f '
 RPROMPT='[%F{16}S:$suspended_jobs %F{4}R:$running_jobs%f]'
 
 unset vi_mode_color suspended_jobs running_jobs

@@ -96,15 +96,6 @@ function make_dir {
   fi
 }
 
-# git_clone() {{{2
-#--------------------------------------------------
-function git_clone {
-  local repo=https://github.com/$1
-  local dest=$2/$(basename $repo)
-
-  git clone --quiet --depth=1 $repo $dest
-}
-
 # backup() {{{2
 #--------------------------------------------------
 function backup {
@@ -205,7 +196,7 @@ if should_install 'zsh'; then
   rm_file $HOME/.base16_theme
   rm_file $HOME/.vimrc_background
   rm_dir $XDG_DATA_HOME/base16-shell
-  git_clone 'chriskempson/base16-shell' $XDG_DATA_HOME
+  git clone --quiet --depth=1 https://github.com/chriskempson/base16-shell $XDG_DATA_HOME/base16-shell
 fi
 
 #- Vim {{{2
@@ -290,12 +281,7 @@ if should_install 'termite'; then
 
   backup $XDG_CONFIG_HOME/termite
   make_dir $XDG_CONFIG_HOME
-  make_dir $XDG_DATA_HOME/fonts
   ln -s $self_dir/termite $XDG_CONFIG_HOME/termite
-
-  echo 'Installing Moncaco.ttf'
-  rm_dir $XDG_DATA_HOME/fonts/monaco.ttf
-  git_clone 'todylu/monaco.ttf' $XDG_DATA_HOME/fonts
 fi
 #= endsection }}}1
 
