@@ -40,7 +40,7 @@ branch_color=16
 action_color=3
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git*' formats '(%F{$branch_color}%b%f) '
-zstyle ':vcs_info:git*' actionformats '(%F{$action_color}%a%f|%F{$branch_color}%b%f) '
+zstyle ':vcs_info:git*' actionformats '(%F{$branch_color}%b%f|%F{$action_color}%a%f) '
 
 #- Vi mode {{{2
 #--------------------------------------------------
