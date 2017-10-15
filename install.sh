@@ -275,9 +275,17 @@ if should_install 'i3wm'; then
     fi
   fi
 
+  $self_dir/lib/i3/reload-config.sh $self_dir
+fi
 
-  $SELF_DIR/bin/load-i3-config $SELF_DIR
-  unset bl_device
+#- feh {{{2
+#------------------------------------------------
+if should_install 'feh'; then
+  echo '- feh'
+
+  backup $XDG_CONFIG_HOME/feh
+  make_dir $XDG_CONFIG_HOME
+  ln -s $self_dir/feh $XDG_CONFIG_HOME/feh
 fi
 
 #- Termite {{{2
@@ -289,7 +297,6 @@ if should_install 'termite'; then
   dot_link 'termite' $XDG_CONFIG_HOME
   git_clone 'todylu/monaco.ttf' $XDG_DATA_HOME/fonts/MonacoTTF
 fi
-
 #= endsection }}}1
 
 #= Wrap up {{{1
