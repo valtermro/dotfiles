@@ -43,53 +43,37 @@ set $workspace10 10:music
 
 #= Basic settings {{{1
 #==================================================
-# default font
+set $mod Mod4
 font pango:monospace 10
-
-# make focus change only on click
 focus_follows_mouse no
 
-# use windows key as modifier
-set $mod Mod4
-
-# set keyboard layout and map capslock to control
+exec $X_DOTFILES/lib/i3/detect-headphones.sh
 exec_always "setxkbmap -layout br -option ctrl:nocaps"
 
-# start a terminal
+# if feh is installed and a file named `wallpaper` exists inside i3's configuration
+# directory, then use that file as the wallpaper
+exec_always feh --no-fehbg --bg-scale $XDG_CONFIG_HOME/i3/wallpaper
+
 bindsym $mod+Return exec $terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu
-# bindsym $mod+p exec dmenu_run -b -l 5 -p " " -nf "$color_unfocused_fg" -nb "$color_unfocused_bg" -sf "$color_focused_fg" -sb "$color_focused_bg"
 bindsym $mod+p exec i3-dmenu-desktop
 
-# restart i3 on the fly
+# reload i3 config (restarts i3 as a side effect)
 bindsym $mod+Shift+r exec --no-startup-id $X_DOTFILES/bin/load-i3-config
 
-# exit i3 (logs you out of your X session)
+# log out of X session
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -b 'Yes' 'i3-msg exit'"
 
-# Toggle i3bar on and off
+# toggle i3bar
 bindsym $mod+Shift+m bar mode toggle
-
-# if feh is installed and a file named `wallpaper` exists inside i3's configuration
-# directory, then use that file as the wallpaper
-exec_always feh --no-fehbg --bg-scale $XDG_CONFIG_HOME/i3/wallpaper
 #= endsection }}}1
 
-#- Window colors {{{2
-#--------------------------------------------------
-# color class           border                  background          text                indicator               child border
-client.focused          $color_focused_border   $color_focused_bg   $color_focused_fg   $color_indicator        $color_focused_border
-client.unfocused        $color_unfocused_border $color_unfocused_bg $color_unfocused_fg $color_unfocused_border $color_unfocused_border
-client.focused_inactive $color_unfocused_border $color_unfocused_bg $color_unfocused_fg $color_unfocused_border $color_unfocused_border
-client.urgent           $color_urgent_border    $color_urgent_bg    $color_urgent_fg    $color_urgent_border    $color_urgent_border
-client.background       $color_focused_bg
-
-#- Status bar {{{2
-#--------------------------------------------------
+#= Status bar {{{1
+#==================================================
 bar {
   position top
   status_command i3status -c $X_DOTFILES/i3/i3status.conf
@@ -198,7 +182,16 @@ exec $X_DOTFILES/lib/i3/init_display_layout.sh $workspace1
 
 #= Windows {{{1
 #==================================================
-#= Layout {{{2
+#- Colors {{{2
+#--------------------------------------------------
+# color class           border                  background          text                indicator               child border
+client.focused          $color_focused_border   $color_focused_bg   $color_focused_fg   $color_indicator        $color_focused_border
+client.unfocused        $color_unfocused_border $color_unfocused_bg $color_unfocused_fg $color_unfocused_border $color_unfocused_border
+client.focused_inactive $color_unfocused_border $color_unfocused_bg $color_unfocused_fg $color_unfocused_border $color_unfocused_border
+client.urgent           $color_urgent_border    $color_urgent_bg    $color_urgent_fg    $color_urgent_border    $color_urgent_border
+client.background       $color_focused_bg
+
+#- Layout {{{2
 #--------------------------------------------------
 bindsym $mod+semicolon split toggle
 
