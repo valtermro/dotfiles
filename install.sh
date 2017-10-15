@@ -164,7 +164,7 @@ ask_install 'git'
 ask_install 'zsh' '' 'zsh'
 ask_install 'vim' 'zsh'
 ask_install 'tmux' 'zsh'
-ask_install 'i3wm' 'zsh' 'termite' 'dmenu' 'i3status' 'i3-dmenu-desktop'
+ask_install 'i3wm' 'zsh' 'dmenu' 'i3status' 'i3-dmenu-desktop'
 ask_install 'feh'
 ask_install 'termite'
 #= endsection }}}1
@@ -313,6 +313,8 @@ if should_install 'tmux' || should_install 'vim'; then
 fi
 
 if should_install 'i3wm'; then
+  notes="${notes} - Make sure you have a terminal emulator installed, look at ${self_dir}/lib/i3/launch-terminal.sh for valid ones (i3wm)\n"
+
   if ! is_installed 'twmnd'; then
     notes="${notes} - 'twmn' is required for desktop notifications (i3wm)\n"
   else

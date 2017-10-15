@@ -10,7 +10,6 @@
 #- Applications {{{2
 #--------------------------------------------------
 set $browser chromium
-set $terminal termite
 
 #- Colors {{{2
 #--------------------------------------------------
@@ -55,7 +54,7 @@ exec_always "setxkbmap -layout br -option ctrl:nocaps"
 # directory, then use that file as the wallpaper
 exec_always feh --no-fehbg --bg-scale $XDG_CONFIG_HOME/i3/wallpaper
 
-bindsym $mod+Return exec $terminal
+bindsym $mod+Return exec $X_DOTFILES/lib/i3/launch-terminal.sh
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -157,7 +156,7 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 # `$X_DOTFILES/lib/i3/reload-config.sh` will check for the presence of some applications on the
 # system and update this section on the fly so they get loaded if installed.
 
-exec --no-startup-id $terminal
+exec --no-startup-id $X_DOTFILES/lib/i3/launch-terminal.sh
 exec --no-startup-id $browser
 
 # The 'N' might be removed (by `$X_DOTFILES/lib/i3/reload-config.sh`) if twmn is installed, in which
