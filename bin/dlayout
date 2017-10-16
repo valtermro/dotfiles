@@ -7,20 +7,20 @@ if [[ ! $layout ]]; then
   exit 1
 fi
 
-all_displays=$(xrandr | grep '\<connected\>'| cut -d' ' -f1)
+all_displays=$(xrandr | grep '\<connected\>' | cut -d' ' -f1)
 internal_display=$(echo "$all_displays" | grep -v 'HDMI')
 external_display=$(echo "$all_displays" | grep 'HDMI')
 
 if [[ $layout == 'ionly' ]]; then
-  xrandr --output $internal_display --primary --mode 1366x768 \
+  xrandr --output $internal_display --primary --preferred \
          --output $external_display --off
 elif [[ $layout == 'eonly' ]]; then
   xrandr --output $internal_display --off \
-         --output $external_display --primary --mode 1920x1080 --pos 1366x0
+         --output $external_display --primary --preferred
 elif [[ $layout == 'eright' ]]; then
-  xrandr --output $internal_display --mode 1366x768 --pos 0x312 \
-         --output $external_display --primary --mode 1920x1080 --pos 1366x0
+  xrandr --output $internal_display --preferred \
+         --output $external_display --primary --preferred --right-of $internal_display
 elif [[ $layout == 'eleft' ]]; then
-  xrandr --output $internal_display --mode 1366x768 --pos 1920x312 \
-         --output $external_display --primary --mode 1920x1080 --pos 0x0
+  xrandr --output $internal_display --preferred \
+         --output $external_display --primary --preferred --left-of $internal_display
 fi
