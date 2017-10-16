@@ -1,4 +1,5 @@
 #!/bin/bash
+
 bl_device=$(ls /sys/class/backlight)
 bl_device="/sys/class/backlight/${bl_device[0]}/brightness"
 if [[ $1 == up ]]; then

@@ -260,14 +260,14 @@ floating_modifier $mod
 # Volume {{{2
 #--------------------------------------------------
 # If the keyboard has dedicated keys for volume control
-bindsym XF86AudioLowerVolume exec --no-startup-id pamixer --decrease 5
-bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer --increase 5
-bindsym XF86AudioMute exec --no-startup-id pamixer --toggle-mute
+bindsym XF86AudioLowerVolume exec --no-startup-id $X_DOTFILES/lib/i3/volume-control.sh down
+bindsym XF86AudioRaiseVolume exec --no-startup-id $X_DOTFILES/lib/i3/volume-control.sh up
+bindsym XF86AudioMute exec --no-startup-id $X_DOTFILES/lib/i3/volume-control.sh toggle-mute
 
 # If the keyboard hasn't dedicated keys
-bindsym $mod+F9 exec --no-startup-id pamixer --decrease 5
-bindsym $mod+F10 exec --no-startup-id pamixer --toggle-mute
-bindsym $mod+F11 exec --no-startup-id pamixer --increase 5
+bindsym $mod+F9  exec --no-startup-id $X_DOTFILES/lib/i3/volume-control.sh down
+bindsym $mod+F11  exec --no-startup-id $X_DOTFILES/lib/i3/volume-control.sh up
+bindsym $mod+F10 exec --no-startup-id $X_DOTFILES/lib/i3/volume-control.sh toggle-mute
 
 # Media player {{{2
 #--------------------------------------------------
