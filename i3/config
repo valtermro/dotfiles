@@ -4,6 +4,21 @@
 #
 # * $X_DOTFILES
 #==============================================================================
+# A few notes on what `$X_DOTFILES/lib/i3/reload-config.sh` does.
+#
+# - If `compton` is installed, it gets loaded on startup and the configuration for
+#   compton include in this repo is linked to '$XDG_CONFIG_HOME'
+#
+# - If `udiskie` is installed, it gets loaded on startup (notifications disabled)
+#
+# - If `twmn` is installed, it gets loaded on startup and the configuration included
+#   in this repo is linked to '$XDG_CONFIG_HOME'
+#
+# - If both `udiskie` and `twmn` are installed then `udiskie` is started with
+#   notificatios enabled
+#
+# - If `feh` is installed and a file named `wallpaper` exists inside i3's configuration
+#   directory, `feh` will be used to use that file as the desktop wallpaper
 
 #= Variables {{{1
 #==================================================
@@ -50,10 +65,6 @@ focus_follows_mouse no
 exec $X_DOTFILES/lib/i3/detect-headphones.sh
 exec_always "setxkbmap -layout br -option ctrl:nocaps"
 
-# if feh is installed and a file named `wallpaper` exists inside i3's configuration
-# directory, then use that file as the wallpaper
-exec_always feh --no-fehbg --bg-scale $XDG_CONFIG_HOME/i3/wallpaper
-
 bindsym $mod+Return exec $X_DOTFILES/lib/i3/launch-terminal.sh
 
 # kill focused window
@@ -63,7 +74,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+p exec i3-dmenu-desktop
 
 # reload i3 config (restarts i3 as a side effect)
-bindsym $mod+Shift+r exec --no-startup-id $X_DOTFILES/lib/i3/reload-config.sh
+bindsym $mod+Shift+r exec --no-startup-id $X_DOTFILES/lib/i3/reload-config.sh $X_DOTFILES
 
 # log out of X session
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -b 'Yes' 'i3-msg exit'"
@@ -153,15 +164,12 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 
 #= Startup applications {{{1
 #==================================================
-# `$X_DOTFILES/lib/i3/reload-config.sh` will check for the presence of some applications on the
-# system and update this section on the fly so they get loaded if installed.
+# `$X_DOTFILES/lib/i3/reload-config.sh` will check for the presence of some
+# applications on the system and update this section on the fly so they get
+# loaded if installed.
 
 exec --no-startup-id $X_DOTFILES/lib/i3/launch-terminal.sh
 exec --no-startup-id $browser
-
-# The 'N' might be removed (by `$X_DOTFILES/lib/i3/reload-config.sh`) if twmn is installed, in which
-# case twmnd will be set up to be loaded before udiskie.
-exec --no-startup-id udiskie -asFN2
 #= endsection }}}1
 
 #= Display {{{1

@@ -1,10 +1,7 @@
 #!/bin/bash
 
-# When running `install.sh` $X_DOTFILES will not be set but its value is passed
-# as the first argument for this script. After the `install.sh` has finished its
-# job, and the new shell configuration has been loaded, $X_DOTFILES should be defined
-# so its value is used.
-dotfiles_dir=${1:-$X_DOTFILES}
+dotfiles_dir=$1
+source $dotfiles_dir/zshenv 2>/dev/null
 
 template_file=$dotfiles_dir/i3/config
 config_file=~/.config/i3/config
@@ -12,7 +9,7 @@ config_contents=$(cat $template_file)
 
 # On the fly configurations {{{1
 #==================================================
-# Test if optional packages are installed and, if so, use them.
+# Test if optional packages are installed and, if so,  them.
 
 function config_link {
   local config_for=$1
@@ -28,25 +25,36 @@ function config_link {
   fi
 }
 
-if [[ $(type -p twmnd) ]]; then
+function add_startup_app {
+  local cmd=$1
   config_contents=$(
-  echo "$config_contents" |\
-    # load twmnd before udiskie
-    sed -E 's/^((exec.+)udiskie.+$)/\2twmnd\n\1/' |\
-    # enable notifications
-    sed -E '/^exec.+udiskie.+$/ s/N//'
-  )
+    echo "$config_contents" |\
+    sed -E "0,/^exec --no-startup-id.+$/{s#^((exec --no-startup-id).+$)#\2 ${cmd}\n\1#}")
+}
 
+if [[ $(type -p udiskie) ]]; then
+  if [[ $(type -p twmnd) ]]; then
+    add_startup_app 'udiskie -asF2'
+  else
+    add_startup_app 'udiskie -asFN2'
+  fi
+fi
+
+if [[ $(type -p twmnd) ]]; then
+  add_startup_app 'twmnd'
   config_link 'twmn'
 fi
 
 if [[ $(type -p compton) ]]; then
-  config_contents=$(
-  echo "$config_contents" |\
-    sed -E '0,/^exec --no-startup-id/s#^((exec .+ ).+$)#\2compton -b --config $XDG_CONFIG_HOME/compton/compton.conf\n\1#'
-  )
-
+  add_startup_app 'compton -b --config $XDG_CONFIG_HOME/compton/compton.conf'
   config_link 'compton'
+fi
+
+if [[ $(type -p feh) && -f $XDG_CONFIG_HOME/i3/wallpaper ]]; then
+  cmd='feh --no-fehbg --bg-scale $XDG_CONFIG_HOME/i3/wallpaper'
+  config_contents=$(
+    echo "$config_contents" |\
+    sed -E "0,/^exec_always.+$/{s#^((exec_always).+$)#\1\n\2 ${cmd}\n#}")
 fi
 #= endsection }}}1
 
@@ -55,7 +63,7 @@ fi
 # Variables defined in the file itself {{{2
 #--------------------------------------------------
 var_defs=$(
-echo "$config_contents" |\
+  echo "$config_contents" |\
   # get all variable definitions except the one for '$mod'
   grep -E 'set \$[^mod]+' |\
 
@@ -67,26 +75,46 @@ echo "$config_contents" |\
 
   # make it easier to loop through declarations
   # NOTE: '=' in a declaration will break the parser
-  sed -E 's/\s+/=/'
-)
+  sed -E 's/\s+/=/')
 # remove the declarations
 config_contents=$(echo "$config_contents" | sed -E 's/set \$[^mod].+$//')
 
 # do the replacement
 for def in $var_defs; do
   config_contents=$(
-  echo "$config_contents" |\
-    sed "s/$(echo $def | cut -d'=' -f1)\b/$(echo $def | cut -d'=' -f2)/g"
-  )
+    echo "$config_contents" |\
+    sed "s/$(echo $def | cut -d'=' -f1)\b/$(echo $def | cut -d'=' -f2)/g")
 done
 
-# Variables from the environment {{{2
+# Environment variables {{{2
 #--------------------------------------------------
-config_contents=$(
-echo "$config_contents" |\
-  # $X_DOTFILES is an environment variable
-  sed "s/\$X_DOTFILES/$(echo $dotfiles_dir | sed 's#/#\\/#g')/g"
-)
+function inline_env_var {
+  local name=$1
+  # escape '/' chars in a value that is a path
+  local value=${2//\//\\/}
+
+  config_contents=$(
+    echo "$config_contents" |\
+    sed "s/\$${name}/${value}/g")
+}
+
+inline_env_var 'X_DOTFILES' $dotfiles_dir
+
+# Replace all exported variables in `$dotfiles_dir/zshenv`.
+# NOTE: Not all of these are actually used in the configuration file but that I
+#       want to be future poof on this one.
+var_defs=$(
+  cat $dotfiles_dir/zshenv |\
+  # get all exported variables
+  grep '^export [A-Z_]\+=.\+$' |\
+  # remove the line that exports `X_DOTFILES`
+  grep -v 'X_DOTFILES' |\
+  # get only the variable name
+  sed 's/export //' | sed 's/=.\+$//')
+
+for var in $var_defs; do
+  inline_env_var $var ${!var}
+done
 #= endsection }}}1
 
 # Clean up {{{1
@@ -95,13 +123,10 @@ config_contents=$(
 echo "$config_contents" |\
   # remove comments
   sed -E '/^\s*#/d' |\
-
   # remove empty lines
   sed -E '/^\s*$/d' |\
-
   # remove repeated spaces
-  sed -E 's/([^ ])  +/\1 /g'
-)
+  sed -E 's/([^ ])  +/\1 /g')
 #= endsection }}}1
 
 # Write and load the parsed configuration {{{1
@@ -115,7 +140,8 @@ cat <<EOF > $config_file
 #==============================================================================
 #
 # New settings must be set in "$template_file" and loaded with
-# \`$X_DOTFILES/bin/load-i3-config\` or using the keyboard shortcut \`\$mod+Shift+r\`.
+# \`$dotfiles_dir/lib/i3/reload-config.sh\` or using the keyboard shortcut
+# "\$mod+Shift+r".
 #
 $config_contents
 EOF
