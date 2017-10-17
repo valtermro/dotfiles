@@ -24,6 +24,8 @@ if [[ -d $X_LIB_HOME/zsh ]]; then
     source $fname
   done
 fi
+
+unset fname
 #= endsection }}}1
 
 #= Prompt {{{1
@@ -33,47 +35,49 @@ fi
 setopt PROMPT_SUBST
 setopt TRANSIENT_RPROMPT
 
-#- Git stuff {{{2
+#- Top prompt: current working directory {{{2
+#--------------------------------------------------
+function precmd {
+  vcs_info
+  job_info
+
+  # show the current working directory above the prompt
+  print -P '%F{4}%~%f'
+}
+
+#- Left prompt: vi-mode + git branch/action {{{2
 #--------------------------------------------------
 autoload -Uz vcs_info
-branch_color=16
-action_color=3
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git*' formats '(%F{$branch_color}%b%f) '
-zstyle ':vcs_info:git*' actionformats '(%F{$branch_color}%b%f|%F{$action_color}%a%f) '
+zstyle ':vcs_info:git*' formats '(%F{16}%b%f) '
+zstyle ':vcs_info:git*' actionformats '(%F{16}%b%f|%F{9}%a%f) '
 
-#- Vi mode {{{2
-#--------------------------------------------------
 KEYTIMEOUT=1
 
-vi_mode_color=2
 function zle-line-init zle-keymap-select {
   if [[ $KEYMAP == 'vicmd' ]]; then
-    vi_mode_color=8
+    PROMPT='$vcs_info_msg_0_%F{8}$%f '
   elif [[ $KEYMAP == 'main' ]]; then
-    vi_mode_color=6
+    PROMPT='$vcs_info_msg_0_%F{7}$%f '
   else
-    vi_mode_color=15
+    PROMPT='$vcs_info_msg_0_%F{7}$%f '
   fi
 
   zle reset-prompt
 }
-
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-#- Jobs {{{2
+#- Right prompt: suspended/running jobs ( {{{2
 #--------------------------------------------------
 function job_info {
   local job_list=$(jobs)
 
-  if [[ -z $job_list ]]; then
-    running_jobs=0
-    suspended_jobs=0
-  else
-    running_jobs=$(echo $job_list | grep 'running' | wc -l)
-    suspended_jobs=$(echo $job_list | grep 'suspended' | wc -l)
-  fi
+  RPROMPT='['
+  RPROMPT+="%F{16}S:$(echo $job_list | grep 'suspended' | wc -l)"
+  RPROMPT+=' '
+  RPROMPT+="%F{4}R:$(echo $job_list | grep 'running' | wc -l)%f"
+  RPROMPT+=']'
 }
 
 # The job info becomes outdated when a running job exits. Forcing the prompt to
@@ -85,21 +89,6 @@ function update_prompt_on_clear {
 }
 zle -N update_prompt_on_clear
 bindkey '^l' update_prompt_on_clear
-
-#- At least, the prompt {{{2
-#--------------------------------------------------
-function precmd {
-  vcs_info
-  job_info
-
-  # show the current working directory above the prompt
-  print -P '%F{4}%~%f'
-}
-
-PROMPT='$vcs_info_msg_0_%F{$vi_mode_color}$%f '
-RPROMPT='[%F{16}S:$suspended_jobs %F{4}R:$running_jobs%f]'
-
-unset vi_mode_color suspended_jobs running_jobs
 #= endsection }}}1
 
 #= Aliases {{{1
