@@ -194,12 +194,12 @@ if should_install 'zsh'; then
   ln -s $self_dir/zshenv ~/.zshenv
   ln -s $self_dir/zprofile ~/.zprofile
 
-  # rm_file $HOME/.base16_theme
-  # rm_file $HOME/.vimrc_background
-  # rm_dir $XDG_DATA_HOME/base16-shell
-  # make_dir $XDG_DATA_HOME
-  # echo 'Installing base16-shell'
-  # git clone --quiet --depth=1 https://github.com/chriskempson/base16-shell $XDG_DATA_HOME/base16-shell
+  rm_file $HOME/.base16_theme
+  rm_file $HOME/.vimrc_background
+  rm_dir $XDG_DATA_HOME/base16-shell
+  make_dir $XDG_DATA_HOME
+  echo 'Installing base16-shell'
+  git clone --quiet --depth=1 https://github.com/chriskempson/base16-shell $XDG_DATA_HOME/base16-shell
 fi
 
 #- Vim {{{2
@@ -255,16 +255,6 @@ if should_install 'i3wm'; then
   fi
 
   $self_dir/lib/i3/reload-config.sh $self_dir
-fi
-
-#- feh {{{2
-#------------------------------------------------
-if should_install 'feh'; then
-  echo '- feh'
-
-  backup $XDG_CONFIG_HOME/feh
-  make_dir $XDG_CONFIG_HOME
-  ln -s $self_dir/feh $XDG_CONFIG_HOME/feh
 fi
 
 #- feh {{{2
