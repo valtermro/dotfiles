@@ -35,32 +35,25 @@ unset fname
 setopt PROMPT_SUBST
 setopt TRANSIENT_RPROMPT
 
-#- Top prompt: current working directory {{{2
-#--------------------------------------------------
-function precmd {
-  vcs_info
-  job_info
-
-  # show the current working directory above the prompt
-  print -P '%F{4}%~%f'
-}
-
-#- Left prompt: vi-mode + git branch/action {{{2
+#- Git {{{2
 #--------------------------------------------------
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git*' formats '(%F{16}%b%f) '
 zstyle ':vcs_info:git*' actionformats '(%F{16}%b%f|%F{9}%a%f) '
 
+#- Vi mode {{{2
+#--------------------------------------------------
 KEYTIMEOUT=1
 
+__prompt_vi_mode_color=7
 function zle-line-init zle-keymap-select {
   if [[ $KEYMAP == 'vicmd' ]]; then
-    PROMPT='$vcs_info_msg_0_%F{8}$%f '
+    __prompt_vi_mode_color=8
   elif [[ $KEYMAP == 'main' ]]; then
-    PROMPT='$vcs_info_msg_0_%F{7}$%f '
+    __prompt_vi_mode_color=7
   else
-    PROMPT='$vcs_info_msg_0_%F{7}$%f '
+    __prompt_vi_mode_color=7
   fi
 
   zle reset-prompt
@@ -68,27 +61,37 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-#- Right prompt: suspended/running jobs ( {{{2
+#- Jobs ( {{{2
 #--------------------------------------------------
-function job_info {
+function __prompt_job_info {
   local job_list=$(jobs)
 
-  RPROMPT='['
-  RPROMPT+="%F{16}S:$(echo $job_list | grep 'suspended' | wc -l)"
-  RPROMPT+=' '
-  RPROMPT+="%F{4}R:$(echo $job_list | grep 'running' | wc -l)%f"
-  RPROMPT+=']'
+  __prompt_running_jobs=$(echo $job_list | grep 'running' | wc -l)
+  __prompt_stopped_jobs=$(echo $job_list | grep 'suspended' | wc -l)
 }
 
 # The job info becomes outdated when a running job exits. Forcing the prompt to
 # update everytime the screen is cleaned softens this problem.
-function update_prompt_on_clear {
-  job_info
+function __prompt_update_on_clear {
+  __prompt_job_info
   clear
   zle reset-prompt
 }
-zle -N update_prompt_on_clear
-bindkey '^l' update_prompt_on_clear
+zle -N __prompt_update_on_clear
+bindkey '^l' __prompt_update_on_clear
+
+#- At least, the prompt {{{2
+#--------------------------------------------------
+function precmd {
+  vcs_info
+  __prompt_job_info
+
+  # show the current working directory above the prompt
+  print -P '%F{4}%~%f'
+}
+
+PROMPT='$vcs_info_msg_0_%F{$__prompt_vi_mode_color}$%f '
+RPROMPT='[%F{16}S:$__prompt_stopped_jobs %F{4}R:$__prompt_running_jobs%f]'
 #= endsection }}}1
 
 #= Aliases {{{1
