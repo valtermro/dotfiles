@@ -183,7 +183,7 @@ function __my_tmux_session_attach {
   local session=$1
 
   if [[ $TMUX ]]; then
-    read 'a?Switch current client to $session? [y/N] '
+    read "a?Switch current client to '$session?' [y/N] "
 
     if [[ $a == 'y' || $a == 'Y' ]]; then
       tmux switch-client -t $session
