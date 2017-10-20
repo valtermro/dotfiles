@@ -16,6 +16,7 @@ augroup override_colors
   autocmd ColorScheme *
     \ highlight! Folded ctermbg=none |
     \ highlight! Error ctermfg=9 ctermbg=none |
+    \ highlight! StatusLineNC ctermbg=19 |
     \ highlight! MatchParen ctermbg=none cterm=underline |
     \ highlight! StatusLineWarning ctermfg=9 cterm=reverse
 augroup END
@@ -121,12 +122,6 @@ augroup focus_colorcolumn
   " based on https://www.youtube.com/watch?v=1JY7oIlH9g0
   autocmd WinLeave,FocusLost, * if !&diff |let &colorcolumn = join(range(1, 220), ',')| endif
   autocmd WinEnter,FocusGained * let &colorcolumn = 80
-augroup END
-
-augroup focus_colorscheme
-  autocmd!
-  " makes it easier to see where a window ends and another begins
-  autocmd ColorScheme * highlight! StatusLineNC ctermbg=19
 augroup END
 
 "- Indentantion {{{2
