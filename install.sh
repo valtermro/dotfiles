@@ -157,7 +157,6 @@ ask_install 'vim' 'zsh'
 ask_install 'tmux' 'zsh'
 ask_install 'i3wm' 'zsh' 'dmenu' 'i3status' 'i3-dmenu-desktop'
 ask_install 'feh'
-ask_install 'termite'
 #= endsection }}}1
 
 #= Install {{{1
@@ -266,16 +265,6 @@ if should_install 'feh'; then
   make_dir $XDG_CONFIG_HOME
   ln -s $self_dir/feh $XDG_CONFIG_HOME/feh
 fi
-
-#- Termite {{{2
-#------------------------------------------------
-if should_install 'termite'; then
-  echo '- termite'
-
-  backup $XDG_CONFIG_HOME/termite
-  make_dir $XDG_CONFIG_HOME
-  ln -s $self_dir/termite $XDG_CONFIG_HOME/termite
-fi
 #= endsection }}}1
 
 #= Wrap up {{{1
@@ -292,7 +281,7 @@ if should_install 'tmux' || should_install 'vim'; then
 fi
 
 if should_install 'i3wm'; then
-  notes="${notes} - Make sure you have a terminal emulator installed, look at ${self_dir}/lib/i3/launch-terminal.sh for valid ones (i3wm)\n"
+  notes="${notes} - Make sure you have a terminal emulator installed, any one supported by `i3-sensible-terminal` should be fine (i3wm)\n"
 
   if ! is_installed 'twmnd'; then
     notes="${notes} - 'twmn' is required for desktop notifications (i3wm)\n"
@@ -313,15 +302,6 @@ if should_install 'i3wm'; then
   if ! is_installed 'udiskie'; then
     notes="${notes} - You might want to install 'udiskie' for usb automonting (i3wm)\n"
   fi
-fi
-
-if should_install 'termite'; then
-  font_in_use=$(\
-    cat $XDG_CONFIG_HOME/termite/config |\
-    grep 'font\b' |\
-    sed 's/font\s\?=\s\?//' |\
-    sed 's/\s[0-9]\+$//')
-  notes="${notes} - Make sure the font '${font_in_use}' is installed (termite)\n"
 fi
 
 if [[ $logout_needed == true ]]; then

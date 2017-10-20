@@ -96,7 +96,7 @@ set hidden
 set showcmd
 set fileformats=unix,dos,mac
 set mouse=nvc
-" Fix mouse inside tmux (issue with termite)
+" Fix mouse inside tmux
 if has('mouse_sgr')
   set ttymouse=sgr
 else
