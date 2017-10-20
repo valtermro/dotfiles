@@ -41,18 +41,6 @@ let g:NERDTreeIgnore = ['.git$', '.vagrant', 'node_modules', 'vendor']
 
 nnoremap <silent> <leader>e :NERDTreeToggle<CR>
 
-"- Raimondi/delimitMate {{{2
-"--------------------------------------------------
-let g:delimitMate_expand_cr = 1
-let g:delimitMate_expand_space = 1
-
-imap <C-g>; <C-g>g;<Esc>
-
-augroup fix_delimitMate_in_php_files
-  autocmd!
-  autocmd FileType php let b:delimitMate_matchpairs = '(:),[:],{:}'
-augroup END
-
 "- SirVer/ultisnips {{{2
 "--------------------------------------------------
 let g:UltiSnipsExpandTrigger='<Tab>'
