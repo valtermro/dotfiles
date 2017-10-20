@@ -113,6 +113,22 @@ set nowritebackup
 set nowrap
 set colorcolumn=80
 
+"- Focus {{{2
+"--------------------------------------------------
+augroup focus_colorcolumn
+  autocmd!
+
+  " based on https://www.youtube.com/watch?v=1JY7oIlH9g0
+  autocmd WinLeave,FocusLost, * if !&diff |let &colorcolumn = join(range(1, 220), ',')| endif
+  autocmd WinEnter,FocusGained * let &colorcolumn = 80
+augroup END
+
+augroup focus_colorscheme
+  autocmd!
+  " makes it easier to see where a window ends and another begins
+  autocmd ColorScheme * highlight! StatusLineNC ctermbg=19
+augroup END
+
 "- Indentantion {{{2
 "--------------------------------------------------
 set expandtab
