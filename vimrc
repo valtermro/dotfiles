@@ -16,6 +16,7 @@ augroup override_colors
   autocmd ColorScheme *
     \ highlight! Folded ctermbg=none |
     \ highlight! Error ctermfg=9 ctermbg=none |
+    \ highlight! MatchParen ctermbg=none cterm=underline |
     \ highlight! StatusLineWarning ctermfg=9 cterm=reverse
 augroup END
 
