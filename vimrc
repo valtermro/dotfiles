@@ -149,6 +149,9 @@ nnoremap ` '
 nnoremap ' `
 inoremap <C-c> <Esc>
 
+" I'm so stupid that I keep hitting `u` when I actually wanted `y` in visual mode
+xnoremap u <Nop>
+
 "- Oh! How I hate the arrow keys! {{{2
 "--------------------------------------------------
 cnoremap <C-k> <Up>
@@ -156,8 +159,7 @@ cnoremap <C-j> <Down>
 
 "- Do it again? {{{2
 "--------------------------------------------------
-nnoremap Q n.
-nnoremap <C-q> ;.
+nnoremap Q ;.
 
 "- "Navigating" is necessary {{{2
 "--------------------------------------------------
@@ -174,12 +176,19 @@ xnoremap H _
 onoremap L $
 onoremap H _
 
+" Make it easier to reach for windows and tabs commands
+nnoremap <space> <C-w>
+nnoremap <space>- <C-w>s
+nnoremap <space>i <C-w>v
+nnoremap [w gT
+nnoremap ]w gt
+
 "- Yank/Delete/Put {{{2
 "--------------------------------------------------
 " paste from the yank register
-nnoremap <Space>p "0p
-nnoremap <Space>P "0P
-xnoremap <Space>p "0p
+nnoremap <space>p "0p
+nnoremap <space>P "0P
+xnoremap <space>p "0p
 
 " copy/paste from the system's clipboard
 nnoremap <leader>y "+y
