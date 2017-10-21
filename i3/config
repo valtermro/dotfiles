@@ -28,19 +28,19 @@ set $browser chromium
 
 #- Colors {{{2
 #--------------------------------------------------
-set $color_indicator        #6666cc
-set $color_focused_fg       #a09f93
+set $color_indicator        #81a2be
+set $color_bar_fg           #999999
+set $color_bar_bg           #1d1f21
+set $color_bar_separator    #999999
+set $color_focused_fg       #8abeb7
 set $color_focused_bg       #515151
 set $color_focused_border   #666666
-set $color_unfocused_fg     #747369
+set $color_unfocused_fg     #999999
 set $color_unfocused_bg     #393939
 set $color_unfocused_border #393939
-set $color_urgent_fg        #2d2d2d
-set $color_urgent_bg        #f2777a
-set $color_urgent_border    #f2777a
-set $color_bar_fg           #999999
-set $color_bar_bg           #2d2d2d
-set $color_bar_separator    #999999
+set $color_urgent_fg        #303030
+set $color_urgent_bg        #cc6666
+set $color_urgent_border    #cc6666
 
 #- Workspaces {{{2
 #--------------------------------------------------

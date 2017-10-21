@@ -2,9 +2,55 @@
 #==================================================
 umask 077
 export EDITOR=vim
-export TERM=xterm-256color
+export TERM=screen-256color
 export PATH=$PATH:$X_DOTFILES/bin
 setxkbmap -layout br -option ctrl:nocaps
+#= endsection }}}1
+
+#= Colors {{{1
+#==================================================
+# LS_COLORS
+#--------------------------------------------------
+eval $(dircolors -b $X_DOTFILES/dircolors)
+
+# Terminal colors
+#--------------------------------------------------
+# Colors (and script) based/taken from the 16-color palette of the colorscheme found at:
+# https://github.com/chriskempson/base16-shell/blob/master/scripts/base16-tomorrow-night.sh
+
+if [[ $TMUX ]]; then
+  # Tell tmux to pass the escape sequences through
+  # (Source: http://permalink.gmane.org/gmane.comp.terminal-emulators.tmux.user/1324)
+  printf_template='\033Ptmux;\033\033]4;%d;rgb:%s\033\033\\\033\\'
+  printf_template_var='\033Ptmux;\033\033]%d;rgb:%s\033\033\\\033\\'
+  printf_template_custom='\033Ptmux;\033\033]%s%s\033\033\\\033\\'
+else
+  printf_template='\033]4;%d;rgb:%s\033\\'
+  printf_template_var='\033]%d;rgb:%s\033\\'
+  printf_template_custom='\033]%s%s\033\\'
+fi
+
+printf $printf_template_var 10 'c5/c8/c6' # foreground
+printf $printf_template_var 11 '1d/1f/21' # background
+printf $printf_template_custom 12 ';7'    # cursor
+printf $printf_template  0 '30/30/30'
+printf $printf_template  1 'cc/33/33'
+printf $printf_template  2 '66/cc/66'
+printf $printf_template  3 'cc/cc/33'
+printf $printf_template  4 '81/a2/be'
+printf $printf_template  5 'b2/94/bb'
+printf $printf_template  6 '8a/be/b7'
+printf $printf_template  7 'dd/dd/dd'
+printf $printf_template  8 '99/99/99'
+printf $printf_template  9 'cc/66/66'
+printf $printf_template 10 'b5/bd/68'
+printf $printf_template 11 'f0/c6/74'
+printf $printf_template 12 '81/a2/be'
+printf $printf_template 13 'b2/94/bb'
+printf $printf_template 14 '8a/be/b7'
+printf $printf_template 15 'cc/cc/cc'
+
+unset printf_template printf_template_var printf_template_custom
 #= endsection }}}1
 
 #= Load user-defined scripts {{{1
@@ -39,8 +85,8 @@ setopt TRANSIENT_RPROMPT
 #--------------------------------------------------
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git*' formats '(%F{16}%b%f) '
-zstyle ':vcs_info:git*' actionformats '(%F{16}%b%f|%F{9}%a%f) '
+zstyle ':vcs_info:git*' formats '(%F{10}%b%f) '
+zstyle ':vcs_info:git*' actionformats '(%F{10}%b%f|%F{9}%a%f) '
 
 #- Vi mode {{{2
 #--------------------------------------------------
@@ -91,7 +137,7 @@ function precmd {
 }
 
 PROMPT='$vcs_info_msg_0_%F{$__prompt_vi_mode_color}$%f '
-RPROMPT='[%F{16}S:$__prompt_stopped_jobs %F{4}R:$__prompt_running_jobs%f]'
+RPROMPT='[%F{10}S:$__prompt_stopped_jobs %F{4}R:$__prompt_running_jobs%f]'
 #= endsection }}}1
 
 #= Aliases {{{1
@@ -212,15 +258,6 @@ function add2path {
     echo 'Already on $PATH'
   fi
 }
-#= endsection }}}1
-
-#= Colors {{{1
-#==================================================
-eval "$(${XDG_DATA_HOME}/base16-shell/profile_helper.sh)"
-if [[ ! -f ~/.base16_theme ]]; then
-  echo "Using base16_tomorrow-night colorscheme"
-  base16_tomorrow-night
-fi
 #= endsection }}}1
 
 #= History {{{1

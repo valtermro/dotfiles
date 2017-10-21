@@ -6,7 +6,6 @@ StanAngeloff/php.vim
 ctrlpvim/ctrlp.vim
 cakebaker/scss-syntax.vim
 chr4/nginx.vim
-chriskempson/base16-vim
 editorconfig/editorconfig-vim
 elzr/vim-json
 hail2u/vim-css3-syntax

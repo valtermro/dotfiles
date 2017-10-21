@@ -4,22 +4,6 @@
 "--------------------------------------------------
 packadd matchit
 
-"- chriskempson/base16-vim {{{2
-"--------------------------------------------------
-if filereadable(expand('~/.vimrc_background'))
-  let base16colorspace = 256
-  source ~/.vimrc_background
-endif
-
-augroup override_colors
-  autocmd!
-  autocmd ColorScheme *
-    \ highlight! Folded ctermbg=none |
-    \ highlight! Error ctermfg=9 ctermbg=none |
-    \ highlight! MatchParen ctermbg=none cterm=underline |
-    \ highlight! StatusLineWarning ctermfg=9 cterm=reverse
-augroup END
-
 "- tomtom/tcomment_vim {{{2
 "--------------------------------------------------
 nmap gc{ mt{jgc't't
@@ -74,6 +58,7 @@ let g:vim_json_syntax_conceal = 0
 "--------------------------------------------------
 filetype plugin indent on
 syntax on
+colorscheme vmrclr
 
 set pastetoggle=<F10>
 set scrolloff=1
