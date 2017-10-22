@@ -146,19 +146,13 @@ alias ls='ls --color=auto'
 alias ll='ls -lhF'
 alias la='ls -ACF'
 alias grep='grep --colour=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
 alias tree='tree -C'
 alias open='xdg-open'
-alias vi='vim'
-
-# match vim's `so` command
-alias so='source'
 #= endsection }}}1
 
 #= Functions {{{1
 #==================================================
-# mkcd() {{{2
+#- mkcd() {{{2
 #--------------------------------------------------
 # Creates a new directory and `cd` into it.
 function mkcd {
@@ -170,7 +164,7 @@ function mkcd {
   cd $dir
 }
 
-# tm() {{{2
+#- tm() {{{2
 #--------------------------------------------------
 # A helper for creating new, and attaching to, tmux sessions.
 #
