@@ -11,156 +11,200 @@ snippet html "Basic HTML markup"
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 <body>
-	${2:${VISUAL}}$0
+	${0:${VISUAL}}
 </body>
 </html>
 endsnippet
 
 snippet itag "generic inline tag"
-<${1:span}${2: class="${3:$1}"}>${3:${VISUAL}}$4</$1>$0
+<${1:span}${2: class="${3:$1}"}>${0:${VISUAL}}</$1>
 endsnippet
 
-snippet btag "generic block tag"
+snippet tag "generic block tag"
 <${1:div}${2: class="${3:$1}"}>
-	${3:${VISUAL}}$4
-</$1>$0
+	${0:${VISUAL}}
+</$1>
 endsnippet
 #= endsection }}}1
 
 #= Basic tags {{{1
 #==================================================
 snippet meta "basic meta tag"
-<meta name="$1" content="$2">$0
+<meta name="$1" content="$2">
 endsnippet
 
 snippet metaview "viewport metatag"
-<meta name="viewport" content="width=device-width,initial-scale=1">$0
+<meta name="viewport" content="width=device-width,initial-scale=1">
 endsnippet
 
 snippet link "basic link tag"
-<link rel="stylesheet" href="$1">$0
+<link rel="stylesheet" href="$1">
 endsnippet
 
 snippet style "basic style tag"
 <style>
 	$1
-</style>$0
+</style>
 endsnippet
 
 snippet script "basic script tag"
 <script>
 	$1
-</script>$0
+</script>
 endsnippet
 
 snippet scripts "script tag with src attribute"
-<script src="$1"></script>$0
-endsnippet
-
-snippet anc "basic anchor tag"
-<a class="${1:nav-button}" href="${2:#}">${3:${VISUAL}}$4</a>$0
-endsnippet
-
-snippet img "basic image tag"
-<img class="${1:image}" src="$2" alt="$3">$0
+<script src="$1"></script>
 endsnippet
 
 snippet h1 "basic h1 tag"
-<h1 class="${1:title}">${2:${VISUAL}}$3</h1>$0
+<h1 class="${1:title}">${0:${VISUAL}}</h1>
 endsnippet
 
 snippet h2 "basic h2 tag"
-<h2 class="${1:title}">${2:${VISUAL}}$3</h2>$0
+<h2 class="${1:title}">${0:${VISUAL}}</h2>
 endsnippet
 
 snippet h3 "basic h3 tag"
-<h3 class="${1:title}">${2:${VISUAL}}$3</h3>$0
+<h3 class="${1:title}">${0:${VISUAL}}</h3>
 endsnippet
 
 snippet h4 "basic h4 tag"
-<h4 class="${1:title}">${2:${VISUAL}}$3</h4>$0
+<h4 class="${1:title}">${0:${VISUAL}}</h4>
 endsnippet
 
 snippet h5 "basic h5 tag"
-<h5 class="${1:title}">${2:${VISUAL}}$3</h5>$0
+<h5 class="${1:title}">${0:${VISUAL}}</h5>
 endsnippet
 
 snippet h6 "basic h6 tag"
-<h6 class="${1:title}">${2:${VISUAL}}$3</h6>$0
+<h6 class="${1:title}">${0:${VISUAL}}</h6>
 endsnippet
 
 snippet div "basic div element"
 <div class="${1:container}">
-	${2:${VISUAL}}$3
-</div>$0
+	${0:${VISUAL}}
+</div>
 endsnippet
 
 snippet section "basic section element"
 <section class="${1:container}">
-	${2:${VISUAL}}$3
-</section>$0
+	${0:${VISUAL}}
+</section>
 endsnippet
 
 snippet article "basic article element"
 <article class="${1:container}">
-	${2:${VISUAL}}$3
-</article>$0
+	${0:${VISUAL}}
+</article>
 endsnippet
 
 snippet header "basic header element"
 <header class="${1:container}">
-	${2:${VISUAL}}$3
-</header>$0
+	${0:${VISUAL}}
+</header>
 endsnippet
 
 snippet footer "basic footer element"
 <footer class="${1:container}">
-	${2:${VISUAL}}$3
-</footer>$0
+	${0:${VISUAL}}
+</footer>
+endsnippet
+
+snippet p "basic paragraph tag"
+<p class="${1}">${0:${VISUAL}}</p>
+endsnippet
+
+snippet img "basic image tag" w
+<img class="${1:image}" src="$2" alt="$3">
+endsnippet
+
+snippet a "basic anchor tag" w
+<a class="${1:nav-button}" href="${2:#}">${0:${VISUAL}}</a>
+endsnippet
+
+snippet li "basic li tag"
+<li class="${1:list-item}">${0:${VISUAL}}</li>
+endsnippet
+
+snippet strong "basic strong tag" w
+<strong class="${1:strong}">${0:${VISUAL}}</strong>
+endsnippet
+
+snippet small "basic small tag" w
+<small class="${1:small}">${0:${VISUAL}}</small>
+endsnippet
+
+snippet em "basic em tag" w
+<em class="${1:emphasys}">${0:${VISUAL}}</em>
 endsnippet
 
 snippet form "basic form element"
 <form class="${1:form}" method="${2:POST}" action="$3">
-	${4:${VISUAL}}$5
-</form>$0
+	${0:${VISUAL}}
+</form>
+endsnippet
+
+snippet label "basic label element"
+<label for="$1">${0:${VISUAL}}</label>
 endsnippet
 
 snippet input "basic input element"
-<input class="${1:input}" type="${2:text}">$0
+<input class="${1:input}" type="${2:text}">
 endsnippet
 
 snippet button "basic button element"
-<button class="${1:btn}" type="${2:button}">${3:action}</button>
+<button class="${1:btn}" type="${2:button}">${0:${VISUAL}}</button>
+endsnippet
+
+snippet textarea "basic textarea element"
+<textarea ${1:cols="${2:30}" rows="${3:10}"}>$0</textarea>
+endsnippet
+
+snippet select "basic select element"
+<select class="${1:select}">
+	<option value="$2">${0:${VISUAL}}</option>
+</select>
+endsnippet
+
+snippet option "basic option element"
+<option value="$1">${0:${VISUAL}}</option>
 endsnippet
 
 snippet finput "full input element"
-<input class="${1:input}" type="${2:text}" id="${3:name}"${4: name="${5:$3}"}>$0
+<input class="${1:input}" type="${2:text}" id="${3:name}"${4: name="${5:$3}"}>
 endsnippet
 
 snippet fbutton "full button element"
-<button class="${1:btn}" type="${2:button}" id="${3:action}"${4: name="${5:$3}"}>${6:action}</button>$0
+<button class="${1:btn}" type="${2:button}" id="${3:action}"${4: name="${5:$3}"}>${0:action}</button>
 endsnippet
 #= endsection }}}1
 
 #= Nested blocks {{{1
 #==================================================
+snippet ul "ul>li"
+<ul class="${1:list}">
+	<li class="${2:list-item}">${0:${VISUAL}}</li>
+</ul>
+endsnippet
+
 snippet fgi ".form-group>label+input"
 <div class="form-group">
 	<label for="${1:name}">${2:label}:</label>
 	<input class="form-control" type="${3:text}" id="$1" name="$1">
-</div>$0
+</div>
 endsnippet
 
 snippet fgt ".form-group>textarea"
 <div class="form-group">
 	<label for="${1:name}">${2:label}:</label>
 	<textarea class="form-control" id="$1" name="$1"></textarea>$3
-</div>$0
+</div>
 endsnippet
 
 snippet fgs ".form-group>button"
 <div class="form-group">
 	<button class="btn btn-primary" type="submit">${2:Submit}</button>$3
-</div>$0
+</div>
 endsnippet
 #= endsection }}}1

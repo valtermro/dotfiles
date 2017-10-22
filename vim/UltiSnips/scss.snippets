@@ -1,12 +1,12 @@
-priority -50
+priority -40
 extends css
 
 #= Scss selectors {{{1
 #==================================================
 snippet slp "placeholder selector"
 %${1:placeholder} {
-	$2
-}$0
+	$0
+}
 endsnippet
 #= endsection }}}1
 
@@ -14,12 +14,12 @@ endsnippet
 #==================================================
 snippet @fu "@function"
 @function ${1:name}(${2:args}) {
-	$3
-}$0
+	$0
+}
 endsnippet
 
 snippet @in "@include"
-@include ${1:mixin}(${2:args});$0
+@include ${1:mixin}(${2:args});
 endsnippet
 
 snippet @me "@include media"
@@ -29,10 +29,10 @@ snippet @me "@include media"
 endsnippet
 
 snippet @ex "@extend %placehoder"
-@extend %${1:placehoder};$0
+@extend %${1:placehoder};
 endsnippet
 
 snippet @exc "@extend .class"
-@extend .${1:class};$0
+@extend .${1:class};
 endsnippet
 #= endsection }}}1

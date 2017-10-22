@@ -1,3 +1,4 @@
+priority -30
 extends html
 extends scss
 extends javascript
@@ -29,25 +30,25 @@ endsnippet
 snippet template "template"
 <template>
 <div>
-	$1
+	$0
 </div>
-</template>$0
+</template>
 endsnippet
 
 snippet script "script"
 <script>
 export default {
 	data: () => ({
-		$1
+		$0
 	}),
 };
-</script>$0
+</script>
 endsnippet
 
 snippet style "style"
 <style${1: scoped} lang="${2:scss}">
-$3
-</style>$0
+$0
+</style>
 endsnippet
 #= endsection }}}1
 
@@ -55,7 +56,7 @@ endsnippet
 #==================================================
 snippet met "vue instance method"
 ${1:name}($2) {
-	${3:${VISUAL}}
+	${0:${VISUAL}}
 },
 endsnippet
 #= endsection }}}1
