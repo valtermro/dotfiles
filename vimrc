@@ -152,6 +152,29 @@ inoremap <C-c> <Esc>
 " I'm so stupid that I keep hitting `u` when I actually wanted `y` in visual mode
 xnoremap u <Nop>
 
+" Make `{` and `}` jump over folded areas
+" Taken (and changed to match code style) from https://superuser.com/a/1180075
+" TODO: Visual mode??
+function! s:paragraph_jump_over_folded(direction)
+  let l:current_line = line('.')
+  while foldclosed(l:current_line) != -1
+    let l:current_line = search('^$', a:direction ==# 'down' ? 'Wn' : 'Wnb')
+    if l:current_line == 0
+      if a:direction ==# 'down'
+        call cursor(line('$'), strlen(getline(line('$'))))
+      else
+        call cursor(1, 1)
+      endif
+      break
+    endif
+    call cursor(l:current_line, 0)
+  endwhile
+endfunction
+nnoremap <silent>} }:call <SID>paragraph_jump_over_folded('down')<CR>
+nnoremap <silent>{ {:call <SID>paragraph_jump_over_folded('up')<CR>
+onoremap } :<C-u>normal }<cr>
+onoremap { :<C-u>normal {<cr>
+
 "- Oh! How I hate the arrow keys! {{{2
 "--------------------------------------------------
 cnoremap <C-k> <Up>
@@ -212,7 +235,7 @@ xnoremap / /\v
 xnoremap ? ?\v
 
 nnoremap + :set hlsearch<CR>mt*`t
-nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+nnoremap <silent><C-l> :<C-u>nohlsearch<CR><C-l>
 
 "- UI {{{2
 "--------------------------------------------------
