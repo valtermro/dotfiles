@@ -46,10 +46,6 @@ let g:ale_linters.vue = ['eslint', 'stylelint']
 "- ctrlpvim/ctrlp.vim {{{2
 "--------------------------------------------------
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
-"- elzr/vim-json {{{2
-"--------------------------------------------------
-let g:vim_json_syntax_conceal = 0
 "= endsection }}}1
 
 "= Native settings {{{1
