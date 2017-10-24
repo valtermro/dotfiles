@@ -234,8 +234,9 @@ hi NERDTreeLinkFile   ctermfg=14
 hi NERDTreeLinkDir    ctermfg=14
 hi link NERDTreeDirSlash Normal
 
-"- SCSS highlighting {{{2
+"- SASS/SCSS highlighting {{{2
 "--------------------------------------------------
+hi link sassDefinition         Keyword
 hi link scssImport             Include
 hi link scssMixin              Statement
 hi link scssMixinName          Normal
