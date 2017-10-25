@@ -203,12 +203,14 @@ hi link jsClassMethodType      Type
 
 "- PHP highlighting {{{2
 "--------------------------------------------------
-hi phpDocTags   ctermfg=12 cterm=italic
-hi phpFunctions ctermfg=12
-hi link phpMemberSelector Normal
-hi link phpComparison     Normal
-hi link phpParent         Normal
-hi link phpDocParam       Type
+hi phpDocTags         ctermfg=12 cterm=italic
+hi phpFunctions       ctermfg=12
+hi phpSpecialFunction ctermfg=12
+hi phpComparison      ctermfg=15
+hi link phpMemberSelector  Normal
+hi link phpInclude         phpStructure
+hi link phpParent          Normal
+hi link phpDocParam        Type
 
 "- Markdown highlighting {{{2
 "--------------------------------------------------
