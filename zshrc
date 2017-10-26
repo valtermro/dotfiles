@@ -35,9 +35,9 @@ printf $printf_template_var 11 '1d/1f/21' # background
 printf $printf_template_custom 12 ';7'    # cursor
 printf $printf_template  0 '30/30/30'
 printf $printf_template  1 'cc/33/33'
-printf $printf_template  2 '66/cc/66'
+printf $printf_template  2 '33/cc/33'
 printf $printf_template  3 'cc/cc/33'
-printf $printf_template  4 '81/a2/be'
+printf $printf_template  4 '66/66/cc'
 printf $printf_template  5 'b2/94/bb'
 printf $printf_template  6 '8a/be/b7'
 printf $printf_template  7 'dd/dd/dd'
@@ -133,11 +133,11 @@ function precmd {
   __prompt_job_info
 
   # show the current working directory above the prompt
-  print -P '%F{4}%~%f'
+  print -P '%F{12}%~%f'
 }
 
 PROMPT='$vcs_info_msg_0_%F{$__prompt_vi_mode_color}$%f '
-RPROMPT='[%F{10}S:$__prompt_stopped_jobs %F{4}R:$__prompt_running_jobs%f]'
+RPROMPT='[%F{10}S:$__prompt_stopped_jobs %F{12}R:$__prompt_running_jobs%f]'
 #= endsection }}}1
 
 #= Aliases {{{1

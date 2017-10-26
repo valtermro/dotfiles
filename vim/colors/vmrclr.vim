@@ -27,7 +27,7 @@ hi Title        ctermfg=12               cterm=none
 hi Conceal      ctermfg=12 ctermbg=none
 
 hi ErrorMsg     ctermfg=9  ctermbg=none
-hi ModeMsg      ctermfg=15               cterm=none
+hi ModeMsg      ctermfg=10               cterm=none
 hi MoreMsg      ctermfg=10
 hi Question     ctermfg=11
 hi WarningMsg   ctermfg=11
