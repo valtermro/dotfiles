@@ -79,7 +79,6 @@ hi Identifier   ctermfg=9
 hi Constant     ctermfg=9
 hi String       ctermfg=10
 hi Delimiter    ctermfg=14
-hi Label        ctermfg=11
 hi Special      ctermfg=14
 hi Tag          ctermfg=12 cterm=underline
 hi Typedef      ctermfg=11
@@ -91,6 +90,7 @@ hi Operator     ctermfg=15 cterm=none
 hi Comment      ctermfg=8
 hi MatchParen              ctermbg=none  cterm=underline
 hi Todo         ctermfg=11 ctermbg=none  cterm=italic
+hi link Label       Keyword
 hi link Exception   Keyword
 hi link Conditional Keyword
 hi link Repeat      Keyword
