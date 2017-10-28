@@ -50,7 +50,7 @@ hi LineNr       ctermfg=8  ctermbg=0
 hi CursorLineNr ctermfg=6  ctermbg=0
 hi SignColumn   ctermfg=8  ctermbg=0
 hi FoldColumn   ctermfg=8  ctermbg=0
-hi Folded       ctermfg=8  ctermbg=none
+hi Folded       ctermfg=8  ctermbg=none  cterm=italic
 
 hi TabLineSel   ctermfg=15 ctermbg=0  cterm=none
 hi TabLine      ctermfg=8  ctermbg=0  cterm=none
@@ -62,7 +62,7 @@ hi PmenuSbar    ctermbg=0
 hi PmenuThumb   ctermbg=8
 
 hi Bold        cterm=bold
-hi Italic      cterm=none
+hi Italic      cterm=italic
 hi Underlined  ctermfg=9
 "= endsection }}}1
 
