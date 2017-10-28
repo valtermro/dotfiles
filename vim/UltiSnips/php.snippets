@@ -24,6 +24,12 @@ function $1($2)
 	${0:${VISUAL}}
 }
 endsnippet
+
+snippet clo "closure function"
+function ($1)${2: use ($$3)} {
+	${0:${VISUAL}}
+}
+endsnippet
 #= endsection }}}1
 
 #= Flow control {{{1
@@ -115,7 +121,7 @@ endsnippet
 snippet me "public method"
 public function $1($2)
 {
-	$3
+	${0:${VISUAL}}
 }
 endsnippet
 
@@ -191,7 +197,11 @@ snippet tme "Test method"
 /** @test */
 public function $1`!p t[1] = t[1].replace(' ', '_')`()
 {
-	${0:${VISUAL}}
-}
+	${2:${VISUAL:$this->markTestIncomplete('TODO');}}
+}$0
+endsnippet
+
+snippet mti "$this->markTestIncomplete()"
+$this->markTestIncomplete('${0:TODO}');
 endsnippet
 #= endsection }}}1
