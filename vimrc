@@ -130,8 +130,9 @@ nnoremap ` '
 nnoremap ' `
 inoremap <C-c> <Esc>
 
-" I'm so stupid that I keep hitting `u` when I actually wanted `y` in visual mode
+" Keep me from doing stupid things
 xnoremap u <Nop>
+inoremap <C-@> <Nop>
 
 " Make `{` and `}` jump over folded areas
 " Taken (and changed to match code style) from https://superuser.com/a/1180075
@@ -181,11 +182,19 @@ onoremap L $
 onoremap H _
 
 " Make it easier to reach for windows and tabs commands
-nnoremap <space> <C-w>
-nnoremap <space>- <C-w>s
-nnoremap <space>i <C-w>v
 nnoremap [w gT
 nnoremap ]w gt
+
+nnoremap <space>- <C-w>s
+nnoremap <space>i <C-w>v
+nnoremap <space>k <C-w>k
+nnoremap <space>l <C-w>l
+nnoremap <space>j <C-w>j
+nnoremap <space>h <C-w>h
+nnoremap <space>o <C-w>o
+nnoremap <space>= <C-w>=
+nnoremap <space>_ <C-w>_
+nnoremap <space>\| <C-w>\|
 
 "- Yank/Delete/Put {{{2
 "--------------------------------------------------
