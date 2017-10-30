@@ -246,6 +246,14 @@ hi link scssFunctionDefinition scssMixin
 hi link scssFunctionName       scssMixinName
 hi link scssInclude            Statement
 
+"- Vue highlighting {{{2
+"--------------------------------------------------
+" These groups are defined in $X_DOTFILES/vim/syntax/vue.vim
+hi link vueRegionTag       Normal
+hi link vueRegionTagName   Identifier
+hi link vueRegionTagArg    htmlArg
+hi link vueRegionTagString String
+
 "- Spelling highlighting {{{2
 "--------------------------------------------------
 hi SpellBad   ctermbg=none  cterm=undercurl
