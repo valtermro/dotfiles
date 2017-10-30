@@ -116,6 +116,8 @@ hi link cPreCondit PreProc
 "- CSS highlighting {{{2
 "--------------------------------------------------
 hi cssColor        ctermfg=14
+hi cssFontAttr     ctermfg=9
+hi cssValueNumber  ctermfg=9
 hi cssClassName    ctermfg=13
 hi cssIdentifier   ctermfg=12
 hi cssFunctionName ctermfg=14
@@ -239,12 +241,24 @@ hi link NERDTreeDirSlash Normal
 "- SASS/SCSS highlighting {{{2
 "--------------------------------------------------
 hi link sassDefinition         Keyword
-hi link scssImport             Include
-hi link scssMixin              Statement
-hi link scssMixinName          Normal
-hi link scssFunctionDefinition scssMixin
-hi link scssFunctionName       scssMixinName
-hi link scssInclude            Statement
+hi link sassControl            Keyword
+hi link sassFor                sassControl
+hi link sassMixin              Statement
+hi link sassMixinName          Normal
+hi link sassFunctionDecl       sassMixin
+hi link sassFunctionName       sassMixinName
+hi link sassInclude            Include
+hi link sassMixing             Statement
+
+hi link scssContent            Keyword
+hi link scssImport             sassInclude
+hi link scssInclude            sassMixing
+hi link scssMixin              sassMixin
+hi link scssMixinName          scssMixinName
+hi link scssFunctionDefinition sassFunctionDecl
+hi link scssFunctionName       sassFunctionName
+hi link scssIf                 sassControl
+hi link scssElse               sassControl
 
 "- Vue highlighting {{{2
 "--------------------------------------------------
