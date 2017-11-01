@@ -83,11 +83,16 @@ else
   set ttymouse=xterm2
 end
 
-"- Backup, undo and swap files {{{2
+"- Special files {{{2
 "--------------------------------------------------
 set noswapfile
 set nobackup
 set nowritebackup
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+
+if !isdirectory($XDG_CACHE_HOME.'/vim')
+  call mkdir($XDG_CACHE_HOME.'/vim', 'p', 0700)
+endif
 
 "- Line length control {{{2
 "--------------------------------------------------
