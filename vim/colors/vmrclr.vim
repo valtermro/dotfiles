@@ -209,6 +209,7 @@ hi phpDocTags         ctermfg=12 cterm=italic
 hi phpFunctions       ctermfg=12
 hi phpSpecialFunction ctermfg=12
 hi phpComparison      ctermfg=15
+hi link phpDocCustomTags   phpDocTags
 hi link phpMemberSelector  Normal
 hi link phpInclude         phpStructure
 hi link phpParent          Normal
