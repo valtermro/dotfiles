@@ -165,6 +165,12 @@ nnoremap <silent>{ {:call <SID>paragraph_jump_over_folded('up')<CR>
 onoremap } :<C-u>normal }<cr>
 onoremap { :<C-u>normal {<cr>
 
+"- Basic should be basic {{{2
+"--------------------------------------------------
+nnoremap <space>w :w<CR>
+nnoremap <space>q :q<CR>
+nnoremap <space>W :wq<CR>
+
 "- Oh! How I hate the arrow keys! {{{2
 "--------------------------------------------------
 cnoremap <C-k> <Up>
