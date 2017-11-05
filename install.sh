@@ -274,7 +274,7 @@ if should_install 'tmux' || should_install 'vim'; then
 fi
 
 if should_install 'i3wm'; then
-  notes="${notes} - Make sure you have a terminal emulator installed, any one supported by `i3-sensible-terminal` should be fine (i3wm)\n"
+  notes="${notes} - Make sure you have a terminal emulator installed, any one supported by 'i3-sensible-terminal' should be fine (i3wm)\n"
 
   if ! is_installed 'twmnd'; then
     notes="${notes} - 'twmn' is required for desktop notifications (i3wm)\n"
@@ -286,10 +286,6 @@ if should_install 'i3wm'; then
     notes="${notes} - You might want to install 'compton' for a better experience (i3wm)\n"
   else
     logout_needed=true
-  fi
-
-  if ! is_installed 'pamixer'; then
-    notes="${notes} - 'pamixer' is required for volume control (i3wm)\n"
   fi
 
   if ! is_installed 'udiskie'; then
