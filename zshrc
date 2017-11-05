@@ -15,8 +15,10 @@ eval $(dircolors -b $X_DOTFILES/dircolors)
 
 # Terminal colors
 #--------------------------------------------------
-# Colors (and script) based/taken from the 16-color palette of the colorscheme found at:
-# https://github.com/chriskempson/base16-shell/blob/master/scripts/base16-tomorrow-night.sh
+# The colors defined bellow are kind of a mix of:
+# https://github.com/chriskempson/base16-shell/blob/master/scripts/base16-solarized-dark.sh
+# and
+# https://github.com/chriskempson/base16-shell/blob/master/scripts/base16-solarized-light.sh
 
 if [[ $TMUX ]]; then
   # Tell tmux to pass the escape sequences through
@@ -30,25 +32,32 @@ else
   printf_template_custom='\033]%s%s\033\\'
 fi
 
-printf $printf_template_var 10 'c5/c8/c6' # foreground
-printf $printf_template_var 11 '1d/1f/21' # background
+printf $printf_template_var 10 '93/a1/a1' # foreground
+printf $printf_template_var 11 '00/2b/36' # background
 printf $printf_template_custom 12 ';7'    # cursor
-printf $printf_template  0 '30/30/30'
-printf $printf_template  1 'cc/33/33'
-printf $printf_template  2 '33/cc/33'
-printf $printf_template  3 'cc/cc/33'
-printf $printf_template  4 '66/66/cc'
-printf $printf_template  5 'b2/94/bb'
-printf $printf_template  6 '8a/be/b7'
-printf $printf_template  7 'dd/dd/dd'
-printf $printf_template  8 '99/99/99'
-printf $printf_template  9 'cc/66/66'
-printf $printf_template 10 'b5/bd/68'
-printf $printf_template 11 'f0/c6/74'
-printf $printf_template 12 '81/a2/be'
-printf $printf_template 13 'b2/94/bb'
-printf $printf_template 14 '8a/be/b7'
-printf $printf_template 15 'cc/cc/cc'
+printf $printf_template  0 '00/2b/36'
+printf $printf_template  1 'dd/22/22'
+printf $printf_template  2 '33/99/00'
+printf $printf_template  3 'cc/99/00'
+printf $printf_template  4 '26/8b/d2'
+printf $printf_template  5 '6c/71/c4'
+printf $printf_template  6 '2a/a1/98'
+printf $printf_template  7 'bb/bb/bb'
+printf $printf_template  8 '58/6e/75'
+printf $printf_template  9 'dc/32/2f'
+printf $printf_template 10 '85/99/00'
+printf $printf_template 11 'b5/89/00'
+printf $printf_template 12 '26/8b/d2'
+printf $printf_template 13 '6c/71/c4'
+printf $printf_template 14 '2a/a1/98'
+printf $printf_template 15 'fd/f6/e3'
+
+# Special colors
+printf $printf_template 21 'ee/e8/d5'
+printf $printf_template 23 '93/a1/a1'
+printf $printf_template 24 '83/94/96'
+printf $printf_template 28 '07/36/42'
+printf $printf_template 31 'ee/e8/d5'
 
 unset printf_template printf_template_var printf_template_custom
 #= endsection }}}1
@@ -85,21 +94,21 @@ setopt TRANSIENT_RPROMPT
 #--------------------------------------------------
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git*' formats '(%F{10}%b%f) '
-zstyle ':vcs_info:git*' actionformats '(%F{10}%b%f|%F{9}%a%f) '
+zstyle ':vcs_info:git*' formats '(%F{2}%b%f) '
+zstyle ':vcs_info:git*' actionformats '(%F{2}%b%f|%F{3}%a%f) '
 
 #- Vi mode {{{2
 #--------------------------------------------------
 KEYTIMEOUT=1
 
-__prompt_vi_mode_color=7
+__prompt_vi_mode_color=23
 function zle-line-init zle-keymap-select {
   if [[ $KEYMAP == 'vicmd' ]]; then
     __prompt_vi_mode_color=8
   elif [[ $KEYMAP == 'main' ]]; then
-    __prompt_vi_mode_color=7
+    __prompt_vi_mode_color=23
   else
-    __prompt_vi_mode_color=7
+    __prompt_vi_mode_color=23
   fi
 
   zle reset-prompt
@@ -133,11 +142,11 @@ function precmd {
   __prompt_job_info
 
   # show the current working directory above the prompt
-  print -P '%F{12}%~%f'
+  print -P '%F{4}%~%f'
 }
 
 PROMPT='$vcs_info_msg_0_%F{$__prompt_vi_mode_color}$%f '
-RPROMPT='[%F{10}S:$__prompt_stopped_jobs %F{12}R:$__prompt_running_jobs%f]'
+RPROMPT='[%F{3}S:$__prompt_stopped_jobs %F{5}R:$__prompt_running_jobs%f]'
 #= endsection }}}1
 
 #= Aliases {{{1

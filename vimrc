@@ -54,7 +54,12 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 "--------------------------------------------------
 filetype plugin indent on
 syntax on
-colorscheme vmrclr
+
+if filereadable($XDG_CONFIG_HOME.'/vim/colorscheme.vim') |
+  exec 'source '.$XDG_CONFIG_HOME.'/vim/colorscheme.vim'
+else
+  colorscheme dark
+endif
 
 set pastetoggle=<F10>
 set scrolloff=1
