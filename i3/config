@@ -128,7 +128,6 @@ bindsym $mod+Shift+Tab move workspace to output left
 #--------------------------------------------------
 assign [instance="$browser"] $workspace2
 assign [instance="VirtualBox"] $workspace8
-assign [instance="beebeep"] $workspace9
 
 # https://github.com/i3/i3/issues/2060#issuecomment-155179472
 for_window [instance="spotify"] move to workspace $workspace10
@@ -205,7 +204,6 @@ bindsym $mod+semicolon split toggle
 
 new_window pixel 2
 new_float normal
-for_window [instance="beebeep"] floating enable
 
 #- Move focus {{{2
 #--------------------------------------------------
