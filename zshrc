@@ -53,7 +53,6 @@ printf $printf_template 14 '2a/a1/98'
 printf $printf_template 15 'fd/f6/e3'
 
 # Special colors
-printf $printf_template 21 'ee/e8/d5'
 printf $printf_template 23 '93/a1/a1'
 printf $printf_template 24 '83/94/96'
 printf $printf_template 28 '07/36/42'

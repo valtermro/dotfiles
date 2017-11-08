@@ -19,7 +19,7 @@ let s:color8 = 24
 
 " Special colors
 let s:color_fg_normal = 8
-let s:color_bg_visual = 21
+let s:color_bg_visual = 31
 let s:color_fg_accent = 0
 let s:color_bg_accent = 7
 "= endsection }}}1
@@ -40,14 +40,14 @@ let &t_ZR="\e[23m"
 exec 'hi Normal            ctermfg='.s:color_fg_normal.' ctermbg='.s:color0
 exec 'hi Debug             ctermfg='.s:color1
 exec 'hi Directory         ctermfg='.s:color4
-exec 'hi Error             ctermfg='.s:color0.' ctermbg='.s:color1
+exec 'hi Error             ctermfg='.s:color7.' ctermbg='.s:color1
 exec 'hi SpecialKey        ctermfg='.s:color8
 exec 'hi NonText           ctermfg='.s:color8
 exec 'hi Visual            ctermfg='.s:color_fg_accent.' ctermbg='.s:color_bg_accent
 exec 'hi WildMenu          ctermfg='.s:color0.' ctermbg='.s:color3
 exec 'hi Title             ctermfg='.s:color6
 exec 'hi Conceal           ctermfg='.s:color6.' ctermbg='.s:color0
-exec 'hi MatchParen        ctermbg='.s:color_bg_accent
+exec 'hi MatchParen                             ctermbg='.s:color_bg_visual.' cterm=underline'
 
 exec 'hi ModeMsg           ctermfg='.s:color3.' cterm=none'
 exec 'hi MoreMsg           ctermfg='.s:color3
@@ -127,15 +127,16 @@ hi link Typedef      Statement
 
 "- Vim highlighting {{{2
 "--------------------------------------------------
-exec 'hi VimGroup        ctermfg='.s:color3
-exec 'hi VimCommentTitle ctermfg='.s:color3
-hi link vimHiGroup      vimGroup
-hi link vimOption       Identifier
-hi link vimHiAttrib     Constant
-hi link vimHighlight    Keyword
-hi link vimAutoEvent    Normal
-hi link vimBracket      Normal
-hi link vimParenSep     Normal
+exec 'hi vimGroup        ctermfg='.s:color3
+exec 'hi vimCommentTitle ctermfg='.s:color3
+exec 'hi vimCommand      ctermfg='.s:color5
+hi link vimHiGroup   vimGroup
+hi link vimOption    Identifier
+hi link vimHiAttrib  Constant
+hi link vimHighlight Keyword
+hi link vimAutoEvent Normal
+hi link vimBracket   Normal
+hi link vimParenSep  Normal
 
 "- C/C++ highlighting {{{2
 "--------------------------------------------------
@@ -168,6 +169,7 @@ exec 'hi gitcommitBranch        ctermfg='.s:color2
 exec 'hi gitcommitHeader        ctermfg='.s:color5
 exec 'hi gitcommitOverflow      ctermfg='.s:color1
 exec 'hi gitcommitSummary       ctermfg='.s:color3
+exec 'hi gitcommitBlank         ctermfg='.s:color8.' cterm=italic'
 exec 'hi gitcommitDiscardedType ctermfg='.s:color4
 exec 'hi gitcommitSelectedType  ctermfg='.s:color4
 exec 'hi gitcommitUnmergedType  ctermfg='.s:color4
@@ -185,8 +187,7 @@ hi link gitcommitUntracked  Comment
 "- HTML highlighting {{{2
 "--------------------------------------------------
 exec 'hi htmlTitle   ctermfg='.s:color_fg_normal
-exec 'hi htmlTag     ctermfg='.s:color8
-exec 'hi htmlEndTag  ctermfg='.s:color8
+exec 'hi htmlTag     ctermfg='.s:color_fg_normal
 exec 'hi htmlTagName ctermfg='.s:color1
 exec 'hi htmlArg     ctermfg='.s:color4
 exec 'hi htmlH1      ctermfg='.s:color_fg_normal.' cterm=none'
@@ -202,6 +203,7 @@ hi htmlBoldItalic          cterm=none
 hi htmlBoldUnderline       cterm=none
 hi htmlBoldUnderlineItalic cterm=none
 hi htmlUnderlineItalic     cterm=none
+hi link htmlEndTag  htmlTag
 
 "- JavaScript highlighting {{{2
 "--------------------------------------------------
@@ -223,7 +225,7 @@ hi link jsRegexpCharClass           Identifier
 hi link jsFuncName                  Normal
 hi link jsFuncCall                  Normal
 hi link jsClassFuncName             Normal
-hi link jsReturn                    Keyword
+hi link jsReturn                    Statement
 hi link jsFunction                  Function
 hi link jsThis                      Identifier
 hi link jsSuper                     Identifier

@@ -52,10 +52,10 @@ syn match vueRegionTagString contained +=\zs['"].*['"]+
 
 "= Default colors {{{1
 "==================================================
-hi default link vueRegionTag Normal
-hi default link vueRegionTagName Identifier
-hi default link vueRegionTagArg htmlArg
-hi default link vueRegionTagString String
+hi default link vueRegionTag       htmlTag
+hi default link vueRegionTagName   htmlTagName
+hi default link vueRegionTagArg    htmlArg
+hi default link vueRegionTagString htmlString
 "= endsection }}}
 
 let b:current_syntax = 'vue'
