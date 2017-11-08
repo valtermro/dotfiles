@@ -61,8 +61,8 @@ else
   colorscheme dark
 endif
 
-set pastetoggle=<F10>
 set scrolloff=1
+set history=1000
 
 set splitright
 set diffopt+=vertical
@@ -121,7 +121,7 @@ set completeopt=menuone
 set wildignore+=*/tmp/*,*/node_modules/*,*/vendor/*
 set wildmode=longest,list
 
-"- Invisibles (not anymore!!) {{{2
+"- Invisibles? Not quite {{{2
 "--------------------------------------------------
 set invlist
 set listchars=tab:›\ ,trail:⋅,extends:❯,precedes:❮ ",eol:¬
@@ -244,6 +244,7 @@ xnoremap / /\v
 xnoremap ? ?\v
 
 nnoremap + :set hlsearch<CR>mt*`t
+nnoremap - :set nohlsearch<CR>
 nnoremap <silent><C-l> :<C-u>nohlsearch<CR><C-l>
 
 "- UI {{{2
