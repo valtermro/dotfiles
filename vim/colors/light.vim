@@ -58,7 +58,7 @@ exec 'hi Question          ctermfg='.s:color3
 exec 'hi Search            ctermfg='.s:color0.' ctermbg='.s:color3
 exec 'hi IncSearch         ctermfg='.s:color0.' ctermbg='.s:color3.' cterm=none'
 
-exec 'hi VertSplit         ctermfg='.s:color0.'          ctermbg='.s:color8.' cterm=none'
+exec 'hi VertSplit         ctermfg='.s:color8.'          ctermbg='.s:color0.' cterm=none'
 exec 'hi StatusLine        ctermfg='.s:color0.'          ctermbg='.s:color8.' cterm=none'
 exec 'hi StatusLineNC      ctermfg='.s:color_fg_normal.' ctermbg='.s:color_bg_accent.' cterm=none'
 exec 'hi StatusLineWarning ctermfg='.s:color0.'          ctermbg='.s:color1.'  cterm=italic'
