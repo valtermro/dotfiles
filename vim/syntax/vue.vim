@@ -4,6 +4,9 @@ endif
 
 let s:pack_start = expand('~/.vim/pack/*/start')
 
+" TODO: Improve region start/end detection so that a <template> inside the
+"       template won't break the syntax even if it has no indentation.
+
 "= Html template {{{1
 "==================================================
 syn region vueHtml keepend fold contains=@vueHtml,vueRegionTag
