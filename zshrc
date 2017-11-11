@@ -1,6 +1,6 @@
 #= Basic settings {{{1
 #==================================================
-umask 077
+umask 022
 export EDITOR=vim
 export TERM=screen-256color
 export PATH=$PATH:$X_DOTFILES/bin
