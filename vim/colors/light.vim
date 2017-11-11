@@ -44,6 +44,7 @@ exec 'hi Error             ctermfg='.s:color7.' ctermbg='.s:color1
 exec 'hi SpecialKey        ctermfg='.s:color8
 exec 'hi NonText           ctermfg='.s:color8
 exec 'hi Visual            ctermfg='.s:color_fg_accent.' ctermbg='.s:color_bg_accent
+exec 'hi VisualNOS         ctermfg='.s:color_fg_accent.' ctermbg='.s:color_bg_accent.' cterm=none'
 exec 'hi WildMenu          ctermfg='.s:color0.' ctermbg='.s:color3
 exec 'hi Title             ctermfg='.s:color6
 exec 'hi Conceal           ctermfg='.s:color6.' ctermbg='.s:color0
