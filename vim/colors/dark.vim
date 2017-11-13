@@ -1,4 +1,4 @@
-" Colorscheme based on (~copied~ from) https://github.com/chriskempson/base16-vim/blob/master/colors/base16-solarized-dark.vim
+" Colorscheme based on https://github.com/chriskempson/base16-vim/blob/master/colors/base16-solarized-dark.vim
 
 " TODO: The dark and light colorschemes share a lot of code. Find a
 "       way to remove/reduce that duplication. Or, should I? Maybe. I don't know...
@@ -237,7 +237,8 @@ hi link jsClassMethodType           Type
 
 "- PHP highlighting {{{2
 "--------------------------------------------------
-exec 'hi phpFunctions ctermfg='.s:color4
+exec 'hi phpFunctions       ctermfg='.s:color4
+exec 'hi phpSpecialFunction ctermfg='.s:color4
 hi link phpComparison      Normal
 hi link phpDocTags         DocTags
 hi link phpDocCustomTags   DocTags
