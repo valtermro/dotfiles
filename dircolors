@@ -11,8 +11,6 @@
 
 #= By file type
 #==================================================
-
-
 NORMAL                00        # no color code at all
 FILE                  00        # regular file: use no color at all
 RESET                 00        # reset to "normal" color

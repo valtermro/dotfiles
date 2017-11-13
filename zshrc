@@ -156,6 +156,10 @@ alias la='ls -ACF'
 alias grep='grep --colour=auto'
 alias tree='tree -C'
 alias open='xdg-open'
+
+# Fix search highlighting
+alias man="LESS_TERMCAP_so=$'\E[7;146m' LESS_TERMCAP_se=$'\E[0m' man"
+alias less="LESS_TERMCAP_so=$'\E[7;146m' LESS_TERMCAP_se=$'\E[0m' less"
 #= endsection }}}1
 
 #= Functions {{{1
