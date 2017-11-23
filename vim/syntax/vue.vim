@@ -49,7 +49,7 @@ unlet! b:current_syntax
 syn match vueRegionTag contained contains=vueRegionTagName,vueRegionTagArg,vueRegionTagString
     \ "^</\?\(template\|script\|style\).*>"
 syn keyword vueRegionTagName contained template script style
-syn keyword vueRegionTagArg contained lang
+syn keyword vueRegionTagArg contained lang scoped
 syn match vueRegionTagString contained +=\zs['"].*['"]+
 "= endsection }}}
 
