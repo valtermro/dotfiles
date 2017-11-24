@@ -8,14 +8,9 @@ packadd matchit
 "--------------------------------------------------
 nmap gc{ mt{jgc't't
 
-" NOTE: Using css* groups doesn't seem to mess things up in css files but it does
-"   fix scss regions in the vue ones which makes this ugly hack don't that bad.
-"   Of course, it only works because I always use scss syntax for styles in vue files.
 let g:tcomment#syntax_substitute = {
-  \ 'vueJavascript': {'sub': 'javascript'},
-  \ 'cssTagName': {'sub': 'scss'},
-  \ 'cssBraces': {'sub': 'scss'},
-  \ 'cssSelectorOp': {'sub': 'scss'},
+  \ 'js.*': {'sub': 'javascript'},
+  \ 'css.*': {'sub': 'scss'},
 \ }
 
 "- editorconfig/editorconfig-vim {{{2
