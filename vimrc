@@ -69,19 +69,26 @@ set diffopt+=vertical
 set foldcolumn=0
 set foldlevelstart=0
 
+if filereadable($XDG_CONFIG_HOME.'/vim/colorscheme.vim')
+  exec 'source '.$XDG_CONFIG_HOME.'/vim/colorscheme.vim'
+else
+  colorscheme dark
+endif
+
 augroup fix_vim_overriding_my_settings
   autocmd!
   autocmd BufReadPost * setl formatoptions-=o
-  autocmd VimEnter * call s:set_colorscheme()
-  autocmd FileType html,vue call s:set_colorscheme()
+  autocmd FileType html,vue call s:fix_colorscheme()
 augroup END
 
-function! s:set_colorscheme()
-  if filereadable($XDG_CONFIG_HOME.'/vim/colorscheme.vim')
-    exec 'source '.$XDG_CONFIG_HOME.'/vim/colorscheme.vim'
-  else
-    colorscheme dark
-  endif
+function! s:fix_colorscheme()
+  highlight htmlBold cterm=none
+  highlight htmlItalic cterm=none
+  highlight htmlUnderline cterm=none
+  highlight htmlBoldItalic cterm=none
+  highlight htmlBoldUnderline cterm=none
+  highlight htmlBoldUnderlineItalic cterm=none
+  highlight htmlUnderlineItalic cterm=none
 endfunction
 
 "- Stuff that should be on by default (IMHO) {{{2
