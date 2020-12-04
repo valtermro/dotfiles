@@ -29,4 +29,7 @@
 	stal = stash list
 	stac = stash clear
 	unstage = reset HEAD
-	lol = log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset%C(yellow)%d%Creset%Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+	l = log --pretty=format:'%Cred%h %C(cyan)%an%Creset %s %Cgreen%ad%C(yellow)%d' --date=human
+	ld = log --pretty=format:'%Cred%h %C(cyan)%an%Creset %s %Cgreen%ad%C(yellow)%d' --date=format:'%d/%m/%Y %H:%M:%S'
+	lg = l --graph
+	ldg = ld --graph
