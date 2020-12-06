@@ -18,17 +18,8 @@
 	co = checkout
 	cm = commit
 	cma = commit --amend
-	cmaa = commit --amend --reuse-message HEAD
 	cmm = commit --message
-	tags = tag --list
 	rbi = rebase --interactive
-	rbc = rebase --continue
-	rba = rebase --abort
-	sta = stash
-	staa = stash apply
-	stal = stash list
-	stac = stash clear
-	unstage = reset HEAD
 	l = log --pretty=format:'%Cred%h %C(cyan)%an%Creset %s %Cgreen%ad%C(yellow)%d' --date=human
 	ld = log --pretty=format:'%Cred%h %C(cyan)%an%Creset %s %Cgreen%ad%C(yellow)%d' --date=format:'%d/%m/%Y %H:%M:%S'
 	lg = l --graph
