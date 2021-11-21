@@ -1,1 +1,0 @@
-syn keyword vimTodo NOTE

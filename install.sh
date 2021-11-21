@@ -153,10 +153,8 @@ fi
 #================================================
 ask_install 'git'
 ask_install 'zsh' '' 'zsh'
-ask_install 'vim' 'zsh'
-ask_install 'tmux' 'zsh'
-ask_install 'i3wm' 'zsh' 'dmenu' 'i3status' 'i3-dmenu-desktop'
-ask_install 'feh'
+ask_install 'vim'
+ask_install 'tmux'
 #= endsection }}}1
 
 #= Install {{{1
@@ -204,10 +202,6 @@ if should_install 'vim'; then
 
   ln -s $self_dir/vim ~/.vim
   ln -s $self_dir/vimrc ~/.vimrc
-
-  echo 'Installing plugins'
-  bash $self_dir/vim/plugins.sh $self_dir/vim
-  vim -c 'helptags ALL' -c 'q'
 fi
 
 #- Tmux {{{2
@@ -217,46 +211,6 @@ if should_install 'tmux'; then
 
   backup ~/.tmux.conf
   ln -s $self_dir/tmux.conf ~/.tmux.conf
-fi
-
-#- i3wm {{{2
-#------------------------------------------------
-if should_install 'i3wm'; then
-  echo '- i3wm'
-
-  backup $XDG_CONFIG_HOME/i3/config
-  make_dir $XDG_CONFIG_HOME/i3
-
-  bl_device=$(ls /sys/class/backlight)
-  if [[ ${bl_device[0]} ]]; then
-    echo
-    log 'I need you attention'
-    echo "In order to get the brightness control keys to work, you'll need to be able"
-    echo "to run '${self_dir}/lib/i3/brightctl.sh' as root without password."
-    echo "I can help you here creating a group with that power and adding you to it."
-    echo "For that, I'll need your sudo password, just once."
-    if ask "Do you want to create the 'brightctl' group"; then
-      bl_device="/sys/class/backlight/${bl_device[0]}/brightness"
-      sudo groupadd brightctl 2>/dev/null
-      sudo usermod -aG brightctl $USER
-      echo "%brightctl ALL=(ALL) NOPASSWD: ${self_dir}/lib/i3/brightctl.sh" > /tmp/brightctl.sudoers
-      sudo chown root: /tmp/brightctl.sudoers
-      sudo mv /tmp/brightctl.sudoers /etc/sudoers.d/99-brightctl
-      logout_needed=true
-    fi
-  fi
-
-  $self_dir/lib/i3/reload-config.sh $self_dir
-fi
-
-#- feh {{{2
-#------------------------------------------------
-if should_install 'feh'; then
-  echo '- feh'
-
-  backup $XDG_CONFIG_HOME/feh
-  make_dir $XDG_CONFIG_HOME
-  ln -s $self_dir/feh $XDG_CONFIG_HOME/feh
 fi
 #= endsection }}}1
 
