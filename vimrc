@@ -99,21 +99,6 @@ nnoremap <silent>{ {:call <SID>paragraph_jump_over_folded('up')<CR>
 onoremap } :<C-u>normal }<cr>
 onoremap { :<C-u>normal {<cr>
 
-"- "Navigating" is necessary {{{2
-"--------------------------------------------------
-nnoremap <C-E> 5<C-E>
-nnoremap <C-Y> 5<C-Y>
-
-nnoremap <C-O> <C-O>zz
-nnoremap <C-I> <C-I>zz
-
-nnoremap L $
-nnoremap H _
-xnoremap L $
-xnoremap H _
-onoremap L $
-onoremap H _
-
 "- Search {{{2
 "--------------------------------------------------
 nnoremap / /\v
@@ -124,6 +109,7 @@ xnoremap ? ?\v
 nnoremap + :set hlsearch<CR>mt*`t
 nnoremap - :set nohlsearch<CR>
 nnoremap <silent><C-l> :<C-u>nohlsearch<CR><C-l>
+"= endsection }}}1
 
 "= Motions {{{1
 "==================================================
